@@ -1,0 +1,1454 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>AI 视频提示词库</title>
+  <style>
+    :root {
+      --ink: #181520;
+      --muted: #736d7d;
+      --line: #e6e1ea;
+      --paper: #faf8fc;
+      --panel: #ffffff;
+      --violet: #6b46d8;
+      --violet-soft: #eee9ff;
+      --amber: #d97706;
+      --cyan: #0f8ea6;
+      --rose: #d94771;
+      --shadow: 0 12px 36px rgba(48, 31, 70, .07);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      width: 100%;
+      height: 100%;
+      min-height: 100%;
+    }
+    body {
+      margin: 0;
+      overflow: hidden;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "Microsoft YaHei UI", "PingFang SC", "Noto Sans CJK SC", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select { font: inherit; }
+    button { color: inherit; }
+    ::selection { color: #fff; background: var(--violet); }
+
+    .app {
+      width: 100%;
+      height: 100vh;
+      min-height: 0;
+      display: grid;
+      grid-template-rows: 80px minmax(0, 1fr);
+      overflow: hidden;
+    }
+
+    .topbar {
+      padding: 0 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+      background: rgba(255,255,255,.95);
+      backdrop-filter: blur(16px);
+      z-index: 5;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 43px;
+      height: 43px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: #fff;
+      background:
+        linear-gradient(145deg, rgba(255,255,255,.25), transparent 52%),
+        var(--violet);
+      box-shadow: 0 8px 22px rgba(107,70,216,.27);
+      font: 700 24px Georgia, serif;
+    }
+
+    .eyebrow {
+      margin: 0 0 5px;
+      color: var(--violet);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+    }
+
+    .brand h1 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -.03em;
+    }
+
+    .top-stats {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .top-stats strong { color: var(--ink); }
+    .top-stats i { width: 1px; height: 14px; background: var(--line); }
+
+    .workspace {
+      min-height: 0;
+      display: grid;
+      grid-template-columns: minmax(350px, 31%) 1fr;
+      overflow: hidden;
+    }
+
+    .sidebar {
+      min-width: 0;
+      min-height: 0;
+      height: 100%;
+      padding: 22px 18px 0;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border-right: 1px solid var(--line);
+      background: #f6f3f8;
+    }
+
+    .field-label {
+      display: block;
+      margin: 0 0 8px;
+      color: #5e5768;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .search-wrap {
+      height: 46px;
+      padding: 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border: 1px solid #ddd7e3;
+      border-radius: 13px;
+      background: #fff;
+      box-shadow: 0 5px 15px rgba(38,25,54,.035);
+      transition: .16s ease;
+    }
+    .search-wrap:focus-within {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px var(--violet-soft);
+    }
+    .search-icon {
+      color: #91899e;
+      font-size: 22px;
+      transform: rotate(-15deg);
+    }
+    .search-wrap input {
+      min-width: 0;
+      flex: 1;
+      border: 0;
+      outline: 0;
+      background: transparent;
+      color: var(--ink);
+    }
+    .search-wrap input::placeholder { color: #a29baa; }
+    .clear-search {
+      width: 26px;
+      height: 26px;
+      display: none;
+      border: 0;
+      border-radius: 50%;
+      color: #766e82;
+      background: #f1edf4;
+      cursor: pointer;
+    }
+
+    .filters {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: 1fr 112px;
+      gap: 10px;
+    }
+    .filters select {
+      width: 100%;
+      height: 40px;
+      padding: 0 30px 0 10px;
+      border: 1px solid #ddd7e3;
+      border-radius: 11px;
+      outline: 0;
+      color: #50495b;
+      background: #fff;
+      font-size: 12px;
+    }
+
+    .result-meta {
+      padding: 18px 2px 10px;
+      display: flex;
+      justify-content: space-between;
+      color: #817989;
+      font-size: 11px;
+    }
+    .result-meta button {
+      display: none;
+      border: 0;
+      color: var(--violet);
+      background: transparent;
+      cursor: pointer;
+      font-size: 11px;
+    }
+
+    .prompt-list {
+      min-height: 0;
+      padding: 0 2px 24px;
+      display: flex;
+      flex: 1;
+      flex-direction: column;
+      gap: 9px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+      scrollbar-width: thin;
+      scrollbar-color: #d6cfdd transparent;
+    }
+    .prompt-list::-webkit-scrollbar { width: 8px; }
+    .prompt-list::-webkit-scrollbar-track { background: transparent; }
+    .prompt-list::-webkit-scrollbar-thumb {
+      border: 2px solid transparent;
+      border-radius: 999px;
+      background: #cfc7d7;
+      background-clip: padding-box;
+    }
+
+    .prompt-card {
+      width: 100%;
+      padding: 13px;
+      display: flex;
+      flex: 0 0 auto;
+      gap: 12px;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      text-align: left;
+      background: transparent;
+      cursor: pointer;
+      transition: .16s ease;
+    }
+    .prompt-card:hover {
+      border-color: #ddd6e5;
+      background: rgba(255,255,255,.68);
+    }
+    .prompt-card.selected {
+      border-color: #d7cbf7;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+
+    .card-index {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      flex: 0 0 auto;
+      place-items: center;
+      border-radius: 11px;
+      font-size: 11px;
+      font-weight: 800;
+    }
+    .card-index.violet { color: var(--violet); background: var(--violet-soft); }
+    .card-index.amber { color: var(--amber); background: #fff0d8; }
+    .card-index.cyan { color: var(--cyan); background: #dcf5f8; }
+    .card-index.rose { color: var(--rose); background: #ffe5ed; }
+
+    .card-content { min-width: 0; flex: 1; }
+    .card-topline {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .card-title {
+      display: -webkit-box;
+      overflow: hidden;
+      font-size: 13px;
+      line-height: 1.45;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .ratio {
+      padding: 3px 6px;
+      border-radius: 6px;
+      color: #706878;
+      background: #f0ecf3;
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .card-description {
+      margin-top: 6px;
+      display: -webkit-box;
+      overflow: hidden;
+      color: #7e7787;
+      font-size: 11px;
+      line-height: 1.55;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+    .tag-row {
+      margin-top: 9px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .tag, .large-tag {
+      padding: 3px 7px;
+      border: 1px solid #e3dee8;
+      border-radius: 999px;
+      color: #766e80;
+      background: #fbf9fc;
+      font-size: 9px;
+      font-style: normal;
+    }
+    .duration { margin-left: auto; color: #9b94a2; font-size: 9px; }
+
+    .detail {
+      min-width: 0;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+      background: #fff;
+    }
+
+    .detail-hero {
+      padding: 30px 34px 20px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .detail-heading h2 {
+      margin: 0;
+      font-size: clamp(25px, 3vw, 36px);
+      letter-spacing: -.045em;
+    }
+    .detail-lead {
+      max-width: 780px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .detail-actions { align-self: center; }
+    .detail-facts {
+      grid-column: 1 / -1;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .detail-facts span {
+      min-width: 92px;
+      padding: 8px 11px;
+      border: 1px solid #eeeaf1;
+      border-radius: 10px;
+      color: #4c4555;
+      background: #fcfbfd;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .detail-facts small {
+      margin-right: 7px;
+      color: #9b94a2;
+      font-size: 9px;
+      font-weight: 600;
+    }
+
+    .copy-button {
+      height: 42px;
+      padding: 0 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 0;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 8px 20px rgba(23,21,31,.14);
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+      transition: .14s ease;
+    }
+    .copy-button:hover { transform: translateY(-1px); background: var(--violet); }
+    .copy-button.compact {
+      height: 32px;
+      padding: 0 10px;
+      color: #5d536b;
+      border: 1px solid #e3ddec;
+      border-radius: 9px;
+      background: #fff;
+      box-shadow: none;
+      font-size: 10px;
+    }
+    .copy-button.compact:hover {
+      color: var(--violet);
+      border-color: #cfc1f3;
+      transform: none;
+    }
+
+    .detail-tabs {
+      padding: 0 34px;
+      display: flex;
+      gap: 25px;
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+    .detail-tabs button {
+      height: 48px;
+      position: relative;
+      border: 0;
+      color: #88808f;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 650;
+    }
+    .detail-tabs button.active { color: var(--ink); }
+    .detail-tabs button.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: var(--violet);
+    }
+
+    .detail-scroll {
+      min-height: 0;
+      flex: 1;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      background:
+        radial-gradient(circle at 90% 8%, rgba(108,69,217,.045), transparent 23%),
+        #fbfafc;
+      scrollbar-width: thin;
+      scrollbar-color: #d6cfdd transparent;
+    }
+
+    .content-width {
+      width: min(960px, calc(100% - 48px));
+      margin: 0 auto;
+      padding: 26px 0 48px;
+    }
+    .content-card {
+      padding: 22px;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 8px 30px rgba(42,28,63,.035);
+    }
+    .content-card + .content-card { margin-top: 14px; }
+    .section-title, .shot-heading {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .section-title h3, .shot-heading h3, .source-title {
+      margin: 0;
+      font-size: 17px;
+    }
+    .prompt-text {
+      margin-top: 22px;
+      color: #3f3947;
+      font-size: 13px;
+      line-height: 1.95;
+      white-space: pre-wrap;
+    }
+    .negative-card {
+      border-left: 3px solid var(--rose);
+      background: linear-gradient(120deg, #fff9fb, #fff);
+    }
+    .negative-card .eyebrow { color: var(--rose); }
+    .negative-text {
+      margin: 18px 0 0;
+      color: #6e4854;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    .timeline { display: flex; flex-direction: column; }
+    .shot-card { display: grid; grid-template-columns: 42px 1fr; }
+    .shot-rail {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+    .shot-rail span {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: var(--violet);
+      background: var(--violet-soft);
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .shot-rail i { width: 1px; flex: 1; background: #ddd5eb; }
+    .shot-card:last-child .shot-rail i { display: none; }
+    .shot-body {
+      margin: 0 0 16px 4px;
+      padding: 19px 20px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      background: #fff;
+    }
+    .shot-time {
+      color: var(--violet);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .shot-heading h3 { margin-top: 4px; }
+    .shot-action {
+      margin: 15px 0;
+      color: #46404f;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    dl { margin: 0; }
+    dl > div {
+      padding: 8px 0;
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 12px;
+      border-top: 1px solid #f0edf2;
+    }
+    dt { color: #9991a1; font-size: 10px; font-weight: 700; }
+    dd {
+      margin: 0;
+      color: #6b6472;
+      font-size: 11px;
+      line-height: 1.65;
+      word-break: break-word;
+    }
+
+    .spec-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .spec-card { min-height: 140px; }
+    .spec-card + .spec-card { margin-top: 0; }
+    .spec-value {
+      margin: 14px 0 0;
+      color: #5f5867;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+    .full { min-height: auto; grid-column: 1 / -1; }
+    .large-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+    .large-tag { padding: 6px 10px; font-size: 10px; }
+
+    .source-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 14px;
+    }
+    .source-grid .content-card + .content-card { margin-top: 0; }
+    .source-title { margin: 8px 0 20px; }
+    .note-card { border-top: 3px solid var(--amber); }
+    .note-card .eyebrow { color: var(--amber); }
+    .note-card p:not(.eyebrow) {
+      color: #5f5867;
+      font-size: 12px;
+      line-height: 1.85;
+    }
+
+    .empty {
+      min-height: 300px;
+      padding: 48px 20px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      text-align: center;
+    }
+    .empty-glyph { color: #b8afc3; font-size: 42px; }
+    .empty h2 { margin: 12px 0 5px; font-size: 17px; }
+    .empty p { margin: 0; color: #8c8494; font-size: 12px; }
+
+    .toast {
+      position: fixed;
+      right: 24px;
+      bottom: 24px;
+      padding: 12px 16px;
+      border-radius: 11px;
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 12px 34px rgba(23,21,31,.24);
+      font-size: 12px;
+      font-weight: 700;
+      opacity: 0;
+      transform: translateY(12px);
+      pointer-events: none;
+      transition: .2s ease;
+      z-index: 20;
+    }
+    .toast.show { opacity: 1; transform: translateY(0); }
+
+    .fatal {
+      min-height: 100vh;
+      display: none;
+      place-items: center;
+      text-align: center;
+      background: var(--paper);
+    }
+    .fatal-card {
+      width: min(460px, calc(100% - 32px));
+      padding: 44px;
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      background: #fff;
+      box-shadow: var(--shadow);
+    }
+    .fatal-card h1 { margin: 20px 0 8px; }
+    .fatal-card p { margin: 0; color: var(--muted); line-height: 1.7; }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .toolbar-button {
+      height: 36px;
+      padding: 0 12px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      border: 1px solid #ded8e5;
+      border-radius: 10px;
+      color: #554d61;
+      background: #fff;
+      cursor: pointer;
+      font-size: 11px;
+      font-weight: 700;
+      transition: .14s ease;
+    }
+    .toolbar-button:hover {
+      color: var(--violet);
+      border-color: #cfc2f0;
+      background: #fbf9ff;
+    }
+    .toolbar-button.primary {
+      color: #fff;
+      border-color: var(--violet);
+      background: var(--violet);
+    }
+    .toolbar-button.primary:hover { color: #fff; background: #5935c2; }
+    .toolbar-button.danger { color: #b62f56; }
+    .toolbar-button.danger:hover { border-color: #efb6c7; background: #fff7f9; }
+
+    .management-strip {
+      margin: 0 34px 18px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid #e7e1ed;
+      border-radius: 13px;
+      background: linear-gradient(100deg, #f8f5ff, #fff);
+    }
+    .management-strip p {
+      margin: 0;
+      color: #6e6678;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+    .management-strip strong { color: var(--ink); }
+    .manage-actions { display: flex; gap: 7px; flex-wrap: wrap; }
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      padding: 22px;
+      display: none;
+      place-items: center;
+      background: rgba(20, 16, 27, .52);
+      backdrop-filter: blur(6px);
+      z-index: 50;
+    }
+    .modal-backdrop.open { display: grid; }
+    .modal {
+      width: min(820px, 100%);
+      max-height: min(820px, calc(100vh - 44px));
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 30px 100px rgba(20, 12, 31, .28);
+    }
+    .modal-header {
+      padding: 20px 22px 16px;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      border-bottom: 1px solid var(--line);
+    }
+    .modal-header h2 { margin: 0; font-size: 20px; }
+    .modal-header p { margin: 6px 0 0; color: var(--muted); font-size: 11px; }
+    .modal-close {
+      width: 32px;
+      height: 32px;
+      border: 0;
+      border-radius: 9px;
+      color: #726b7c;
+      background: #f2eef4;
+      cursor: pointer;
+      font-size: 20px;
+    }
+    .modal-tabs {
+      padding: 0 22px;
+      display: flex;
+      gap: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+    .modal-tabs button {
+      height: 43px;
+      position: relative;
+      border: 0;
+      color: #8a8292;
+      background: transparent;
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .modal-tabs button.active { color: var(--ink); }
+    .modal-tabs button.active::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: var(--violet);
+    }
+    .modal-body { min-height: 0; padding: 20px 22px; overflow-y: auto; }
+    .modal-pane { display: none; }
+    .modal-pane.active { display: block; }
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .form-field { display: flex; flex-direction: column; gap: 7px; }
+    .form-field.full { grid-column: 1 / -1; }
+    .form-field label {
+      color: #5d5667;
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .form-field input,
+    .form-field textarea {
+      width: 100%;
+      border: 1px solid #ddd6e3;
+      border-radius: 10px;
+      outline: 0;
+      color: var(--ink);
+      background: #fff;
+      font-size: 12px;
+    }
+    .form-field input { height: 40px; padding: 0 11px; }
+    .form-field textarea {
+      min-height: 98px;
+      padding: 11px;
+      resize: vertical;
+      line-height: 1.7;
+    }
+    .form-field textarea.tall { min-height: 220px; }
+    .form-field input:focus,
+    .form-field textarea:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px var(--violet-soft);
+    }
+    .form-help { margin: 0; color: #9a92a1; font-size: 10px; line-height: 1.6; }
+    .form-actions {
+      margin-top: 18px;
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .drop-zone {
+      min-height: 220px;
+      padding: 30px;
+      display: grid;
+      place-items: center;
+      align-content: center;
+      border: 1.5px dashed #cfc3df;
+      border-radius: 16px;
+      text-align: center;
+      background: #faf8fd;
+      cursor: pointer;
+      transition: .16s ease;
+    }
+    .drop-zone.dragging {
+      border-color: var(--violet);
+      background: var(--violet-soft);
+      transform: scale(.995);
+    }
+    .drop-icon {
+      width: 52px;
+      height: 52px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      color: var(--violet);
+      background: var(--violet-soft);
+      font-size: 25px;
+    }
+    .drop-zone h3 { margin: 16px 0 7px; font-size: 16px; }
+    .drop-zone p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.7; }
+    .import-options {
+      margin-top: 14px;
+      padding: 13px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fff;
+    }
+    .import-options label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #645c6e;
+      font-size: 11px;
+    }
+    .import-summary {
+      margin-top: 14px;
+      padding: 12px 14px;
+      display: none;
+      border-radius: 11px;
+      color: #356b48;
+      background: #eaf8ef;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .import-summary.show { display: block; }
+    .local-badge {
+      padding: 4px 7px;
+      border-radius: 7px;
+      color: #356b48;
+      background: #e9f7ee;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .collection-chip {
+      padding: 5px 8px;
+      border-radius: 8px;
+      color: #5d4d74;
+      background: #f0eafb;
+      font-size: 10px;
+      font-weight: 700;
+    }
+    .export-meta {
+      margin: 0 0 12px;
+      padding: 11px 13px;
+      border: 1px solid #dcecdf;
+      border-radius: 11px;
+      color: #356b48;
+      background: #f2faf4;
+      font-size: 11px;
+      line-height: 1.7;
+    }
+    .export-data {
+      width: 100%;
+      min-height: 330px;
+      padding: 13px;
+      resize: vertical;
+      border: 1px solid #ddd6e3;
+      border-radius: 11px;
+      outline: 0;
+      color: #51495b;
+      background: #fbfafc;
+      font: 11px/1.65 Consolas, "Microsoft YaHei UI", monospace;
+    }
+    .export-data:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px var(--violet-soft);
+    }
+
+    @media (max-width: 900px) {
+      body { overflow: auto; }
+      .app { height: auto; min-height: 100vh; overflow: visible; }
+      .workspace { overflow: visible; }
+      .top-stats { display: none; }
+      .workspace { grid-template-columns: 1fr; }
+      .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+      .prompt-list { max-height: 430px; }
+      .detail { min-height: 850px; }
+      .detail-scroll { overflow: visible; }
+    }
+    @media (max-width: 620px) {
+      .app { grid-template-rows: 72px 1fr; }
+      .topbar { padding: 0 16px; }
+      .sidebar { padding: 18px 12px 0; }
+      .filters { grid-template-columns: 1fr 100px; }
+      .detail-hero { padding: 24px 18px 18px; grid-template-columns: 1fr; }
+      .detail-actions, .detail-actions .copy-button { width: 100%; }
+      .detail-actions .copy-button { justify-content: center; }
+      .detail-tabs { padding: 0 18px; gap: 16px; overflow-x: auto; }
+      .detail-tabs button { white-space: nowrap; }
+      .content-width { width: calc(100% - 24px); }
+      .spec-grid, .source-grid { grid-template-columns: 1fr; }
+      .full { grid-column: auto; }
+      .detail-facts span { flex: 1; }
+      .top-actions .toolbar-button.secondary { display: none; }
+      .form-grid, .import-options { grid-template-columns: 1fr; }
+      .form-field.full { grid-column: auto; }
+      .management-strip { margin: 0 18px 14px; align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">P</span>
+        <div>
+          <p class="eyebrow">PROMPT ATLAS</p>
+          <h1>AI 视频提示词库</h1>
+        </div>
+      </div>
+      <div class="top-actions">
+        <div id="topStats" class="top-stats"></div>
+        <button id="exportButton" class="toolbar-button secondary" type="button">⇩ 导出备份</button>
+        <button id="openImportButton" class="toolbar-button primary" type="button">＋ 导入 / 新增</button>
+      </div>
+    </header>
+
+    <div class="workspace">
+      <aside class="sidebar">
+        <label class="field-label" for="search">搜索提示词</label>
+        <div class="search-wrap">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <input id="search" type="search" autocomplete="off" placeholder="题材、角色、风格或效果…">
+          <button id="clearSearch" class="clear-search" type="button" aria-label="清除搜索">×</button>
+        </div>
+
+        <div class="filters">
+          <label>
+            <span class="field-label">类型</span>
+            <select id="category" aria-label="按类型筛选"></select>
+          </label>
+          <label>
+            <span class="field-label">画幅</span>
+            <select id="ratio" aria-label="按画幅筛选"></select>
+          </label>
+        </div>
+        <label style="margin-top:10px">
+          <span class="field-label">合集</span>
+          <select id="collection" aria-label="按合集筛选" style="width:100%;height:40px;padding:0 10px;border:1px solid #ddd7e3;border-radius:11px;background:#fff;color:#50495b;font-size:12px"></select>
+        </label>
+
+        <div class="result-meta">
+          <span id="resultCount">0 个结果</span>
+          <button id="clearFilters" type="button">清除筛选</button>
+        </div>
+        <div id="promptList" class="prompt-list"></div>
+      </aside>
+
+      <section id="detail" class="detail"></section>
+    </div>
+  </div>
+
+  <div id="fatal" class="fatal">
+    <div class="fatal-card">
+      <span class="brand-mark">P</span>
+      <h1>数据库未连接</h1>
+      <p>请双击“启动数据库.bat”，它会同步最新 JSON 后自动打开本页面。</p>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" role="status">已复制到剪贴板</div>
+
+  <div id="manageModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle">导入与整理提示词</h2>
+          <p>支持 TXT、Markdown 和 JSON；导入后可以继续编辑分类、合集与标签。</p>
+        </div>
+        <button id="closeModal" class="modal-close" type="button" aria-label="关闭">×</button>
+      </div>
+      <div class="modal-tabs">
+        <button class="active" type="button" data-modal-tab="import">批量导入</button>
+        <button type="button" data-modal-tab="edit">手动新增</button>
+      </div>
+      <div class="modal-body">
+        <section id="importPane" class="modal-pane active">
+          <input id="fileInput" type="file" accept=".txt,.md,.json,text/plain,text/markdown,application/json" multiple hidden>
+          <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="选择或拖入提示词文件">
+            <div class="drop-icon">⇧</div>
+            <h3>拖入提示词文件，或点击选择</h3>
+            <p>TXT / Markdown：每个文件创建一条提示词<br>JSON：支持数据库备份、提示词数组或单条记录</p>
+          </div>
+          <div class="import-options">
+            <label><input id="autoClassify" type="checkbox" checked> 自动识别分类、画幅、时长和标签</label>
+            <label><input id="skipDuplicates" type="checkbox" checked> 跳过标题与内容均相同的记录</label>
+          </div>
+          <div id="importSummary" class="import-summary"></div>
+        </section>
+
+        <section id="editPane" class="modal-pane">
+          <form id="promptForm">
+            <input id="editId" type="hidden">
+            <div class="form-grid">
+              <div class="form-field">
+                <label for="editTitle">标题 *</label>
+                <input id="editTitle" required placeholder="例如：雨夜霓虹街头追逐">
+              </div>
+              <div class="form-field">
+                <label for="editCategory">分类</label>
+                <input id="editCategory" list="categoryOptions" placeholder="例如：电影级动作">
+              </div>
+              <div class="form-field">
+                <label for="editCollection">合集</label>
+                <input id="editCollection" list="collectionOptions" placeholder="例如：待测试 / 美食系列">
+              </div>
+              <div class="form-field">
+                <label for="editRatio">画幅</label>
+                <input id="editRatio" placeholder="16:9">
+              </div>
+              <div class="form-field">
+                <label for="editDuration">时长（秒）</label>
+                <input id="editDuration" type="number" min="0" step="0.1" placeholder="10">
+              </div>
+              <div class="form-field">
+                <label for="editTags">标签</label>
+                <input id="editTags" placeholder="搞笑, POV, 2D贴纸">
+              </div>
+              <div class="form-field full">
+                <label for="editPrompt">完整提示词 *</label>
+                <textarea id="editPrompt" class="tall" required placeholder="粘贴完整提示词…"></textarea>
+                <p class="form-help">可点击“自动分析”从提示词正文识别分类、标签、画幅、时长和分镜。</p>
+              </div>
+              <div class="form-field full">
+                <label for="editNegative">负面提示词</label>
+                <textarea id="editNegative" placeholder="角色漂移、变形、闪烁、低清晰度…"></textarea>
+              </div>
+            </div>
+            <datalist id="categoryOptions"></datalist>
+            <datalist id="collectionOptions"></datalist>
+            <div class="form-actions">
+              <button id="autoAnalyzeButton" class="toolbar-button" type="button">✦ 自动分析</button>
+              <button class="toolbar-button primary" type="submit">保存提示词</button>
+            </div>
+          </form>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="exportModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="exportModalTitle">
+    <div class="modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="exportModalTitle">导出数据库备份</h2>
+          <p>先核对备份内容，再下载 JSON；如果浏览器拦截下载，也可以复制完整 JSON。</p>
+        </div>
+        <button id="closeExportModal" class="modal-close" type="button" aria-label="关闭导出窗口">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="exportMeta" class="export-meta"></div>
+        <textarea id="exportData" class="export-data" readonly spellcheck="false" aria-label="导出 JSON 内容"></textarea>
+        <div class="form-actions">
+          <button id="copyExportButton" class="toolbar-button" type="button">⧉ 复制 JSON</button>
+          <button id="downloadExportButton" class="toolbar-button primary" type="button">⇩ 下载 JSON 文件</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="database-data.js"></script>
+  <script>
+    window.__legacyPromptApp = () => {
+      const db = window.AI_VIDEO_PROMPT_DB;
+      if (!db || !Array.isArray(db.prompts)) {
+        document.getElementById("app").style.display = "none";
+        document.getElementById("fatal").style.display = "grid";
+        return;
+      }
+
+      const state = {
+        query: "",
+        category: "全部",
+        ratio: "全部",
+        selectedId: db.prompts[0]?.id ?? null,
+        tab: "prompt"
+      };
+
+      const colors = ["violet", "amber", "cyan", "rose"];
+      const el = {
+        search: document.getElementById("search"),
+        clearSearch: document.getElementById("clearSearch"),
+        category: document.getElementById("category"),
+        ratio: document.getElementById("ratio"),
+        clearFilters: document.getElementById("clearFilters"),
+        resultCount: document.getElementById("resultCount"),
+        promptList: document.getElementById("promptList"),
+        detail: document.getElementById("detail"),
+        topStats: document.getElementById("topStats"),
+        toast: document.getElementById("toast")
+      };
+
+      const escapeHtml = (value) => String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+      const formatDuration = (value) =>
+        Number.isInteger(value) ? `${value} 秒` : `${Number(value).toFixed(1)} 秒`;
+
+      const unique = (values) => [...new Set(values)];
+
+      function fillSelect(select, values) {
+        select.innerHTML = values.map(value =>
+          `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`
+        ).join("");
+      }
+
+      fillSelect(el.category, ["全部", ...unique(db.prompts.map(item => item.category))]);
+      fillSelect(el.ratio, ["全部", ...unique(db.prompts.map(item => item.aspect_ratio))]);
+
+      const shotCount = db.prompts.reduce((sum, item) => sum + (item.shots?.length ?? 0), 0);
+      el.topStats.innerHTML = `
+        <span><strong>${db.prompts.length}</strong> 条提示词</span>
+        <i></i>
+        <span><strong>${shotCount}</strong> 个分镜</span>
+        <i></i>
+        <span>版本 ${escapeHtml(db.version)}</span>
+      `;
+
+      function filteredPrompts() {
+        const query = state.query.trim().toLocaleLowerCase();
+        return db.prompts.filter(item => {
+          const categoryOk = state.category === "全部" || item.category === state.category;
+          const ratioOk = state.ratio === "全部" || item.aspect_ratio === state.ratio;
+          const haystack = [
+            item.title,
+            item.category,
+            item.style_summary,
+            item.scene_summary,
+            item.subject_summary,
+            item.core_mechanic,
+            item.master_prompt,
+            ...(item.tags ?? [])
+          ].join(" ").toLocaleLowerCase();
+          return categoryOk && ratioOk && (!query || haystack.includes(query));
+        });
+      }
+
+      function renderList() {
+        const items = filteredPrompts();
+        if (items.length && !items.some(item => item.id === state.selectedId)) {
+          state.selectedId = items[0].id;
+          state.tab = "prompt";
+        }
+
+        el.resultCount.textContent = `${items.length} 个结果`;
+        el.clearSearch.style.display = state.query ? "block" : "none";
+        el.clearFilters.style.display =
+          state.category !== "全部" || state.ratio !== "全部" ? "block" : "none";
+
+        if (!items.length) {
+          el.promptList.innerHTML = `
+            <div class="empty">
+              <div class="empty-glyph">⌕</div>
+              <h2>没有匹配的提示词</h2>
+              <p>试试缩短关键词或清除筛选条件。</p>
+            </div>`;
+          el.detail.innerHTML = "";
+          return;
+        }
+
+        el.promptList.innerHTML = items.map((item, index) => `
+          <button class="prompt-card ${item.id === state.selectedId ? "selected" : ""}"
+                  type="button" data-prompt-id="${item.id}">
+            <span class="card-index ${colors[index % colors.length]}">${String(item.id).padStart(2, "0")}</span>
+            <span class="card-content">
+              <span class="card-topline">
+                <strong class="card-title">${escapeHtml(item.title)}</strong>
+                <span class="ratio">${escapeHtml(item.aspect_ratio)}</span>
+              </span>
+              <span class="card-description">${escapeHtml(item.style_summary)}</span>
+              <span class="tag-row">
+                ${(item.tags ?? []).slice(0, 3).map(tag => `<em class="tag">${escapeHtml(tag)}</em>`).join("")}
+                <small class="duration">${formatDuration(item.duration_sec)}</small>
+              </span>
+            </span>
+          </button>
+        `).join("");
+
+        el.promptList.querySelectorAll("[data-prompt-id]").forEach(button => {
+          button.addEventListener("click", () => {
+            state.selectedId = Number(button.dataset.promptId);
+            state.tab = "prompt";
+            render();
+          });
+        });
+      }
+
+      function copyButton(text, label, compact = true) {
+        return `<button class="copy-button ${compact ? "compact" : ""}" type="button"
+                  data-copy="${encodeURIComponent(text)}"><span aria-hidden="true">⧉</span>${escapeHtml(label)}</button>`;
+      }
+
+      function promptTab(item) {
+        return `
+          <div class="content-width">
+            <section class="content-card">
+              <div class="section-title">
+                <div><p class="eyebrow">MASTER PROMPT</p><h3>完整提示词</h3></div>
+                ${copyButton(item.master_prompt, "复制")}
+              </div>
+              <div class="prompt-text">${escapeHtml(item.master_prompt)}</div>
+            </section>
+
+            <section class="content-card negative-card">
+              <div class="section-title">
+                <div><p class="eyebrow">NEGATIVE CONSTRAINTS</p><h3>负面提示词</h3></div>
+                ${copyButton(item.negative_prompt, "复制")}
+              </div>
+              <p class="negative-text">${escapeHtml(item.negative_prompt)}</p>
+            </section>
+
+            ${item.reference_image_prompt ? `
+              <section class="content-card">
+                <div class="section-title">
+                  <div><p class="eyebrow">REFERENCE IMAGE</p><h3>参考图提示词</h3></div>
+                  ${copyButton(item.reference_image_prompt, "复制")}
+                </div>
+                <div class="prompt-text">${escapeHtml(item.reference_image_prompt)}</div>
+              </section>` : ""}
+          </div>`;
+      }
+
+      function shotsTab(item) {
+        return `
+          <div class="content-width timeline">
+            ${(item.shots ?? []).map(shot => {
+              const combined = [
+                item.continuity_rules,
+                shot.visual_action,
+                `镜头：${shot.camera}`,
+                shot.audio ? `音效：${shot.audio}` : "",
+                shot.continuity ? `连续性：${shot.continuity}` : "",
+                `禁止：${item.negative_prompt}`
+              ].filter(Boolean).join("\n\n");
+              return `
+                <article class="shot-card">
+                  <div class="shot-rail">
+                    <span>${String(shot.shot_index).padStart(2, "0")}</span><i></i>
+                  </div>
+                  <div class="shot-body">
+                    <div class="shot-heading">
+                      <div>
+                        <time class="shot-time">${String(Math.round(shot.start_sec)).padStart(2, "0")}s — ${Number(shot.end_sec).toFixed(1).replace(".0", "")}s</time>
+                        <h3>${escapeHtml(shot.title)}</h3>
+                      </div>
+                      ${copyButton(combined, "复制本镜头")}
+                    </div>
+                    <p class="shot-action">${escapeHtml(shot.visual_action)}</p>
+                    <dl>
+                      <div><dt>镜头</dt><dd>${escapeHtml(shot.camera)}</dd></div>
+                      ${shot.audio ? `<div><dt>声音</dt><dd>${escapeHtml(shot.audio)}</dd></div>` : ""}
+                      ${shot.continuity ? `<div><dt>连续性</dt><dd>${escapeHtml(shot.continuity)}</dd></div>` : ""}
+                    </dl>
+                  </div>
+                </article>`;
+            }).join("")}
+          </div>`;
+      }
+
+      function specTab(item) {
+        const specs = [
+          ["视觉风格", item.style_summary],
+          ["场景", item.scene_summary],
+          ["主体", item.subject_summary],
+          ["镜头语言", item.camera_language],
+          ["灯光与色彩", item.lighting_color],
+          ["音效设计", item.audio_design],
+          ["连续性规则", item.continuity_rules],
+          ["推荐模型", item.recommended_models]
+        ];
+        return `
+          <div class="content-width spec-grid">
+            ${specs.map(([label, value]) => `
+              <section class="content-card spec-card">
+                <p class="eyebrow">${escapeHtml(label)}</p>
+                <p class="spec-value">${escapeHtml(value)}</p>
+              </section>`).join("")}
+            <section class="content-card spec-card full">
+              <p class="eyebrow">标签</p>
+              <div class="large-tags">${(item.tags ?? []).map(tag => `<span class="large-tag">${escapeHtml(tag)}</span>`).join("")}</div>
+            </section>
+          </div>`;
+      }
+
+      function sourceTab(item) {
+        const source = db.sources.find(source => source.id === item.source_id);
+        return `
+          <div class="content-width source-grid">
+            <section class="content-card">
+              <p class="eyebrow">DATA PROVENANCE</p>
+              <h3 class="source-title">${escapeHtml(source?.title ?? "未知来源")}</h3>
+              <dl>
+                <div><dt>来源类型</dt><dd>${escapeHtml(source?.source_type)}</dd></div>
+                <div><dt>来源位置</dt><dd>${escapeHtml(source?.locator)}</dd></div>
+                <div><dt>校验方式</dt><dd>${escapeHtml(source?.verification)}</dd></div>
+                <div><dt>提示词性质</dt><dd>${escapeHtml(item.prompt_origin)}</dd></div>
+              </dl>
+            </section>
+            <section class="content-card note-card">
+              <p class="eyebrow">QUALITY NOTES</p>
+              <h3 class="source-title">数据质量说明</h3>
+              <p>${escapeHtml(item.quality_notes)}</p>
+              ${source?.notes ? `<p>${escapeHtml(source.notes)}</p>` : ""}
+            </section>
+          </div>`;
+      }
+
+      function renderDetail() {
+        const item = db.prompts.find(prompt => prompt.id === state.selectedId);
+        if (!item) return;
+        const tabs = [
+          ["prompt", "完整提示词"],
+          ["shots", `分镜 · ${item.shots?.length ?? 0}`],
+          ["spec", "创作规格"],
+          ["source", "来源说明"]
+        ];
+        const tabContent = {
+          prompt: promptTab(item),
+          shots: shotsTab(item),
+          spec: specTab(item),
+          source: sourceTab(item)
+        }[state.tab];
+
+        el.detail.innerHTML = `
+          <div class="detail-hero">
+            <div class="detail-heading">
+              <p class="eyebrow">PROMPT #${String(item.id).padStart(2, "0")}</p>
+              <h2>${escapeHtml(item.title)}</h2>
+              <p class="detail-lead">${escapeHtml(item.core_mechanic)}</p>
+            </div>
+            <div class="detail-actions">${copyButton(item.master_prompt, "复制完整提示词", false)}</div>
+            <div class="detail-facts">
+              <span><small>画幅</small>${escapeHtml(item.aspect_ratio)}</span>
+              <span><small>时长</small>${formatDuration(item.duration_sec)}</span>
+              <span><small>分辨率</small>${escapeHtml(item.resolution)}</span>
+              <span><small>分镜</small>${item.shots?.length ?? 0} 段</span>
+            </div>
+          </div>
+          <nav class="detail-tabs" aria-label="提示词详情">
+            ${tabs.map(([key, label]) =>
+              `<button type="button" data-tab="${key}" class="${state.tab === key ? "active" : ""}">${label}</button>`
+            ).join("")}
+          </nav>
+          <div class="detail-scroll">${tabContent}</div>
+        `;
+
+        el.detail.querySelectorAll("[data-tab]").forEach(button => {
+          button.addEventListener("click", () => {
+            state.tab = button.dataset.tab;
+            renderDetail();
+          });
+        });
+
+        el.detail.querySelectorAll("[data-copy]").forEach(button => {
+          button.addEventListener("click", async () => {
+            const text = decodeURIComponent(button.dataset.copy);
+            try {
+              await navigator.clipboard.writeText(text);
+            } catch {
+              const area = document.createElement("textarea");
+              area.value = text;
+              area.style.position = "fixed";
+              area.style.opacity = "0";
+              document.body.appendChild(area);
+              area.select();
+              document.execCommand("copy");
+              area.remove();
+            }
+            showToast();
+          });
+        });
+      }
+
+      let toastTimer;
+      function showToast() {
+        clearTimeout(toastTimer);
+        el.toast.classList.add("show");
+        toastTimer = setTimeout(() => el.toast.classList.remove("show"), 1500);
+      }
+
+      function render() {
+        renderList();
+        if (filteredPrompts().length) renderDetail();
+      }
+
+      el.search.addEventListener("input", event => {
+        state.query = event.target.value;
+        render();
+      });
+      el.clearSearch.addEventListener("click", () => {
+        state.query = "";
+        el.search.value = "";
+        el.search.focus();
+        render();
+      });
+      el.category.addEventListener("change", event => {
+        state.category = event.target.value;
+        render();
+      });
+      el.ratio.addEventListener("change", event => {
+        state.ratio = event.target.value;
+        render();
+      });
+      el.clearFilters.addEventListener("click", () => {
+        state.category = "全部";
+        state.ratio = "全部";
+        el.category.value = "全部";
+        el.ratio.value = "全部";
+        render();
+      });
+      document.addEventListener("keydown", event => {
+        if (event.key === "/" && document.activeElement !== el.search) {
+          event.preventDefault();
+          el.search.focus();
+        }
+        if (event.key === "Escape" && state.query) {
+          state.query = "";
+          el.search.value = "";
+          render();
+        }
+      });
+
+      render();
+    };
+  </script>
+  <script src="app-manager.js"></script>
+</body>
+</html>
