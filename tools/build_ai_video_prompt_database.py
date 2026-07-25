@@ -41,6 +41,15 @@ ANIMATION_STYLES_X_POST = (
     "character, a world, and a complete 15-second story.\n\nPilot batch: graphite, pinscreen, "
     "particle flow, and cel-banded CGI.\n\nFour styles. Four micro-short. One minute ↓"
 )
+STARBUCKS_ANIME_X_URL = "https://x.com/noorwithwifi/status/2080914390782779861"
+STARBUCKS_ANIME_PROMPT = (
+    "Create a 35-second anime/Ghibli-inspired 2D commercial for Starbucks Bottled Coffee "
+    "featuring a young man enjoying a bright morning in the city. He picks up a Starbucks "
+    "Caffè Latte from a convenience store, takes a refreshing sip, then works and socializes "
+    "with friends in a cozy café while using his laptop and notebook. Warm sunlight, soft "
+    "colors, expressive character animation, and upbeat acoustic music create a cheerful, "
+    "inspiring atmosphere. End with a close-up of the Starbucks Caffè Latte bottles."
+)
 
 
 def read_utf8(name: str) -> str:
@@ -191,6 +200,22 @@ def build_records() -> tuple[list[dict], list[dict]]:
             ),
             "raw_excerpt": ANIMATION_STYLES_X_POST,
         },
+        {
+            "id": 8,
+            "source_type": "x_video",
+            "title": "Seedance 2.0 日系二维瓶装咖啡城市晨间广告",
+            "locator": STARBUCKS_ANIME_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata_thumbnail",
+            "notes": (
+                "作者在帖子正文中公开了完整英文 prompt，并注明使用 Seedance 2.0。"
+                "原 prompt 要求 35 秒，公开视频媒体元数据为 31.201 秒、720×810（8:9）。"
+                "内容结构为城市明亮早晨、便利店取瓶装拿铁、饮用、咖啡馆工作与朋友社交、"
+                "最终产品瓶特写。数据库保留作者原文，并按实际媒体时长整理分镜。"
+            ),
+            "sha256": sha256_text(STARBUCKS_ANIME_PROMPT),
+            "raw_excerpt": "Made with Seedance 2.0\n\nPrompt:\n\n" + STARBUCKS_ANIME_PROMPT,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -329,6 +354,8 @@ Shot 4 (4s): Overhead orbit—the two streams wrap the storm, bend its vector pa
 Shot 5 (3s): Crane up—the streams rejoin NIA completely as thousands of ground particles illuminate into a vast city-map constellation beneath her; she turns into a clear three-quarter hero silhouette; warm chime and deep resolved pulse.
 
 One character, no dialogue, no explosion, random debris, chaotic noise, face dissolution, missing limbs, colour drift, costume change or generated text. Finish fully reassembled with no loose particles crossing the face."""
+
+    starbucks_anime_video = STARBUCKS_ANIME_PROMPT
 
     prompts = [
         {
@@ -663,6 +690,40 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(5, 12, 15, "城市重新点亮", "涡轮在 Kade 身后锁定旋转，风吹动夹克一次，城市以图形光带回应。", "低机位英雄大全景，末 0.5 秒保持。", "涡轮低鸣与果断两音收尾。", "以清楚剪影结束，动作必须先落点。"),
             ],
         },
+        {
+            "id": 11,
+            "source_id": 8,
+            "slug": "seedance-anime-city-morning-bottled-coffee-commercial",
+            "title": "日系二维城市晨间瓶装咖啡广告",
+            "category": "日系二维商业动画 / 咖啡品牌广告",
+            "language": "en",
+            "aspect_ratio": "8:9",
+            "duration_sec": 31.201,
+            "resolution": "720×810",
+            "style_summary": "温暖手绘日系二维商业动画：柔和配色、明亮晨光、富有表情的角色动作与轻快原声音乐。",
+            "scene_summary": "城市清晨、便利店冷柜或货架、街头饮用、温馨咖啡馆工作与朋友社交，最后以瓶装拿铁产品特写收束。",
+            "subject_summary": "一名年轻男性在明亮城市早晨购买瓶装拿铁，饮用后带着笔记本电脑和纸质笔记本进入咖啡馆工作并与朋友相聚。",
+            "core_mechanic": "用“购买—第一口清爽体验—高效工作—朋友社交—产品英雄镜头”的生活方式叙事，把咖啡产品与积极晨间能量连接起来。",
+            "camera_language": "城市建立镜头、便利店货架与取瓶近景、饮用中近景、咖啡馆桌面与人物关系镜头、产品瓶慢推英雄特写。",
+            "lighting_color": "金色暖阳、柔和低饱和城市色彩、通透浅蓝与奶咖色，咖啡馆使用温暖木色和柔和窗光。",
+            "audio_design": "轻快积极的原声吉他或尤克里里音乐，辅以城市晨间环境声、便利店冰柜声、开瓶与饮用声、咖啡馆谈笑声。",
+            "continuity_rules": "年轻男性的脸、发型、服装与随身物品全程一致；同一瓶咖啡的瓶型、标签颜色和容量稳定；笔记本电脑与纸质笔记本的位置连续。",
+            "master_prompt": starbucks_anime_video,
+            "negative_prompt": "No photorealism, 3D CGI or live action; no character face drift, wardrobe change, extra fingers or deformed hands; no bottle shape changes, duplicate bottles before the final pack shot, warped labels, misspelled product text, random logos, flicker, inconsistent café layout, harsh neon lighting, gloomy mood or generated subtitles.",
+            "reference_image_prompt": "",
+            "recommended_models": "Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在帖子正文中公开了完整英文 prompt，数据库逐字保留；原文要求 35 秒，但公开视频媒体元数据为 31.201 秒、720×810，分镜按实际时长整理。",
+            "tags": ["Seedance 2.0", "日系二维动画", "商业广告", "瓶装咖啡", "城市早晨", "便利店", "咖啡馆", "生活方式", "产品特写", "8:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 4, "明亮城市晨间", "年轻男性在阳光明媚的城市早晨出场，建立轻松积极的一天。", "城市宽景转人物中景，轻柔跟拍。", "轻快原声音乐与城市晨间环境声起。", "人物外形、服装和随身物品首次锁定。"),
+                shot(2, 4, 9, "便利店取瓶装拿铁", "他进入便利店，从冷柜或货架拿起一瓶 Starbucks Caffè Latte。", "货架建立镜头、手部取瓶近景、人物与产品同框中景。", "店内底噪、冰柜轻响与取瓶声。", "手部结构正确，瓶型与标签完整清楚。"),
+                shot(3, 9, 13, "清爽第一口", "回到明亮街头，他打开瓶盖并自然喝下一口，露出清爽满足的表情。", "侧面中近景配产品局部特写，暖阳形成柔和轮廓光。", "开瓶声、饮用声，音乐轻微上扬。", "饮用动作自然，瓶口不穿透面部，产品外观不变化。"),
+                shot(4, 13, 20, "咖啡馆专注工作", "他坐在温馨咖啡馆，用笔记本电脑和纸质笔记本工作，瓶装咖啡放在桌面可见位置。", "窗边环境中景、肩后屏幕镜头、手写与键盘细节。", "轻快音乐、键盘与纸笔声、柔和咖啡馆底噪。", "电脑、笔记本、咖啡瓶与座位方位连续。"),
+                shot(5, 20, 26.5, "与朋友轻松社交", "朋友来到桌边，几人自然交流、微笑并分享轻松的咖啡馆时刻。", "双人或小群组关系中景，轻微横移捕捉表情互动。", "自然谈笑声与积极原声音乐。", "主角身份和服装不漂移；新人物数量稳定。"),
+                shot(6, 26.5, 31.201, "瓶装拿铁英雄镜头", "以多瓶 Starbucks Caffè Latte 的清晰近景结束，产品成为唯一视觉焦点。", "桌面产品英雄镜头，缓慢推近，背景柔和虚化。", "音乐形成明亮收束，可加入轻微瓶身落桌声。", "标签朝向统一、瓶型无变形，停留足够时间形成广告封面。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -901,7 +962,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 4 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 10 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 5 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 11 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -976,6 +1037,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - `海盗舰队与巨兽激战提示词.txt` 是 0 字节空文件，未作为独立提示词导入。
 - ID 4–6 的三个 X 视频作者未公开完整原始提示词，相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
 - ID 7–10 来自同一动画风格合辑；作者在回复中逐字公开四份 16:9 生图提示词和四份 Seedance 2.0 视频提示词，数据库按原文收录并标记为 `author_published_full_prompt`。
+- ID 11 的作者在正文中公开了完整 Seedance 2.0 视频提示词；原文要求 35 秒，公开视频实际为 31.201 秒、720×810，数据库保留原文并按实际媒体时长整理分镜。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 

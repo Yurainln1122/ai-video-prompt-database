@@ -1,6 +1,6 @@
 # AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 4 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 10 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 5 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 11 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -16,8 +16,9 @@
 | 8 | AS-058 Orin Vale：The Last Signal | 实验动画 / 针幕浮雕 | 16:9 | 15s | author_published_full_prompt |
 | 9 | AS-096 Nia Vector：Map the Storm | 实验动画 / 粒子流 | 16:9 | 15s | author_published_full_prompt |
 | 10 | AS-061 Kade Flux：Restart the Sky | 实验动画 / 墨线赛璐璐 CGI | 16:9 | 15s | author_published_full_prompt |
+| 11 | 日系二维城市晨间瓶装咖啡广告 | 日系二维商业动画 / 咖啡品牌广告 | 8:9 | 31.201s | author_published_full_prompt |
 
-共 10 条主提示词、52 条分镜、67 个去重标签。
+共 11 条主提示词、58 条分镜、76 个去重标签。
 
 ## 文件说明
 
@@ -92,3 +93,4 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - `海盗舰队与巨兽激战提示词.txt` 是 0 字节空文件，未作为独立提示词导入。
 - ID 4–6 的三个 X 视频作者未公开完整原始提示词，相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
 - ID 7–10 来自同一动画风格合辑；作者在回复中逐字公开四份 16:9 生图提示词和四份 Seedance 2.0 视频提示词，数据库按原文收录并标记为 `author_published_full_prompt`。
+- ID 11 的作者在正文中公开了完整 Seedance 2.0 视频提示词；原文要求 35 秒，公开视频实际为 31.201 秒、720×810，数据库保留原文并按实际媒体时长整理分镜。
