@@ -1,6 +1,6 @@
 .pnpm-store/
+.analysis-*
 ~$*
 *.lnk
 .DS_Store
 Thumbs.db
-
