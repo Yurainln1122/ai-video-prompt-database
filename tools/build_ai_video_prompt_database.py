@@ -33,6 +33,14 @@ RESTAURANT_X_POST = (
 )
 SHOOTING_GALLERY_X_URL = "https://x.com/manaimovie/status/2080268691430928644"
 SHOOTING_GALLERY_X_POST = "🎯射的では大物を狙うべからず🧸"
+ANIMATION_STYLES_X_URL = "https://x.com/sebatheepan/status/2080687176581259596"
+ANIMATION_STYLES_IMAGE_POST_URL = "https://x.com/sebatheepan/status/2080687180532342996"
+ANIMATION_STYLES_VIDEO_POST_URL = "https://x.com/sebatheepan/status/2080687185150271772"
+ANIMATION_STYLES_X_POST = (
+    "I’m testing 100 animation styles by giving each one the same challenge: create an original "
+    "character, a world, and a complete 15-second story.\n\nPilot batch: graphite, pinscreen, "
+    "particle flow, and cel-banded CGI.\n\nFour styles. Four micro-short. One minute ↓"
+)
 
 
 def read_utf8(name: str) -> str:
@@ -163,6 +171,26 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(SHOOTING_GALLERY_X_POST),
             "raw_excerpt": SHOOTING_GALLERY_X_POST,
         },
+        {
+            "id": 7,
+            "source_type": "x_video_thread",
+            "title": "100 种动画风格试验：首批四个 15 秒微短片",
+            "locator": ANIMATION_STYLES_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompts_reference_prompts_full_video_frames_metadata",
+            "notes": (
+                "主视频为 1080×1920 竖屏合辑、60.3 秒，包含四个约 15 秒微短片："
+                "graphite、pinscreen、particle flow、cel-banded CGI。作者在后续两条回复中"
+                "公开了四份 16:9 角色与世界设定图提示词，以及四份 Seedance 2.0 完整视频提示词。"
+                f"生图原文：{ANIMATION_STYLES_IMAGE_POST_URL}；视频原文：{ANIMATION_STYLES_VIDEO_POST_URL}。"
+            ),
+            "sha256": sha256_text(
+                ANIMATION_STYLES_X_POST
+                + ANIMATION_STYLES_IMAGE_POST_URL
+                + ANIMATION_STYLES_VIDEO_POST_URL
+            ),
+            "raw_excerpt": ANIMATION_STYLES_X_POST,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -208,6 +236,99 @@ def build_records() -> tuple[list[dict], list[dict]]:
 [00:22.5-00:25.7] 三名少女并肩离开射击摊。蓝发少女继续拿着红色丸子，浅金发女孩抱着泰迪熊走在两人之间或稍后方。最后切近女孩的脸与熊，她闭眼露出满足笑容，以暖灯笼与奖品架虚化背景收尾。
 
 镜头语言：枪管主观近景、摊位正面与侧面中景、软木塞飞行特写、柔软绒毛受击微距、额头反应特写、三人关系中景、领奖背面镜头、温暖笑容近景。剪辑节奏清楚，动作轴线统一，软木塞飞行、反弹、命中和泰迪熊翻倒遵守连续物理。声音可包含夏祭人群底噪、远处铃鼓与摊位声、软木枪“噗”的轻响、纸盒翻落声、软木塞弹回的滑稽音、泰迪熊落架的闷响和温柔轻快的日系配乐。"""
+
+    mira_image = """Asset type: 16:9 animation production character-and-world sheet
+Primary request: Create a clean landscape production sheet for an original character named Mira Quill in graphite motion-study animation.
+Subject: Mira Quill, a slim adult wind-archive courier with a short asymmetrical bob, angular oval face, long split-tail field coat, narrow trousers, ankle boots and compact satchel. Original design, no resemblance to an existing character.
+Style/medium: graphite on warm animation paper, visible construction lines, soft smudging, erased highlights, controlled line boil implied in the action strip, selective muted ochre accents.
+Layout: one large full-body three-quarter hero; smaller front, side and back views; head close-up with neutral and curious expressions; three-step walk silhouette strip; Aeroseed prop callout; wide archive-courtyard environment panel; stone and paper-streamer material details; four-value palette.
+Environment: open wind-worn archive courtyard with high arches, paper streamers and stone paving.
+Text (verbatim): "AS-004  MIRA QUILL"
+Constraints: landscape 16:9, full bodies visible, generous margins, consistent face and clothing across every view, one character only, exact same satchel and coat, no photorealism, no colour except muted ochre accent, no logos, no watermark, no extra text."""
+
+    mira_video = """AS-004 — Mira Quill: “Draw the Way”
+
+@ Image1 controls MIRA's original identity, face, asymmetrical bob, split-tail coat, satchel, proportions, Aeroseed, graphite-on-warm-paper medium, ochre accent and archive architecture. Use it as identity, style, prop and world reference only; do not reproduce the sheet layout, white background, panels, labels or text. Preserve MIRA and her wardrobe across every cut.
+
+Create one fast 15-second micro-story with five explicit cuts. Graphite animation on warm paper: visible construction lines, purposeful contour boil, smears, erased highlights and animation on twos.
+
+Shot 1 (2s): Extreme close-up—the courtyard floor erases itself into a white void racing toward MIRA's boot; rapid pencil-scratch push-in; sharp eraser hiss.
+Shot 2 (3s): Wide lateral track—MIRA sprints left-to-right as arches and paper streamers vanish behind her in sweeping erased strokes; coat and satchel follow through; urgent dry percussion.
+Shot 3 (3s): Medium profile—at the broken edge MIRA skids, swings the satchel forward, and the ochre Aeroseed bursts free; camera stops with her; scrape, heartbeat, bright chime.
+Shot 4 (4s): Low-angle tracking—MIRA leaps as the Aeroseed draws one bold graphite line through empty space; the line thickens into a bridge beneath each landing foot and redraws the courtyard outward in fast construction passes; percussion peaks.
+Shot 5 (3s): Crane back to wide—MIRA lands in a stable three-quarter pose while the final arch sketches itself complete and loose graphite birds lift from the page; music resolves on one pencil tap.
+
+One character, no dialogue, no photorealism or 3D, no face drift, no costume change, no extra limbs, no generated text. End on a complete readable hero frame."""
+
+    orin_image = """Use case: infographic-diagram
+Asset type: 16:9 animation production character-and-world sheet
+Primary request: Create a clean landscape production sheet for an original character named Orin Vale rendered as physical pinscreen shadow relief.
+Subject: Orin Vale, a sturdy adult nocturnal signal keeper with short swept hair, strong profile, high collar, asymmetric shoulder cape, long tapered gloves, broad cropped trousers and heavy boots. Original design.
+Style/medium: physical pinscreen relief made from thousands of pin-tip shadows, oblique side lighting, embossed monochrome gradients, velvety black-to-white stipple, no charcoal or pencil texture.
+Layout: one large full-body three-quarter hero; smaller front, side and back relief views; profile head close-up with calm and curious expressions; three-step walk silhouette strip; raised-light Aeroseed callout; wide terraced night-plaza environment panel; pin-depth and shadow-ripple detail; four-value grayscale palette.
+Environment: terraced nocturnal plaza with arched signal towers and rolling relief fog.
+Text (verbatim): "AS-058  ORIN VALE"
+Constraints: landscape 16:9, full bodies visible, generous margins, consistent profile, cape and boots in every view, one character only, strict monochrome, unmistakable pinscreen texture, no colour, no text except the exact title, no logos, no watermark."""
+
+    orin_video = """AS-058 — Orin Vale: “The Last Signal”
+
+@ Image1 controls ORIN's original identity, profile, high collar, asymmetric cape, gloves, boots, Aeroseed, terraced signal plaza and physical pinscreen relief. Use it as identity, style, prop and world reference only; do not reproduce the sheet layout, white background, panels, labels or text. Preserve ORIN's silhouette across every cut.
+
+Create one tense 15-second micro-story with five explicit cuts. Strict monochrome physical pinscreen: thousands of pin-tip shadows, fixed oblique side light, embossed depth and velvety black-to-white gradients.
+
+Shot 1 (2s): Macro—a luminous signal tower collapses into flat black pin depth; locked camera, pins retract in a fast circular chain; metallic pin whisper and one alarm knock.
+Shot 2 (3s): Extreme wide—the black relief tide races across the terraces extinguishing towers toward ORIN; high-angle pan follows the tide, not the character; low drum pulse grows.
+Shot 3 (3s): Medium low angle—ORIN steps in front of the final beacon, plants both boots, and raises the white Aeroseed to shoulder height; slow push-in ends on his resolved profile; cape settles, bass hit.
+Shot 4 (4s): Overhead—the Aeroseed releases three concentric pressure rings; pins rise behind each ring, reversing the black tide and rebuilding stairs, arches and fog in luminous relief; camera remains overhead; tactile rolling thunder moves in stereo.
+Shot 5 (3s): Wide profile—the last tower snaps upright and throws a white beam across the plaza; ORIN lowers his arm as relief fog parts around him; restrained brass note and final pin click.
+
+One character, no dialogue, no colour, no pencil, charcoal, smoke simulation or CGI gloss, no face drift, no costume change, no generated text. Keep side-light direction physically consistent and end on a readable silhouette."""
+
+    kade_image = """Asset type: 16:9 animation production character-and-world sheet
+Primary request: Create a clean landscape production sheet for an original character named Kade Flux in ink-contour cel-banded CGI.
+Subject: Kade Flux, an athletic adult urban wind-grid mechanic with swept dark hair, clean graphic facial planes, angular cropped jacket, one asymmetric shoulder panel, tapered utility trousers and sturdy boots. Original design, not a superhero.
+Style/medium: non-photorealistic stylized 3D, two-to-four cel-shaded light bands, variable dark ink contours, flat graphic shadow shapes, pale stone surfaces with teal and amber accents, no realistic skin shading.
+Layout: one large full-body three-quarter hero; smaller front, side and back views; head close-up with neutral and alert-curious expressions; three-step walk/action silhouette strip; amber Aeroseed with two teal orbit rings; wide modular rooftop wind-plaza environment panel; line-weight and cel-shadow detail; four-colour palette.
+Environment: modular rooftop plaza with geometric turbines, suspended rings and block architecture.
+Text (verbatim): "AS-061  KADE FLUX"
+Constraints: landscape 16:9, full bodies visible, generous margins, identical jacket, face and proportions across every view, one character only, stable dark contours, no photorealism, no glossy plastic skin, no brand marks, no watermark, no extra text."""
+
+    kade_video = """AS-061 — Kade Flux: “Restart the Sky”
+
+@ Image1 controls KADE's original identity, swept hair, angular jacket, amber shoulder panel, trousers, boots, Aeroseed, teal-and-amber palette and rooftop wind plaza. Use it as identity, style, prop and world reference only; do not reproduce the sheet layout, white background, panels, labels or text. Preserve KADE's face, contour design and wardrobe across every cut.
+
+Create one propulsive 15-second micro-story with five explicit cuts. Non-photoreal 3D with stable variable-width ink contours, two-to-four cel-light bands, graphic shadows and angular held poses punctuated by short motion bursts.
+
+Shot 1 (2s): Extreme close-up—a turbine ring fractures and amber power arcs toward camera; snap zoom ends on the crack; electric pop and immediate drum hit.
+Shot 2 (3s): Wide 24mm lateral track—KADE races left-to-right across the rooftop while the dead turbine collapses behind him in clean geometric pieces; one action pose per beat, teal speed accents.
+Shot 3 (3s): Ground-level medium—KADE drops into one controlled knee slide beneath a falling ring and catches the hovering Aeroseed against his forearm guard; camera tracks with the slide and stops at contact; metal scrape, syncopated hit.
+Shot 4 (4s): Rising three-quarter shot—KADE redirects the Aeroseed into the turbine core; one amber shock pulse travels through every suspended ring as cel bands switch from shadow to teal light across the skyline; camera cranes with the energy path; synth rises.
+Shot 5 (3s): Low hero wide—the turbine locks into rotation behind KADE, wind snaps his jacket once, and the city lights answer in graphic bands; hold the final half-second on a clean silhouette; turbine thrum and decisive two-note finish.
+
+One character, no dialogue, no photoreal skin, glossy plastic, contour crawl, face drift, costume change, extra fingers or generated text. Every cut must end after its action lands."""
+
+    nia_image = """Asset type: 16:9 animation production character-and-world sheet
+Primary request: Create a clean landscape production sheet for an original character named Nia Vector in coherent particle-flow animation.
+Subject: Nia Vector, a tall adult flow-field cartographer with rounded bob, simple luminous eyes, short structured cape, fitted tunic, wide cuffs and slim boots. Her body is a stable readable silhouette constructed from thousands of cyan and muted-violet luminous particles with denser points around the face and hands.
+Style/medium: coherent point-cloud animation concept, force-driven particle currents, controlled density, soft alpha trails, dark spatial background, gold-white Aeroseed, no chaotic noise.
+Layout: one large full-body three-quarter hero; smaller front, side and back particle silhouettes; head close-up with neutral and curious expressions; three-step walk/action silhouette strip; dense gold-white Aeroseed with two cyan particle arcs; wide flow-field environment panel; particle-density and current-path detail; four-colour palette.
+Environment: midnight spatial field with flowing contour lines, sparse pylons and organized particle currents.
+Text (verbatim): "AS-096  NIA VECTOR"
+Constraints: landscape 16:9, full bodies visible, generous margins, same cape, face silhouette and colour-density pattern in every view, one character only, particles must form a legible body, no explosion, no random debris, no photoreal human skin, no logos, no watermark, no extra text."""
+
+    nia_video = """AS-096 — Nia Vector: “Map the Storm”
+
+@ Image1 controls NIA's original identity, rounded bob, luminous eyes, structured cape, tunic, cuffs, boots, cyan-violet density pattern, gold-white Aeroseed and flow-field world. Use it as identity, style, prop and world reference only; do not reproduce the sheet layout, white background, panels, labels or text. Keep her face and torso densely legible across every cut.
+
+Create one escalating 15-second micro-story with five explicit cuts. Coherent point-cloud animation: force-driven advection, organized contour currents, controlled density shifts and soft trails; particles always follow readable vector paths.
+
+Shot 1 (2s): Macro—the gold Aeroseed flickers as a violent cyan current bends backward and tears a dark hole through the map; rapid rack focus from seed to rupture; granular crack and sub-bass drop.
+Shot 2 (3s): Extreme wide—the particle storm funnels toward the pylons and strips their outer points away; camera dives along one contour line toward NIA; accelerating airy pulse.
+Shot 3 (3s): Medium frontal—NIA braces, opens both arms, and deliberately releases only her cape edge and outer silhouette into two controlled streams; slow push-in ends on her stable eyes; sound briefly drops to a heartbeat.
+Shot 4 (4s): Overhead orbit—the two streams wrap the storm, bend its vector path into a luminous spiral, and pull the dark rupture closed; NIA's face and torso remain intact; granular crescendo circles in stereo.
+Shot 5 (3s): Crane up—the streams rejoin NIA completely as thousands of ground particles illuminate into a vast city-map constellation beneath her; she turns into a clear three-quarter hero silhouette; warm chime and deep resolved pulse.
+
+One character, no dialogue, no explosion, random debris, chaotic noise, face dissolution, missing limbs, colour drift, costume change or generated text. Finish fully reassembled with no loose particles crossing the face."""
 
     prompts = [
         {
@@ -408,6 +529,138 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 shot(5, 16.5, 19.5, "蓝发少女精准代打", "蓝发少女冷静射中熊腹中心，出现圆形命中点，泰迪熊停顿后向前翻倒。", "奖品架正面中景与命中近景。", "软木枪声、命中闷声、玩偶落架声。", "严格按命中、停顿、翻倒顺序；周围奖品只轻微受扰。"),
                 shot(6, 19.5, 22.5, "领奖并送给主角", "摊主递出泰迪熊，蓝发少女接过后送到浅金发女孩怀里，粉发少女微笑见证。", "三人背面中景切正面关系镜头。", "人群底噪、温柔配乐上扬。", "玩偶从摊主到蓝发少女再到主角，交接顺序不可跳变。"),
                 shot(7, 22.5, 25.708, "抱熊满足收尾", "三人并肩离开，浅金发女孩抱紧泰迪熊，最后闭眼露出满足笑容。", "并肩中景后切女孩与熊的温暖近景。", "轻快温柔配乐与远处夏祭声收尾。", "蓝发少女仍拿红色丸子；女孩始终抱着同一只熊。"),
+            ],
+        },
+        {
+            "id": 7,
+            "source_id": 7,
+            "slug": "as-004-mira-quill-draw-the-way",
+            "title": "AS-004 Mira Quill：Draw the Way",
+            "category": "实验动画 / 石墨运动研究",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 15.0,
+            "resolution": "16:9 源片（竖屏合辑 1080×1920）",
+            "style_summary": "暖色动画纸上的石墨运动研究：结构线、擦除高光、轮廓抖动与赭色点缀。",
+            "scene_summary": "风蚀档案庭院正在被白色虚空擦除，Mira 用 Aeroseed 画出桥梁并重建空间。",
+            "subject_summary": "风之档案信使 Mira Quill：不对称短发、分叉长外套、窄裤、短靴与小型挎包。",
+            "core_mechanic": "世界被橡皮擦除，赭色 Aeroseed 画出的石墨线变成承重桥梁并反向重绘庭院。",
+            "camera_language": "极近景快速推入、横向追踪、中景侧面、低角度跟拍、起重机后拉大全景。",
+            "lighting_color": "暖色动画纸、石墨灰、柔和涂抹与擦除高光，只保留低饱和赭色强调。",
+            "audio_design": "橡皮擦嘶声、干涩急促打击乐、滑步刮擦、心跳、明亮提示音与铅笔落点声。",
+            "continuity_rules": "Mira 的脸、发型、外套、挎包与比例跨镜头锁定；参考图只控制身份、风格、道具和世界，不复制设定表版式。",
+            "master_prompt": mira_video,
+            "negative_prompt": "One character only; no dialogue, no photorealism or 3D, no face drift, no costume change, no extra limbs, no generated text; do not reproduce the sheet layout, white background, panels, labels or text.",
+            "reference_image_prompt": mira_image,
+            "recommended_models": "Seedance 2.0（作者指定）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在线程回复中公开了完整生图提示词与完整视频提示词；已按原文收录，并用合辑成片与媒体元数据核对。",
+            "tags": ["Seedance 2.0", "石墨动画", "运动研究", "角色设定图", "微短片", "Aeroseed", "世界重建", "16:9", "五镜头", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 2, "庭院被擦除", "庭院地面化为白色虚空并冲向 Mira 的靴子。", "极近景，铅笔刮擦式快速推入。", "尖锐橡皮擦嘶声。", "石墨暖纸媒介稳定，擦除边界清楚。"),
+                shot(2, 2, 5, "奔离消失区", "Mira 从左向右奔跑，拱门和纸飘带在身后被擦掉。", "宽幅横向跟拍。", "急促干涩打击乐。", "外套与挎包有连续跟随动作。"),
+                shot(3, 5, 8, "释放 Aeroseed", "Mira 在断裂边缘滑停并甩出挎包，赭色 Aeroseed 飞出。", "中景侧面，镜头与角色同时停住。", "刮擦、心跳、明亮提示音。", "动作结束点和道具来源明确。"),
+                shot(4, 8, 12, "画线成桥", "Mira 跃起，Aeroseed 画出粗石墨线；线在每次落脚下变成桥并向外重绘庭院。", "低角度跟拍。", "打击乐达到峰值。", "桥梁在脚落下前形成，重绘方向可读。"),
+                shot(5, 12, 15, "庭院完成重建", "Mira 以稳定三分之四姿态落地，最后一座拱门完成，石墨鸟从纸面飞起。", "起重机后拉至大全景。", "音乐在一次铅笔轻点上解决。", "以完整可读英雄帧结束。"),
+            ],
+        },
+        {
+            "id": 8,
+            "source_id": 7,
+            "slug": "as-058-orin-vale-the-last-signal",
+            "title": "AS-058 Orin Vale：The Last Signal",
+            "category": "实验动画 / 针幕浮雕",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 15.0,
+            "resolution": "16:9 源片（竖屏合辑 1080×1920）",
+            "style_summary": "严格黑白的实体针幕阴影浮雕：针尖暗影、斜侧光、压印深度与丝绒灰阶。",
+            "scene_summary": "夜间阶梯信号广场被黑色浮雕潮吞没，Orin 用 Aeroseed 压力环重建塔楼与雾。",
+            "subject_summary": "夜间信号守护者 Orin Vale：强壮轮廓、高领、不对称肩披、长手套、阔短裤与重靴。",
+            "core_mechanic": "三圈压力波使针体依次升起，逆转黑潮并恢复台阶、拱门、浮雕雾和信号塔。",
+            "camera_language": "锁定微距、高角度跟潮平移、中低角度慢推、固定俯视、宽幅侧面结尾。",
+            "lighting_color": "严格单色，固定斜侧光，黑到白的浮雕渐变与物理针幕阴影。",
+            "audio_design": "金属针低语、警报敲击、低鼓脉冲、低音重击、环绕滚雷、克制铜管与针响。",
+            "continuity_rules": "Orin 的侧脸、披肩和重靴跨切口一致；侧光方向物理一致；禁止用铅笔、炭笔或 CGI 光泽替代针幕。",
+            "master_prompt": orin_video,
+            "negative_prompt": "One character only; no dialogue, no colour, no pencil, charcoal, smoke simulation or CGI gloss, no face drift, no costume change, no generated text; keep side-light direction physically consistent; do not reproduce the sheet layout, labels or text.",
+            "reference_image_prompt": orin_image,
+            "recommended_models": "Seedance 2.0（作者指定）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在线程回复中公开了完整生图提示词与完整视频提示词；已按原文收录，并用合辑成片与媒体元数据核对。",
+            "tags": ["Seedance 2.0", "针幕动画", "浮雕", "黑白", "角色设定图", "微短片", "Aeroseed", "信号塔", "16:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 2, "信号塔熄灭", "一座发光信号塔塌成平黑针深，针体沿圆形链快速缩回。", "锁定微距。", "金属针低语与一次警报敲击。", "斜侧光和针幕材质固定。"),
+                shot(2, 2, 5, "黑潮逼近", "黑色浮雕潮穿过阶梯熄灭塔楼并逼近 Orin。", "极大全景，高角度平移跟随黑潮。", "低鼓脉冲增强。", "镜头跟潮而非跟角色。"),
+                shot(3, 5, 8, "守住最后信标", "Orin 站到最后信标前，双靴落定，把白色 Aeroseed 举到肩高。", "中低角度慢推，结束于坚定侧脸。", "披肩落定与低音重击。", "角色轮廓完整可读。"),
+                shot(4, 8, 12, "压力环逆转黑潮", "Aeroseed 释放三圈压力环，针体随环升起并重建台阶、拱门和雾。", "固定俯视。", "有触感的滚雷环绕移动。", "三圈传播顺序和重建因果清楚。"),
+                shot(5, 12, 15, "最后信号恢复", "最后塔楼竖起并投出白色光束，Orin 放下手臂，浮雕雾向两侧分开。", "宽幅侧面。", "克制铜管音与最终针响。", "以清楚稳定的侧面剪影结束。"),
+            ],
+        },
+        {
+            "id": 9,
+            "source_id": 7,
+            "slug": "as-096-nia-vector-map-the-storm",
+            "title": "AS-096 Nia Vector：Map the Storm",
+            "category": "实验动画 / 粒子流",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 15.0,
+            "resolution": "16:9 源片（竖屏合辑 1080×1920）",
+            "style_summary": "相干点云动画：力场驱动平流、有组织的等高流线、受控密度与柔和拖尾。",
+            "scene_summary": "午夜流场地图被青色风暴撕开，Nia 释放外轮廓粒子改变向量路径并封闭裂口。",
+            "subject_summary": "流场制图师 Nia Vector：圆短发、发光眼睛、结构短披风、束腰外衣、宽袖口与细靴。",
+            "core_mechanic": "只释放披风边缘和身体外轮廓形成两股可控粒子流，包住风暴并把地面点云点亮成城市地图。",
+            "camera_language": "微距移焦、沿等高线俯冲、正面慢推、头顶环绕、起重机上升。",
+            "lighting_color": "深色空间背景，青色与低饱和紫色点云，金白 Aeroseed；脸和手部粒子更密。",
+            "audio_design": "颗粒裂响、次低频下坠、加速空气脉冲、心跳、环绕颗粒高潮、温暖钟音与深沉收束。",
+            "continuity_rules": "Nia 的脸和躯干在所有镜头中保持高密度可读；粒子沿明确向量运动；结尾完全重组且脸前无游离粒子。",
+            "master_prompt": nia_video,
+            "negative_prompt": "One character only; no dialogue, no explosion, random debris, chaotic noise, face dissolution, missing limbs, colour drift, costume change or generated text; no photoreal human skin; finish fully reassembled with no loose particles crossing the face.",
+            "reference_image_prompt": nia_image,
+            "recommended_models": "Seedance 2.0（作者指定）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在线程回复中公开了完整生图提示词与完整视频提示词；已按原文收录，并用合辑成片与媒体元数据核对。",
+            "tags": ["Seedance 2.0", "粒子流", "点云", "流场", "角色设定图", "微短片", "Aeroseed", "城市地图", "16:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 2, "地图被撕裂", "金色 Aeroseed 闪烁，青色激流反向弯曲并在地图中撕出黑洞。", "微距，从种子快速移焦至裂口。", "颗粒裂响与次低频下坠。", "裂口形成路径和流向可读。"),
+                shot(2, 2, 5, "粒子风暴袭来", "风暴漏斗卷向塔柱，剥离其外层点云。", "极大全景，镜头沿一条等高线俯冲向 Nia。", "加速空气脉冲。", "粒子依照有组织的向量路径移动。"),
+                shot(3, 5, 8, "释放外轮廓", "Nia 稳住身体、张开双臂，只把披风边缘和外轮廓释放为两股流。", "正面中景慢推，结束于稳定眼神。", "声音短暂降至心跳。", "脸和躯干保持完整高密度。"),
+                shot(4, 8, 12, "改写风暴向量", "两股流包裹风暴，将其弯成发光螺旋并拉合黑色裂口。", "头顶环绕。", "颗粒高潮在立体声场中旋转。", "Nia 的脸和躯干始终不解体。"),
+                shot(5, 12, 15, "点亮城市地图", "流体完全回到 Nia，地面数千粒子点亮为巨大城市地图，她转成三分之四英雄剪影。", "起重机上升。", "温暖钟音与深沉脉冲解决。", "完全重组，脸前没有游离粒子。"),
+            ],
+        },
+        {
+            "id": 10,
+            "source_id": 7,
+            "slug": "as-061-kade-flux-restart-the-sky",
+            "title": "AS-061 Kade Flux：Restart the Sky",
+            "category": "实验动画 / 墨线赛璐璐 CGI",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 15.0,
+            "resolution": "16:9 源片（竖屏合辑 1080×1920）",
+            "style_summary": "非写实三维：稳定可变宽墨线、二至四层赛璐璐光带、平面图形阴影与短促动作爆发。",
+            "scene_summary": "模块化屋顶风力广场失去动力，Kade 把 Aeroseed 导入涡轮核心并重启整片城市天际线。",
+            "subject_summary": "城市风网机械师 Kade Flux：深色后掠发、棱角短夹克、不对称肩片、工具裤与结实短靴。",
+            "core_mechanic": "抓住悬浮 Aeroseed 后把它导入核心，一道琥珀冲击波依次穿过悬环并把城市光带从阴影切为青色。",
+            "camera_language": "极近景变焦、24mm 横向跟拍、地面高度跟滑、中高位上升、低机位英雄大全景。",
+            "lighting_color": "浅色石材、稳定深色轮廓、图形化阴影、青色与琥珀色强调光带。",
+            "audio_design": "电弧爆响、即刻鼓击、金属刮擦、切分节拍、上升合成器、涡轮低鸣与两音收束。",
+            "continuity_rules": "Kade 的脸、轮廓、夹克和比例跨镜头锁定；所有动作在切镜前落点；轮廓不爬动，皮肤无塑料光泽。",
+            "master_prompt": kade_video,
+            "negative_prompt": "One character only; no dialogue, no photoreal skin, glossy plastic, contour crawl, face drift, costume change, extra fingers or generated text; no photorealism; do not reproduce the sheet layout, white background, panels, labels or text.",
+            "reference_image_prompt": kade_image,
+            "recommended_models": "Seedance 2.0（作者指定）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在线程回复中公开了完整生图提示词与完整视频提示词；已按原文收录，并用合辑成片与媒体元数据核对。",
+            "tags": ["Seedance 2.0", "赛璐璐CGI", "墨线轮廓", "角色设定图", "微短片", "Aeroseed", "涡轮", "城市屋顶", "16:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 2, "涡轮环断裂", "涡轮环断裂，琥珀电能朝镜头弹射。", "极近景，快速变焦停在裂纹。", "电弧爆响与立即鼓击。", "断裂点和能量来源明确。"),
+                shot(2, 2, 5, "穿越坍塌屋顶", "Kade 从左向右奔跑，失效涡轮在身后崩成干净几何块。", "24mm 宽幅横向跟拍。", "推进型打击乐。", "每一拍一个动作姿态，使用青色速度强调。"),
+                shot(3, 5, 8, "滑跪接住种子", "Kade 在坠落圆环下完成一次受控膝滑，并用前臂护具接住 Aeroseed。", "地面高度中景，跟滑并在接触时停止。", "金属刮擦与切分重击。", "单一连贯滑行动作，手部和道具接触稳定。"),
+                shot(4, 8, 12, "重启风力网络", "Kade 把 Aeroseed 导入核心，琥珀冲击波穿过所有悬环，城市赛璐璐光带由阴影切为青色。", "三分之四上升镜头，沿能量路径升高。", "合成器持续上升。", "冲击波传播顺序与照明切换同步。"),
+                shot(5, 12, 15, "城市重新点亮", "涡轮在 Kade 身后锁定旋转，风吹动夹克一次，城市以图形光带回应。", "低机位英雄大全景，末 0.5 秒保持。", "涡轮低鸣与果断两音收尾。", "以清楚剪影结束，动作必须先落点。"),
             ],
         },
     ]
@@ -648,7 +901,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 3 个 X 视频反推案例统一整理为可检索结构。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 4 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 10 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -721,7 +974,8 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 
 - `海盗舰队与巨兽激战提示词.md` 的时间轴覆盖 0–15 秒，但末尾另写“10s”；数据库以时间轴为准记录 15 秒，并保留冲突说明。
 - `海盗舰队与巨兽激战提示词.txt` 是 0 字节空文件，未作为独立提示词导入。
-- 三个 X 视频作者均未公开完整原始提示词；相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
+- ID 4–6 的三个 X 视频作者未公开完整原始提示词，相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
+- ID 7–10 来自同一动画风格合辑；作者在回复中逐字公开四份 16:9 生图提示词和四份 Seedance 2.0 视频提示词，数据库按原文收录并标记为 `author_published_full_prompt`。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
