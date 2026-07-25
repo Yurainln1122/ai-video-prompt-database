@@ -1,5 +1,6 @@
 .pnpm-store/
 .analysis-*
+.analysis_*
 ~$*
 *.lnk
 .DS_Store

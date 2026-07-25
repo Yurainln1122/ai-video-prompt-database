@@ -1,6 +1,6 @@
 # AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 2 个 X 视频反推案例统一整理为可检索结构。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 3 个 X 视频反推案例统一整理为可检索结构。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -11,8 +11,9 @@
 | 3 | 山地烧烤 Vlog：猫头鹰偷肉 | 户外 Vlog + 2D 贴纸搞笑短视频 | 9:16 | 10s | local_source_full_text |
 | 4 | 单指局部时间冻结：城市广场 | 超写实概念 VFX / 时间操控 | 16:9 | 43.285s | reconstructed_from_page_and_visual_evidence |
 | 5 | AI 外国人探店：暖色串烧餐厅广告 | AI 商业广告 / 餐饮探店 | 16:9 | 15.168s | reconstructed_from_page_and_visual_evidence |
+| 6 | 夏祭射击摊：大熊奖品反弹与友情代打 | 日系动漫短片 / 夏祭轻喜剧 | 16:9 | 25.708s | reconstructed_from_page_and_full_video_evidence |
 
-共 5 条主提示词、25 条分镜、38 个去重标签。
+共 6 条主提示词、32 条分镜、47 个去重标签。
 
 ## 文件说明
 
@@ -85,4 +86,4 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 
 - `海盗舰队与巨兽激战提示词.md` 的时间轴覆盖 0–15 秒，但末尾另写“10s”；数据库以时间轴为准记录 15 秒，并保留冲突说明。
 - `海盗舰队与巨兽激战提示词.txt` 是 0 字节空文件，未作为独立提示词导入。
-- 两个 X 视频作者均未公开完整原始提示词；第 4、5 条标记为 `reconstructed_from_page_and_visual_evidence`，不会与原文来源混淆。
+- 三个 X 视频作者均未公开完整原始提示词；相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
