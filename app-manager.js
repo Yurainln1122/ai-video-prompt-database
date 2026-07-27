@@ -78,7 +78,6 @@
     dropTitle: document.getElementById("dropTitle"),
     dropHelp: document.getElementById("dropHelp"),
     categoryOptions: document.getElementById("categoryOptions"),
-    collectionOptions: document.getElementById("collectionOptions"),
     openCollectionManager: document.getElementById("openCollectionManager"),
     quickCreateCollection: document.getElementById("quickCreateCollection"),
     collectionModal: document.getElementById("collectionModal"),
@@ -430,6 +429,14 @@
     select.value = values.includes(current) ? current : ALL;
   }
 
+  function refreshEditorCollectionOptions(current = el.editCollection.value || DEFAULT_COLLECTION) {
+    const collections = syncCatalogCollections();
+    el.editCollection.innerHTML = collections.map(value =>
+      `<option value="${escapeHtml(value)}">${escapeHtml(value)}</option>`
+    ).join("");
+    el.editCollection.value = collections.includes(current) ? current : DEFAULT_COLLECTION;
+  }
+
   function refreshOptions() {
     const prompts = state.mediaType === MEDIA_ALL
       ? state.catalog.prompts
@@ -440,7 +447,7 @@
     fillSelect(el.collection, [ALL, ...collections], state.collection);
     const categories = unique(prompts.map(item => item.category)).sort();
     el.categoryOptions.innerHTML = categories.map(value => `<option value="${escapeHtml(value)}"></option>`).join("");
-    el.collectionOptions.innerHTML = collections.map(value => `<option value="${escapeHtml(value)}"></option>`).join("");
+    refreshEditorCollectionOptions();
   }
 
   function findCollection(name) {
@@ -492,7 +499,7 @@
     const existing = findCollection(value);
     if (existing) {
       if (state.assignNewCollectionToEditor) {
-        el.editCollection.value = existing;
+        refreshEditorCollectionOptions(existing);
         closeCollectionDialog();
       }
       showToast("该合集已经存在");
@@ -503,7 +510,7 @@
     refreshOptions();
     renderCollectionManager();
     if (state.assignNewCollectionToEditor) {
-      el.editCollection.value = value;
+      refreshEditorCollectionOptions(value);
       closeCollectionDialog();
     } else {
       el.collectionName.value = "";
@@ -522,6 +529,7 @@
       showToast("同名合集已经存在");
       return;
     }
+    const editorUsesRenamedCollection = el.editCollection.value === oldName;
     state.catalog.collections = state.catalog.collections.map(name => name === oldName ? newName : name);
     state.catalog.prompts.forEach(prompt => {
       if (prompt.collection === oldName) prompt.collection = newName;
@@ -529,6 +537,7 @@
     if (state.collection === oldName) state.collection = newName;
     await saveCatalog();
     render();
+    if (editorUsesRenamedCollection) refreshEditorCollectionOptions(newName);
     renderCollectionManager();
     showToast(`合集已重命名为“${newName}”`);
   }
@@ -537,6 +546,7 @@
     if (name === DEFAULT_COLLECTION) return;
     const count = state.catalog.prompts.filter(prompt => prompt.collection === name).length;
     if (!window.confirm(`确定删除合集“${name}”吗？\n\n其中 ${count} 条提示词会移入“${DEFAULT_COLLECTION}”，提示词本身不会被删除。`)) return;
+    const editorUsesDeletedCollection = el.editCollection.value === name;
     state.catalog.prompts.forEach(prompt => {
       if (prompt.collection === name) prompt.collection = DEFAULT_COLLECTION;
     });
@@ -544,6 +554,7 @@
     if (state.collection === name) state.collection = ALL;
     await saveCatalog();
     render();
+    if (editorUsesDeletedCollection) refreshEditorCollectionOptions(DEFAULT_COLLECTION);
     renderCollectionManager();
     showToast(`合集“${name}”已删除，提示词已移入“${DEFAULT_COLLECTION}”`);
   }
@@ -892,7 +903,7 @@
   function clearEditor(mediaType = state.manageMediaType) {
     el.promptForm.reset();
     el.editId.value = "";
-    el.editCollection.value = DEFAULT_COLLECTION;
+    refreshEditorCollectionOptions(DEFAULT_COLLECTION);
     el.editRatio.value = "";
     el.editDuration.value = "";
     el.editCategory.value = "";
@@ -909,7 +920,7 @@
       el.editMediaType.value = item.media_type;
       el.editTitle.value = item.title;
       el.editCategory.value = item.category;
-      el.editCollection.value = item.collection;
+      refreshEditorCollectionOptions(item.collection);
       el.editRatio.value = item.aspect_ratio === "未识别" ? "" : item.aspect_ratio;
       el.editDuration.value = item.duration_sec || "";
       el.editTags.value = item.tags.join(", ");

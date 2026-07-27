@@ -1209,7 +1209,8 @@
                   <label for="editCollection">合集</label>
                   <button id="quickCreateCollection" class="inline-action" type="button">＋ 新建合集</button>
                 </div>
-                <input id="editCollection" list="collectionOptions" placeholder="例如：待测试 / 美食系列">
+                <select id="editCollection" aria-label="选择提示词合集"></select>
+                <p class="form-help">从已有合集中选择；没有目标合集时点击“＋ 新建合集”。</p>
               </div>
               <div class="form-field">
                 <label for="editRatio">画幅</label>
@@ -1234,7 +1235,6 @@
               </div>
             </div>
             <datalist id="categoryOptions"></datalist>
-            <datalist id="collectionOptions"></datalist>
             <div class="form-actions">
               <button id="autoAnalyzeButton" class="toolbar-button" type="button">✦ 自动分析</button>
               <button class="toolbar-button primary" type="submit">保存提示词</button>
