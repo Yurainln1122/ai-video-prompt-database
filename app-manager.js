@@ -14,6 +14,9 @@
   const FALLBACK_KEY = "ai-video-prompt-library-catalog";
   const ALL = "全部";
   const DEFAULT_COLLECTION = "未归档";
+  const MEDIA_ALL = "all";
+  const MEDIA_VIDEO = "video";
+  const MEDIA_IMAGE = "image";
   const colors = ["violet", "amber", "cyan", "rose"];
 
   const state = {
@@ -22,6 +25,9 @@
     category: ALL,
     ratio: ALL,
     collection: ALL,
+    mediaType: MEDIA_ALL,
+    manageMediaType: MEDIA_VIDEO,
+    exportMediaType: MEDIA_VIDEO,
     selectedId: null,
     tab: "prompt",
   };
@@ -40,6 +46,9 @@
     toast: document.getElementById("toast"),
     exportButton: document.getElementById("exportButton"),
     openImportButton: document.getElementById("openImportButton"),
+    exportImageButton: document.getElementById("exportImageButton"),
+    openImageImportButton: document.getElementById("openImageImportButton"),
+    mediaFilterButtons: [...document.querySelectorAll("[data-media-filter]")],
     modal: document.getElementById("manageModal"),
     closeModal: document.getElementById("closeModal"),
     importPane: document.getElementById("importPane"),
@@ -51,18 +60,27 @@
     importSummary: document.getElementById("importSummary"),
     promptForm: document.getElementById("promptForm"),
     editId: document.getElementById("editId"),
+    editMediaType: document.getElementById("editMediaType"),
     editTitle: document.getElementById("editTitle"),
     editCategory: document.getElementById("editCategory"),
     editCollection: document.getElementById("editCollection"),
     editRatio: document.getElementById("editRatio"),
     editDuration: document.getElementById("editDuration"),
+    durationField: document.getElementById("durationField"),
     editTags: document.getElementById("editTags"),
     editPrompt: document.getElementById("editPrompt"),
     editNegative: document.getElementById("editNegative"),
     autoAnalyzeButton: document.getElementById("autoAnalyzeButton"),
+    editorHelp: document.getElementById("editorHelp"),
+    modalTitle: document.getElementById("modalTitle"),
+    modalDescription: document.getElementById("modalDescription"),
+    dropTitle: document.getElementById("dropTitle"),
+    dropHelp: document.getElementById("dropHelp"),
     categoryOptions: document.getElementById("categoryOptions"),
     collectionOptions: document.getElementById("collectionOptions"),
     exportModal: document.getElementById("exportModal"),
+    exportModalTitle: document.getElementById("exportModalTitle"),
+    exportModalDescription: document.getElementById("exportModalDescription"),
     closeExportModal: document.getElementById("closeExportModal"),
     exportMeta: document.getElementById("exportMeta"),
     exportData: document.getElementById("exportData"),
@@ -125,6 +143,9 @@
       source_id: prompt?.source_id ?? options.sourceId ?? "local-import",
       slug: asText(prompt?.slug || slugify(title)),
       title,
+      media_type: [MEDIA_VIDEO, MEDIA_IMAGE].includes(prompt?.media_type)
+        ? prompt.media_type
+        : ([MEDIA_VIDEO, MEDIA_IMAGE].includes(prompt?.prompt_type) ? prompt.prompt_type : (options.mediaType || MEDIA_VIDEO)),
       category: asText(prompt?.category || "待整理"),
       language: asText(prompt?.language || "zh-CN"),
       aspect_ratio: asText(prompt?.aspect_ratio || "未识别"),
@@ -261,9 +282,18 @@
     return match ? match[1].toUpperCase() : "";
   }
 
-  function detectCategory(text) {
+  function detectCategory(text, mediaType = MEDIA_VIDEO) {
     const source = asText(text).toLocaleLowerCase();
-    const rules = [
+    const imageRules = [
+      ["人物肖像 / 角色设计", /肖像|人像|角色设定|角色设计|portrait|character\s*(?:design|sheet)/],
+      ["产品摄影 / 广告视觉", /产品摄影|商品摄影|广告海报|包装|product\s*(?:photo|shot)|commercial|packshot/],
+      ["场景概念 / 环境设计", /场景概念|环境设计|建筑|风景|城市景观|concept\s*art|environment|landscape/],
+      ["动漫 / 插画", /动漫|动画|插画|赛璐璐|二次元|anime|illustration|cel[\s-]?shad/],
+      ["海报 / 平面设计", /海报|封面|排版|字体设计|poster|cover|graphic\s*design|typography/],
+      ["摄影写实", /摄影|写实|镜头|相机|photo(?:graphy)?|photoreal/],
+      ["3D / CG", /\b3d\b|cgi|渲染|render/],
+    ];
+    const videoRules = [
       ["搞笑短视频", /搞笑|喜剧|荒诞|爆笑|恶作剧|comedy|funny/],
       ["美食 / 做饭", /厨房|做饭|烹饪|烧烤|美食|炒菜|锅|cooking|food/],
       ["奇幻动作", /海盗|巨兽|奇幻|boss|魔法|舰队|fantasy/],
@@ -272,10 +302,11 @@
       ["广告 / 产品", /广告|产品|商品|commercial|product/],
       ["人物 / 角色", /角色|人物|肖像|portrait|character/],
     ];
+    const rules = mediaType === MEDIA_IMAGE ? imageRules : videoRules;
     return rules.find(([, pattern]) => pattern.test(source))?.[0] || "待整理";
   }
 
-  function detectTags(text) {
+  function detectTags(text, mediaType = MEDIA_VIDEO) {
     const source = asText(text);
     const rules = [
       ["搞笑", /搞笑|喜剧|荒诞|爆笑/],
@@ -297,8 +328,18 @@
       ["4K", /\b4k\b/i],
       ["16:9", /16\s*:\s*9/],
       ["9:16", /9\s*:\s*16/],
+      ["角色设计", /角色设定|角色设计|character\s*(?:design|sheet)/i],
+      ["产品摄影", /产品摄影|商品摄影|product\s*(?:photo|shot)/i],
+      ["概念艺术", /概念艺术|概念设计|concept\s*art/i],
+      ["插画", /插画|illustration/i],
+      ["动漫", /动漫|二次元|anime/i],
+      ["海报", /海报|poster/i],
+      ["摄影写实", /摄影写实|photoreal|photography/i],
     ];
-    return rules.filter(([, pattern]) => pattern.test(source)).map(([tag]) => tag);
+    return unique([
+      mediaType === MEDIA_IMAGE ? "图片提示词" : "视频提示词",
+      ...rules.filter(([, pattern]) => pattern.test(source)).map(([tag]) => tag),
+    ]);
   }
 
   function parseShots(text) {
@@ -329,14 +370,14 @@
     });
   }
 
-  function analyzePrompt(text) {
+  function analyzePrompt(text, mediaType = MEDIA_VIDEO) {
     return {
-      category: detectCategory(text),
+      category: detectCategory(text, mediaType),
       aspect_ratio: detectRatio(text) || "未识别",
-      duration_sec: detectDuration(text),
+      duration_sec: mediaType === MEDIA_VIDEO ? detectDuration(text) : 0,
       resolution: detectResolution(text) || "未识别",
-      tags: detectTags(text),
-      shots: parseShots(text),
+      tags: detectTags(text, mediaType),
+      shots: mediaType === MEDIA_VIDEO ? parseShots(text) : [],
     };
   }
 
@@ -352,7 +393,9 @@
   }
 
   function refreshOptions() {
-    const prompts = state.catalog.prompts;
+    const prompts = state.mediaType === MEDIA_ALL
+      ? state.catalog.prompts
+      : state.catalog.prompts.filter(item => item.media_type === state.mediaType);
     fillSelect(el.category, [ALL, ...unique(prompts.map(item => item.category)).sort()], state.category);
     fillSelect(el.ratio, [ALL, ...unique(prompts.map(item => item.aspect_ratio)).sort()], state.ratio);
     fillSelect(el.collection, [ALL, ...unique(prompts.map(item => item.collection)).sort()], state.collection);
@@ -366,6 +409,7 @@
     const query = state.query.trim().toLocaleLowerCase();
     return state.catalog.prompts
       .filter(item => {
+        const mediaOk = state.mediaType === MEDIA_ALL || item.media_type === state.mediaType;
         const categoryOk = state.category === ALL || item.category === state.category;
         const ratioOk = state.ratio === ALL || item.aspect_ratio === state.ratio;
         const collectionOk = state.collection === ALL || item.collection === state.collection;
@@ -373,7 +417,7 @@
           item.title, item.category, item.collection, item.style_summary, item.scene_summary,
           item.subject_summary, item.core_mechanic, item.master_prompt, ...(item.tags || []),
         ].join(" ").toLocaleLowerCase();
-        return categoryOk && ratioOk && collectionOk && (!query || haystack.includes(query));
+        return mediaOk && categoryOk && ratioOk && collectionOk && (!query || haystack.includes(query));
       })
       .sort((a, b) => {
         if (a.user_managed !== b.user_managed) return a.user_managed ? -1 : 1;
@@ -382,10 +426,13 @@
   }
 
   function updateStats() {
+    const videoCount = state.catalog.prompts.filter(item => item.media_type === MEDIA_VIDEO).length;
+    const imageCount = state.catalog.prompts.filter(item => item.media_type === MEDIA_IMAGE).length;
     const shotCount = state.catalog.prompts.reduce((sum, item) => sum + item.shots.length, 0);
     el.topStats.innerHTML = `
-      <span><strong>${state.catalog.prompts.length}</strong> 条提示词</span>
-      <i></i><span><strong>${shotCount}</strong> 个分镜</span>
+      <span><strong>${videoCount}</strong> 视频</span>
+      <i></i><span><strong>${imageCount}</strong> 图片</span>
+      <i></i><span><strong>${shotCount}</strong> 分镜</span>
       <i></i><span>本地自动保存</span>`;
   }
 
@@ -398,7 +445,9 @@
     el.resultCount.textContent = `${items.length} 个结果`;
     el.clearSearch.style.display = state.query ? "block" : "none";
     el.clearFilters.style.display =
-      state.category !== ALL || state.ratio !== ALL || state.collection !== ALL ? "block" : "none";
+      state.mediaType !== MEDIA_ALL || state.category !== ALL || state.ratio !== ALL || state.collection !== ALL ? "block" : "none";
+    el.mediaFilterButtons.forEach(button =>
+      button.classList.toggle("active", button.dataset.mediaFilter === state.mediaType));
     if (!items.length) {
       el.promptList.innerHTML = `
         <div class="empty"><div class="empty-glyph">⌕</div>
@@ -413,12 +462,14 @@
         <span class="card-content">
           <span class="card-topline">
             <strong class="card-title">${escapeHtml(item.title)}</strong>
-            <span class="ratio">${escapeHtml(item.aspect_ratio)}</span>
+            <span class="media-badge ${item.media_type === MEDIA_IMAGE ? "image" : ""}">
+              ${item.media_type === MEDIA_IMAGE ? "图片" : "视频"}
+            </span>
           </span>
           <span class="card-description">${escapeHtml(item.style_summary || item.category)}</span>
           <span class="tag-row">
             ${(item.tags || []).slice(0, 3).map(tag => `<em class="tag">${escapeHtml(tag)}</em>`).join("")}
-            <small class="duration">${formatDuration(item.duration_sec)}</small>
+            <small class="duration">${escapeHtml(item.aspect_ratio)}${item.media_type === MEDIA_VIDEO ? ` · ${formatDuration(item.duration_sec)}` : ""}</small>
           </span>
         </span>
       </button>`).join("");
@@ -494,12 +545,19 @@
   }
 
   function specTab(item) {
-    const specs = [
-      ["视觉风格", item.style_summary], ["场景", item.scene_summary],
-      ["主体", item.subject_summary], ["镜头语言", item.camera_language],
-      ["灯光与色彩", item.lighting_color], ["音效设计", item.audio_design],
-      ["连续性规则", item.continuity_rules], ["推荐模型", item.recommended_models],
-    ];
+    const specs = item.media_type === MEDIA_IMAGE
+      ? [
+          ["视觉风格", item.style_summary], ["场景", item.scene_summary],
+          ["主体", item.subject_summary], ["构图与视角", item.camera_language],
+          ["灯光与色彩", item.lighting_color], ["画面约束", item.continuity_rules],
+          ["推荐模型", item.recommended_models],
+        ]
+      : [
+          ["视觉风格", item.style_summary], ["场景", item.scene_summary],
+          ["主体", item.subject_summary], ["镜头语言", item.camera_language],
+          ["灯光与色彩", item.lighting_color], ["音效设计", item.audio_design],
+          ["连续性规则", item.continuity_rules], ["推荐模型", item.recommended_models],
+        ];
     return `<div class="content-width spec-grid">
       ${specs.map(([label, value]) => `<section class="content-card spec-card">
         <p class="eyebrow">${escapeHtml(label)}</p>
@@ -538,8 +596,10 @@
   function renderDetail() {
     const item = state.catalog.prompts.find(prompt => idEquals(prompt.id, state.selectedId));
     if (!item) return;
+    if (item.media_type === MEDIA_IMAGE && state.tab === "shots") state.tab = "prompt";
     const tabs = [
-      ["prompt", "完整提示词"], ["shots", `分镜 · ${item.shots.length}`],
+      ["prompt", "完整提示词"],
+      ...(item.media_type === MEDIA_VIDEO ? [["shots", `分镜 · ${item.shots.length}`]] : []),
       ["spec", "创作规格"], ["source", "来源说明"],
     ];
     const tabContent = {
@@ -549,20 +609,26 @@
     el.detail.innerHTML = `
       <div class="detail-hero">
         <div class="detail-heading">
-          <p class="eyebrow">${item.user_managed ? "LOCAL PROMPT" : "DATABASE PROMPT"}</p>
+          <p class="eyebrow">${item.media_type === MEDIA_IMAGE ? "IMAGE PROMPT" : "VIDEO PROMPT"} · ${item.user_managed ? "LOCAL" : "DATABASE"}</p>
           <h2>${escapeHtml(item.title)}</h2>
           <p class="detail-lead">${escapeHtml(item.core_mechanic)}</p>
         </div>
         <div class="detail-actions">${copyButton(item.master_prompt, "复制完整提示词", false)}</div>
         <div class="detail-facts">
           <span><small>画幅</small>${escapeHtml(item.aspect_ratio)}</span>
-          <span><small>时长</small>${formatDuration(item.duration_sec)}</span>
           <span><small>分辨率</small>${escapeHtml(item.resolution)}</span>
-          <span><small>分镜</small>${item.shots.length} 段</span>
+          ${item.media_type === MEDIA_VIDEO
+            ? `<span><small>时长</small>${formatDuration(item.duration_sec)}</span>
+               <span><small>分镜</small>${item.shots.length} 段</span>`
+            : `<span><small>类型</small>图片提示词</span>
+               <span><small>标签</small>${item.tags.length} 个</span>`}
         </div>
       </div>
       <div class="management-strip">
         <div>
+          <span class="media-badge ${item.media_type === MEDIA_IMAGE ? "image" : ""}">
+            ${item.media_type === MEDIA_IMAGE ? "▧ 图片提示词" : "🎬 视频提示词"}
+          </span>
           <span class="collection-chip">合集 · ${escapeHtml(item.collection)}</span>
           ${item.user_managed ? `<span class="local-badge">本地导入 / 编辑</span>` : ""}
         </div>
@@ -633,6 +699,10 @@
       button.classList.toggle("active", button.dataset.modalTab === tab));
     el.importPane.classList.toggle("active", tab === "import");
     el.editPane.classList.toggle("active", tab === "edit");
+    const typeLabel = state.manageMediaType === MEDIA_IMAGE ? "图片提示词" : "视频提示词";
+    el.modalTitle.textContent = tab === "edit"
+      ? `${el.editId.value ? "编辑" : "新增"}${typeLabel}`
+      : `导入${typeLabel}`;
   }
 
   function openModal(tab = "import") {
@@ -646,19 +716,54 @@
     document.body.style.overflow = "";
   }
 
-  function clearEditor() {
+  function updateManagerCopy(mediaType) {
+    const isImage = mediaType === MEDIA_IMAGE;
+    el.modalTitle.textContent = isImage ? "导入图片提示词" : "导入视频提示词";
+    el.modalDescription.textContent = isImage
+      ? "导入用于文生图、参考图或视觉设计的提示词，并继续编辑分类、合集与标签。"
+      : "导入用于文生视频、图生视频或视频编辑的提示词，并自动整理时长与分镜。";
+    el.dropTitle.textContent = isImage
+      ? "拖入图片提示词文件，或点击选择"
+      : "拖入视频提示词文件，或点击选择";
+    el.dropHelp.innerHTML = isImage
+      ? "TXT / Markdown：每个文件创建一条图片提示词<br>JSON：支持图片提示词备份、数组或单条记录"
+      : "TXT / Markdown：每个文件创建一条视频提示词<br>JSON：支持视频提示词备份、数组或单条记录";
+  }
+
+  function updateEditorMode(mediaType) {
+    const isImage = mediaType === MEDIA_IMAGE;
+    el.editMediaType.value = mediaType;
+    el.durationField.style.display = isImage ? "none" : "flex";
+    el.editorHelp.textContent = isImage
+      ? "自动分析会识别图片分类、标签、画幅和分辨率。"
+      : "自动分析会识别视频分类、标签、画幅、时长和时间码分镜。";
+  }
+
+  function openManager(mediaType, tab = "import") {
+    state.manageMediaType = mediaType;
+    updateManagerCopy(mediaType);
+    el.importSummary.classList.remove("show");
+    openModal(tab);
+  }
+
+  function clearEditor(mediaType = state.manageMediaType) {
     el.promptForm.reset();
     el.editId.value = "";
     el.editCollection.value = DEFAULT_COLLECTION;
     el.editRatio.value = "";
     el.editDuration.value = "";
     el.editCategory.value = "";
+    updateEditorMode(mediaType);
   }
 
   function openEditor(item = null) {
-    clearEditor();
+    const mediaType = item?.media_type || state.manageMediaType;
+    state.manageMediaType = mediaType;
+    updateManagerCopy(mediaType);
+    clearEditor(mediaType);
     if (item) {
       el.editId.value = item.id;
+      el.editMediaType.value = item.media_type;
       el.editTitle.value = item.title;
       el.editCategory.value = item.category;
       el.editCollection.value = item.collection;
@@ -673,33 +778,40 @@
   }
 
   function applyAnalysisToEditor() {
-    const analysis = analyzePrompt(el.editPrompt.value);
+    const mediaType = el.editMediaType.value;
+    const analysis = analyzePrompt(el.editPrompt.value, mediaType);
     if (!el.editCategory.value || el.editCategory.value === "待整理") el.editCategory.value = analysis.category;
     if (!el.editRatio.value) el.editRatio.value = analysis.aspect_ratio === "未识别" ? "" : analysis.aspect_ratio;
     if (!el.editDuration.value && analysis.duration_sec) el.editDuration.value = analysis.duration_sec;
     const combinedTags = unique([...asTags(el.editTags.value), ...analysis.tags]);
     el.editTags.value = combinedTags.join(", ");
-    showToast(`分析完成：识别到 ${analysis.shots.length} 个分镜`);
+    showToast(mediaType === MEDIA_IMAGE
+      ? `图片提示词分析完成：识别到 ${analysis.tags.length} 个标签`
+      : `视频提示词分析完成：识别到 ${analysis.shots.length} 个分镜`);
   }
 
   async function saveEditor(event) {
     event.preventDefault();
     const existing = state.catalog.prompts.find(prompt => idEquals(prompt.id, el.editId.value));
-    const analysis = analyzePrompt(el.editPrompt.value);
+    const mediaType = el.editMediaType.value;
+    const analysis = analyzePrompt(el.editPrompt.value, mediaType);
     const timestamp = nowIso();
     if (existing) {
       Object.assign(existing, {
+        media_type: mediaType,
         title: el.editTitle.value.trim(),
         slug: existing.slug || slugify(el.editTitle.value),
         category: el.editCategory.value.trim() || analysis.category,
         collection: el.editCollection.value.trim() || DEFAULT_COLLECTION,
         aspect_ratio: el.editRatio.value.trim() || analysis.aspect_ratio,
-        duration_sec: Number(el.editDuration.value) || analysis.duration_sec,
+        duration_sec: mediaType === MEDIA_VIDEO ? (Number(el.editDuration.value) || analysis.duration_sec) : 0,
         resolution: existing.resolution === "未识别" ? analysis.resolution : existing.resolution,
         tags: asTags(el.editTags.value).length ? asTags(el.editTags.value) : analysis.tags,
         master_prompt: el.editPrompt.value.trim(),
         negative_prompt: el.editNegative.value.trim(),
-        shots: analysis.shots.length ? analysis.shots : existing.shots,
+        shots: mediaType === MEDIA_VIDEO
+          ? (analysis.shots.length ? analysis.shots : existing.shots)
+          : [],
         user_managed: true,
         updated_at: timestamp,
       });
@@ -707,20 +819,21 @@
     } else {
       const prompt = normalizePrompt({
         id: nextUserId(),
+        media_type: mediaType,
         title: el.editTitle.value.trim(),
         category: el.editCategory.value.trim() || analysis.category,
         collection: el.editCollection.value.trim() || DEFAULT_COLLECTION,
         aspect_ratio: el.editRatio.value.trim() || analysis.aspect_ratio,
-        duration_sec: Number(el.editDuration.value) || analysis.duration_sec,
+        duration_sec: mediaType === MEDIA_VIDEO ? (Number(el.editDuration.value) || analysis.duration_sec) : 0,
         resolution: analysis.resolution,
         tags: asTags(el.editTags.value).length ? asTags(el.editTags.value) : analysis.tags,
         master_prompt: el.editPrompt.value.trim(),
         negative_prompt: el.editNegative.value.trim(),
-        shots: analysis.shots,
+        shots: mediaType === MEDIA_VIDEO ? analysis.shots : [],
         user_managed: true,
         created_at: timestamp,
         updated_at: timestamp,
-      }, { userManaged: true, origin: "手动新增" });
+      }, { userManaged: true, origin: "手动新增", mediaType });
       state.catalog.prompts.push(prompt);
       state.selectedId = prompt.id;
     }
@@ -728,6 +841,7 @@
     state.category = ALL;
     state.ratio = ALL;
     state.collection = ALL;
+    state.mediaType = mediaType;
     closeModal();
     render();
     showToast(existing ? "提示词已更新并自动保存" : "提示词已新增并自动保存");
@@ -752,37 +866,45 @@
     const title = normalizeText(candidate.title);
     const prompt = normalizeText(candidate.master_prompt);
     return state.catalog.prompts.some(item =>
-      normalizeText(item.title) === title && normalizeText(item.master_prompt) === prompt);
+      item.media_type === candidate.media_type &&
+      normalizeText(item.title) === title &&
+      normalizeText(item.master_prompt) === prompt);
   }
 
-  function promptFromRaw(raw, filename, useAnalysis) {
+  function promptFromRaw(raw, filename, useAnalysis, importMediaType) {
     const isString = typeof raw === "string";
     const content = isString ? raw : asText(raw.master_prompt || raw.prompt || raw.content || raw.text);
     const titleFromFile = filename.replace(/\.(txt|md|markdown|json)$/i, "");
-    const analysis = useAnalysis ? analyzePrompt(content) : {
+    const rawObject = isString ? {} : raw;
+    const mediaType = [MEDIA_VIDEO, MEDIA_IMAGE].includes(rawObject.media_type)
+      ? rawObject.media_type
+      : importMediaType;
+    const analysis = useAnalysis ? analyzePrompt(content, mediaType) : {
       category: "待整理", aspect_ratio: "未识别", duration_sec: 0,
       resolution: "未识别", tags: [], shots: [],
     };
-    const rawObject = isString ? {} : raw;
     return normalizePrompt({
       ...rawObject,
       id: nextUserId(),
+      media_type: mediaType,
       source_id: "local-import",
       slug: `${slugify(rawObject.title || titleFromFile)}-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
       title: rawObject.title || titleFromFile,
       category: rawObject.category || analysis.category,
       aspect_ratio: rawObject.aspect_ratio || analysis.aspect_ratio,
-      duration_sec: rawObject.duration_sec || analysis.duration_sec,
+      duration_sec: mediaType === MEDIA_VIDEO ? (rawObject.duration_sec || analysis.duration_sec) : 0,
       resolution: rawObject.resolution || analysis.resolution,
       master_prompt: content,
       tags: asTags(rawObject.tags).length ? asTags(rawObject.tags) : analysis.tags,
-      shots: Array.isArray(rawObject.shots) && rawObject.shots.length ? rawObject.shots : analysis.shots,
+      shots: mediaType === MEDIA_VIDEO
+        ? (Array.isArray(rawObject.shots) && rawObject.shots.length ? rawObject.shots : analysis.shots)
+        : [],
       collection: rawObject.collection || DEFAULT_COLLECTION,
       prompt_origin: `本地导入：${filename}`,
       user_managed: true,
       created_at: nowIso(),
       updated_at: nowIso(),
-    }, { userManaged: true, origin: `本地导入：${filename}` });
+    }, { userManaged: true, origin: `本地导入：${filename}`, mediaType });
   }
 
   async function importFiles(fileList) {
@@ -802,7 +924,7 @@
           records = [text];
         }
         for (const record of records) {
-          const candidate = promptFromRaw(record, file.name, el.autoClassify.checked);
+          const candidate = promptFromRaw(record, file.name, el.autoClassify.checked, state.manageMediaType);
           if (!candidate.master_prompt.trim()) {
             skipped += 1;
             continue;
@@ -824,30 +946,47 @@
       state.category = ALL;
       state.ratio = ALL;
       state.collection = ALL;
+      state.mediaType = state.manageMediaType;
       render();
     }
     el.importSummary.classList.add("show");
     el.importSummary.innerHTML = `
-      <strong>导入完成：新增 ${imported} 条，跳过 ${skipped} 条。</strong>
-      ${errors.length ? `<p>${errors.map(escapeHtml).join("<br>")}</p>` : "<p>新记录已保存到浏览器本地数据库。</p>"}`;
+      <strong>${state.manageMediaType === MEDIA_IMAGE ? "图片" : "视频"}提示词导入完成：新增 ${imported} 条，跳过 ${skipped} 条。</strong>
+      ${errors.length ? `<p>${errors.map(escapeHtml).join("<br>")}</p>` : "<p>新记录已保存到当前浏览器数据库。</p>"}`;
     el.fileInput.value = "";
   }
 
-  function createExportPayload() {
+  function createExportPayload(mediaType = state.exportMediaType) {
+    const prompts = state.catalog.prompts.filter(item => item.media_type === mediaType);
+    const sourceIds = new Set(prompts.map(item => String(item.source_id)));
     return {
       ...clone(state.catalog),
-      export_format: "AI Video Prompt Atlas local backup",
+      database_name: mediaType === MEDIA_IMAGE ? "AI 图片提示词数据库" : "AI 视频提示词数据库",
+      sources: clone(state.catalog.sources.filter(source => sourceIds.has(String(source.id)))),
+      prompts: clone(prompts),
+      export_scope: mediaType,
+      export_format: mediaType === MEDIA_IMAGE
+        ? "AI Image Prompt Atlas local backup"
+        : "AI Video Prompt Atlas local backup",
       exported_at: nowIso(),
     };
   }
 
-  function openExportModal() {
-    const payload = createExportPayload();
+  function openExportModal(mediaType) {
+    state.exportMediaType = mediaType;
+    const isImage = mediaType === MEDIA_IMAGE;
+    const payload = createExportPayload(mediaType);
     const json = JSON.stringify(payload, null, 2);
     const shotCount = payload.prompts.reduce((sum, item) => sum + (item.shots?.length || 0), 0);
+    el.exportModalTitle.textContent = isImage ? "导出图片提示词" : "导出视频提示词";
+    el.exportModalDescription.textContent = isImage
+      ? "导出仅包含图片提示词的 JSON 备份，可在其他设备或浏览器重新导入。"
+      : "导出仅包含视频提示词及分镜的 JSON 备份，可在其他设备或浏览器重新导入。";
     el.exportData.value = json;
     el.exportMeta.textContent =
-      `备份已生成：${payload.prompts.length} 条提示词，${shotCount} 个分镜，${new Blob([json]).size} 字节。`;
+      isImage
+        ? `图片备份已生成：${payload.prompts.length} 条图片提示词，${new Blob([json]).size} 字节。`
+        : `视频备份已生成：${payload.prompts.length} 条视频提示词，${shotCount} 个分镜，${new Blob([json]).size} 字节。`;
     el.exportModal.classList.add("open");
     document.body.style.overflow = "hidden";
   }
@@ -858,12 +997,13 @@
   }
 
   function downloadExportBackup() {
-    const json = el.exportData.value || JSON.stringify(createExportPayload(), null, 2);
+    const json = el.exportData.value || JSON.stringify(createExportPayload(state.exportMediaType), null, 2);
     const blob = new Blob([json], { type: "application/json;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const anchor = document.createElement("a");
     anchor.href = url;
-    anchor.download = `AI视频提示词数据库_备份_${new Date().toISOString().slice(0, 10)}.json`;
+    const prefix = state.exportMediaType === MEDIA_IMAGE ? "AI图片提示词数据库" : "AI视频提示词数据库";
+    anchor.download = `${prefix}_备份_${new Date().toISOString().slice(0, 10)}.json`;
     document.body.appendChild(anchor);
     anchor.click();
     anchor.remove();
@@ -894,7 +1034,18 @@
       state.collection = event.target.value;
       render();
     });
+    el.mediaFilterButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        state.mediaType = button.dataset.mediaFilter;
+        state.category = ALL;
+        state.ratio = ALL;
+        state.collection = ALL;
+        state.tab = "prompt";
+        render();
+      });
+    });
     el.clearFilters.addEventListener("click", () => {
+      state.mediaType = MEDIA_ALL;
       state.category = ALL;
       state.ratio = ALL;
       state.collection = ALL;
@@ -903,10 +1054,13 @@
       render();
     });
     el.openImportButton.addEventListener("click", () => {
-      el.importSummary.classList.remove("show");
-      openModal("import");
+      openManager(MEDIA_VIDEO, "import");
     });
-    el.exportButton.addEventListener("click", openExportModal);
+    el.openImageImportButton.addEventListener("click", () => {
+      openManager(MEDIA_IMAGE, "import");
+    });
+    el.exportButton.addEventListener("click", () => openExportModal(MEDIA_VIDEO));
+    el.exportImageButton.addEventListener("click", () => openExportModal(MEDIA_IMAGE));
     el.closeExportModal.addEventListener("click", closeExportModal);
     el.exportModal.addEventListener("click", event => {
       if (event.target === el.exportModal) closeExportModal();
@@ -919,7 +1073,7 @@
     });
     document.querySelectorAll("[data-modal-tab]").forEach(button => {
       button.addEventListener("click", () => {
-        if (button.dataset.modalTab === "edit") clearEditor();
+        if (button.dataset.modalTab === "edit") clearEditor(state.manageMediaType);
         setModalTab(button.dataset.modalTab);
       });
     });
@@ -940,6 +1094,11 @@
     }));
     el.dropZone.addEventListener("drop", event => importFiles(event.dataTransfer.files));
     el.fileInput.addEventListener("change", event => importFiles(event.target.files));
+    el.editMediaType.addEventListener("change", event => {
+      state.manageMediaType = event.target.value;
+      updateManagerCopy(state.manageMediaType);
+      updateEditorMode(state.manageMediaType);
+    });
     el.autoAnalyzeButton.addEventListener("click", applyAnalysisToEditor);
     el.promptForm.addEventListener("submit", saveEditor);
     document.addEventListener("keydown", event => {

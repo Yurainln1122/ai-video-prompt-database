@@ -34,6 +34,7 @@ for (const id of [
   "app", "search", "category", "ratio", "collection", "promptList", "detail", "toast",
   "openImportButton", "exportButton", "manageModal", "fileInput", "promptForm",
   "exportModal", "exportData", "copyExportButton", "downloadExportButton",
+  "openImageImportButton", "exportImageButton", "editMediaType", "durationField",
 ]) {
   if (!html.includes(`id="${id}"`)) {
     throw new Error(`Missing required element #${id}`);

@@ -622,7 +622,26 @@
     .top-actions {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 9px;
+    }
+    .action-cluster {
+      height: 44px;
+      padding: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: 1px solid #e1dbe7;
+      border-radius: 13px;
+      background: #f8f6fa;
+    }
+    .action-cluster.video { background: #f4f0ff; border-color: #ddd2f7; }
+    .action-cluster.image { background: #fff3f7; border-color: #f2d5df; }
+    .action-label {
+      padding: 0 7px;
+      color: #62596d;
+      font-size: 10px;
+      font-weight: 800;
+      white-space: nowrap;
     }
     .toolbar-button {
       height: 36px;
@@ -651,6 +670,12 @@
       background: var(--violet);
     }
     .toolbar-button.primary:hover { color: #fff; background: #5935c2; }
+    .toolbar-button.image-primary {
+      color: #fff;
+      border-color: #c53f6b;
+      background: #c53f6b;
+    }
+    .toolbar-button.image-primary:hover { color: #fff; background: #aa3159; }
     .toolbar-button.danger { color: #b62f56; }
     .toolbar-button.danger:hover { border-color: #efb6c7; background: #fff7f9; }
 
@@ -757,6 +782,7 @@
       font-weight: 700;
     }
     .form-field input,
+    .form-field select,
     .form-field textarea {
       width: 100%;
       border: 1px solid #ddd6e3;
@@ -766,7 +792,8 @@
       background: #fff;
       font-size: 12px;
     }
-    .form-field input { height: 40px; padding: 0 11px; }
+    .form-field input,
+    .form-field select { height: 40px; padding: 0 11px; }
     .form-field textarea {
       min-height: 98px;
       padding: 11px;
@@ -775,6 +802,7 @@
     }
     .form-field textarea.tall { min-height: 220px; }
     .form-field input:focus,
+    .form-field select:focus,
     .form-field textarea:focus {
       border-color: var(--violet);
       box-shadow: 0 0 0 3px var(--violet-soft);
@@ -861,6 +889,45 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .media-switch {
+      margin: 14px 0 2px;
+      padding: 4px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 4px;
+      border: 1px solid #e2dce7;
+      border-radius: 12px;
+      background: #eeeaf1;
+    }
+    .media-switch button {
+      height: 32px;
+      border: 0;
+      border-radius: 9px;
+      color: #776f80;
+      background: transparent;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .media-switch button.active {
+      color: #fff;
+      background: var(--ink);
+      box-shadow: 0 4px 12px rgba(28, 23, 35, .14);
+    }
+    .media-switch button[data-media-filter="video"].active { background: var(--violet); }
+    .media-switch button[data-media-filter="image"].active { background: #c53f6b; }
+    .media-badge {
+      padding: 4px 7px;
+      border-radius: 7px;
+      color: #5d4d74;
+      background: #efe9fb;
+      font-size: 9px;
+      font-weight: 800;
+    }
+    .media-badge.image {
+      color: #9e3154;
+      background: #fdeaf0;
+    }
     .export-meta {
       margin: 0 0 12px;
       padding: 11px 13px;
@@ -893,6 +960,7 @@
       .app { height: auto; min-height: 100vh; overflow: visible; }
       .workspace { overflow: visible; }
       .top-stats { display: none; }
+      .action-label { display: none; }
       .workspace { grid-template-columns: 1fr; }
       .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
       .prompt-list { max-height: 430px; }
@@ -914,6 +982,8 @@
       .full { grid-column: auto; }
       .detail-facts span { flex: 1; }
       .top-actions .toolbar-button.secondary { display: none; }
+      .action-cluster { padding: 3px; }
+      .toolbar-button { padding: 0 9px; }
       .form-grid, .import-options { grid-template-columns: 1fr; }
       .form-field.full { grid-column: auto; }
       .management-strip { margin: 0 18px 14px; align-items: flex-start; flex-direction: column; }
@@ -927,13 +997,21 @@
         <span class="brand-mark">P</span>
         <div>
           <p class="eyebrow">PROMPT ATLAS</p>
-          <h1>AI 视频提示词库</h1>
+          <h1>AI 视频 · 图片提示词库</h1>
         </div>
       </div>
       <div class="top-actions">
         <div id="topStats" class="top-stats"></div>
-        <button id="exportButton" class="toolbar-button secondary" type="button">⇩ 导出备份</button>
-        <button id="openImportButton" class="toolbar-button primary" type="button">＋ 导入 / 新增</button>
+        <div class="action-cluster video">
+          <span class="action-label">🎬 视频</span>
+          <button id="exportButton" class="toolbar-button secondary" type="button">⇩ 导出</button>
+          <button id="openImportButton" class="toolbar-button primary" type="button">＋ 导入</button>
+        </div>
+        <div class="action-cluster image">
+          <span class="action-label">▧ 图片</span>
+          <button id="exportImageButton" class="toolbar-button secondary" type="button">⇩ 导出</button>
+          <button id="openImageImportButton" class="toolbar-button image-primary" type="button">＋ 导入</button>
+        </div>
       </div>
     </header>
 
@@ -944,6 +1022,12 @@
           <span class="search-icon" aria-hidden="true">⌕</span>
           <input id="search" type="search" autocomplete="off" placeholder="题材、角色、风格或效果…">
           <button id="clearSearch" class="clear-search" type="button" aria-label="清除搜索">×</button>
+        </div>
+
+        <div class="media-switch" aria-label="按提示词媒介筛选">
+          <button class="active" type="button" data-media-filter="all">全部</button>
+          <button type="button" data-media-filter="video">🎬 视频</button>
+          <button type="button" data-media-filter="image">▧ 图片</button>
         </div>
 
         <div class="filters">
@@ -986,8 +1070,8 @@
     <div class="modal">
       <div class="modal-header">
         <div>
-          <h2 id="modalTitle">导入与整理提示词</h2>
-          <p>支持 TXT、Markdown 和 JSON；导入后可以继续编辑分类、合集与标签。</p>
+          <h2 id="modalTitle">导入视频提示词</h2>
+          <p id="modalDescription">支持 TXT、Markdown 和 JSON；导入后可以继续编辑分类、合集与标签。</p>
         </div>
         <button id="closeModal" class="modal-close" type="button" aria-label="关闭">×</button>
       </div>
@@ -1000,8 +1084,8 @@
           <input id="fileInput" type="file" accept=".txt,.md,.json,text/plain,text/markdown,application/json" multiple hidden>
           <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="选择或拖入提示词文件">
             <div class="drop-icon">⇧</div>
-            <h3>拖入提示词文件，或点击选择</h3>
-            <p>TXT / Markdown：每个文件创建一条提示词<br>JSON：支持数据库备份、提示词数组或单条记录</p>
+            <h3 id="dropTitle">拖入视频提示词文件，或点击选择</h3>
+            <p id="dropHelp">TXT / Markdown：每个文件创建一条视频提示词<br>JSON：支持数据库备份、提示词数组或单条记录</p>
           </div>
           <div class="import-options">
             <label><input id="autoClassify" type="checkbox" checked> 自动识别分类、画幅、时长和标签</label>
@@ -1014,6 +1098,13 @@
           <form id="promptForm">
             <input id="editId" type="hidden">
             <div class="form-grid">
+              <div class="form-field">
+                <label for="editMediaType">提示词类型 *</label>
+                <select id="editMediaType" required>
+                  <option value="video">🎬 视频提示词</option>
+                  <option value="image">▧ 图片提示词</option>
+                </select>
+              </div>
               <div class="form-field">
                 <label for="editTitle">标题 *</label>
                 <input id="editTitle" required placeholder="例如：雨夜霓虹街头追逐">
@@ -1030,7 +1121,7 @@
                 <label for="editRatio">画幅</label>
                 <input id="editRatio" placeholder="16:9">
               </div>
-              <div class="form-field">
+              <div id="durationField" class="form-field">
                 <label for="editDuration">时长（秒）</label>
                 <input id="editDuration" type="number" min="0" step="0.1" placeholder="10">
               </div>
@@ -1041,7 +1132,7 @@
               <div class="form-field full">
                 <label for="editPrompt">完整提示词 *</label>
                 <textarea id="editPrompt" class="tall" required placeholder="粘贴完整提示词…"></textarea>
-                <p class="form-help">可点击“自动分析”从提示词正文识别分类、标签、画幅、时长和分镜。</p>
+                <p id="editorHelp" class="form-help">可点击“自动分析”从提示词正文识别分类、标签、画幅、时长和分镜。</p>
               </div>
               <div class="form-field full">
                 <label for="editNegative">负面提示词</label>
@@ -1065,7 +1156,7 @@
       <div class="modal-header">
         <div>
           <h2 id="exportModalTitle">导出数据库备份</h2>
-          <p>先核对备份内容，再下载 JSON；如果浏览器拦截下载，也可以复制完整 JSON。</p>
+          <p id="exportModalDescription">先核对备份内容，再下载 JSON；如果浏览器拦截下载，也可以复制完整 JSON。</p>
         </div>
         <button id="closeExportModal" class="modal-close" type="button" aria-label="关闭导出窗口">×</button>
       </div>
