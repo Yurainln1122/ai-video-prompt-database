@@ -61,6 +61,23 @@ PHO_ANIME_PROMPT = (
     "Capture warm golden lighting, cozy camping vibes, detailed food close-ups, smooth "
     "transitions, and beautiful anime-inspired visuals."
 )
+COOKIES_MILK_ASMR_X_URL = "https://x.com/AIwithSynthia/status/2081581375790948730"
+COOKIES_MILK_STORYBOARD_PROMPT = """Create a premium 16:9 storyboard infographic for a Cookies & Milk ASMR commercial on a clean white background with a modern creative agency layout. Add the title "STORYBOARD – COOKIES & MILK – ASMR SNACK EXPERIENCE" and info boxes for Duration: 15 Seconds, Style: POV Hands ASMR, Audience: 16–35, Audio: Wrapper • Crunch • Milk Pouring • Glass Tap. Arrange 6 storyboard panels (3×2) with numbered badges and timestamps. Show: (1) cookie box introduction (HELLO!), (2) wrapper opening (CRINKLE~), (3) milk pouring (POUR~), (4) cookie dipping (DIP!), (5) cookie breaking with crumbs (CRUNCH!), (6) final hero shot with cookies, milk, and thumbs-up (YUM!). Include VISUAL, ACTION, and DIALOGUE below each panel. Use realistic food photography, warm wooden table, soft natural lighting, shallow depth of field, handwritten doodle effects, rounded panel borders, elegant brown accents, and a polished client-pitch presentation."""
+COOKIES_MILK_VIDEO_PROMPT = """Create an ultra-realistic 15-second premium ASMR food commercial featuring only POV hands throughout the entire sequence. No faces visible. Cozy morning kitchen aesthetic with a warm wooden tabletop, soft natural window light, shallow depth of field, realistic food textures, cinematic macro photography, and luxury commercial color grading.
+Throughout the video, add playful hand-drawn white doodle text and arrows that naturally animate into the scene, just like a modern food reel. The doodles should appear briefly beside the action, following the product, then fade away. No subtitles, captions, logos, or other text besides these doodle effects.
+0:00–0:02.5
+A premium chocolate chip cookie box and a chilled glass bottle of milk rest on a wooden table. Hands slide into frame and gently rotate the box. Animated doodles appear: "HELLO!", "HI!", small sparkles and arrows pointing toward the box.
+0:02.5–0:05
+Hands slowly tear open the cookie wrapper. Crisp ASMR crinkle fills the room. Animated doodles: "CRINKLE~", "OPEN!", "WOW!" with playful motion lines.
+0:05–0:07.5
+Fresh cold milk pours into a clear glass in slow motion. Creamy splashes, bubbles, and condensation glisten. Animated doodles: "POUR~", "FRESH!", tiny droplets and splash illustrations.
+0:07.5–0:10
+One cookie is lifted and slowly dipped into the milk. Milk drips gently back into the glass. Animated doodles: "DIP!", "SOFT!", hearts and curved arrows following the cookie.
+0:10–0:12.5
+Macro shot of the cookie breaking in half. Chocolate stretches slightly while crumbs fall in slow motion. Animated doodles: "CRUNCH!", "YUM!", "MMM!" with tiny stars and crumb illustrations.
+0:12.5–0:15
+Hero shot of the cookie box, stacked cookies, and glass of milk beautifully arranged together. A hand places the final cookie onto the plate and gives a thumbs-up. Camera slowly pushes in. Animated doodles: "PERFECT!", "BEST!", "ENJOY!", surrounded by soft sparkles and hand-drawn stars.
+Audio: Natural ASMR only—cardboard tapping, wrapper crinkles, milk pouring, glass clinks, cookie dipping, crunchy bites, falling crumbs, soft tabletop taps, and quiet room ambience. No background music, no subtitles, no logos, no watermarks, and no on-screen text other than the animated doodle words. Premium food commercial cinematography, realistic food physics, macro close-ups, physically accurate lighting, photorealistic 4K HDR, 16:9, 24 fps."""
 
 
 def read_utf8(name: str) -> str:
@@ -243,6 +260,30 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(PHO_ANIME_PROMPT),
             "raw_excerpt": "Made with Seedance 2.0\n\nPrompt:\n\n" + PHO_ANIME_PROMPT,
         },
+        {
+            "id": 10,
+            "source_type": "x_video",
+            "title": "GPT Image 2 + Seedance 曲奇牛奶 POV ASMR 广告",
+            "locator": COOKIES_MILK_ASMR_X_URL,
+            "accessed_at": now,
+            "verification": "author_storyboard_prompt_author_video_prompt_video_metadata",
+            "notes": (
+                "作者在帖子正文中公开完整分镜板提示词与完整视频提示词，并注明使用 GPT Image 2、"
+                "Seedance 和 Pollo AI。原提示词要求 15 秒、16:9、4K HDR、24 fps；公开视频"
+                "媒体元数据为 14.778 秒、1076×1330（竖向约 4:5）。视频结构为曲奇盒介绍、"
+                "拆包装、倒牛奶、蘸曲奇、掰开曲奇和产品英雄镜头，全程只有 POV 双手与自然 ASMR。"
+            ),
+            "sha256": sha256_text(
+                COOKIES_MILK_STORYBOARD_PROMPT + COOKIES_MILK_VIDEO_PROMPT
+            ),
+            "raw_excerpt": (
+                "ASMR of Cookies and Milk created on @itsPolloAI\n\n"
+                "GPT Image 2 and Seedance\n\nStoryboard Prompt:\n\n"
+                + COOKIES_MILK_STORYBOARD_PROMPT
+                + "\n\nVideo:\n\n"
+                + COOKIES_MILK_VIDEO_PROMPT
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -384,6 +425,8 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
 
     starbucks_anime_video = STARBUCKS_ANIME_PROMPT
     pho_anime_video = PHO_ANIME_PROMPT
+    cookies_milk_storyboard = COOKIES_MILK_STORYBOARD_PROMPT
+    cookies_milk_video = COOKIES_MILK_VIDEO_PROMPT
 
     prompts = [
         {
@@ -787,6 +830,40 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(7, 10.8, 12.5, "香草装饰与英雄碗", "泰国罗勒、豆芽、辣椒、红洋葱和青柠完成装饰，热气中的牛肉河粉成为最终焦点。", "配料落点微距后轻微环绕成品英雄镜头。", "配料轻落声，音乐温暖收束。", "配料顺序清楚，成品碗完整稳定并留出封面停顿。"),
             ],
         },
+        {
+            "id": 13,
+            "source_id": 10,
+            "slug": "pov-cookies-milk-asmr-doodle-food-commercial",
+            "title": "POV 曲奇蘸牛奶 ASMR：手绘涂鸦美食广告",
+            "category": "写实美食广告 / POV ASMR",
+            "language": "en",
+            "aspect_ratio": "4:5",
+            "duration_sec": 14.778,
+            "resolution": "1076×1330",
+            "style_summary": "超写实高端美食广告：温馨晨间厨房、POV 双手、电影级微距、慢动作食物物理与短暂白色手绘涂鸦。",
+            "scene_summary": "暖色木桌上的巧克力曲奇盒、独立包装曲奇、冰牛奶瓶、透明玻璃杯与曲奇成品盘。",
+            "subject_summary": "全片只出现同一双第一人称手，不露脸；依次转动曲奇盒、拆包装、倒牛奶、蘸曲奇、掰开曲奇并完成点赞。",
+            "core_mechanic": "用包装摩擦、牛奶倾倒、蘸取滴落、曲奇断裂和碎屑坠落组成六段自然 ASMR，并以跟随动作的白色涂鸦词强化每个触感节点。",
+            "camera_language": "桌面产品建立、手部近景、包装超近景、牛奶慢动作微距、蘸取跟随、断裂高速特写和末尾缓慢推近英雄镜头。",
+            "lighting_color": "柔和自然窗光、暖木棕、奶白色、巧克力金棕与冷凝高光；浅景深和高端商业调色。",
+            "audio_design": "仅自然 ASMR：纸盒轻敲、包装脆响、牛奶倾倒、玻璃轻碰、曲奇蘸取、清脆咬裂、碎屑落下、桌面轻拍与安静室内底噪；无背景音乐。",
+            "continuity_rules": "只保留同一双 POV 手；曲奇盒、包装、牛奶瓶、玻璃杯、盘子和桌面位置连续；涂鸦词只在对应动作旁短暂出现并自然淡出。",
+            "master_prompt": cookies_milk_video,
+            "negative_prompt": "No faces visible; no background music, subtitles, captions, logos or watermarks; no on-screen text except the specified animated doodle words; no deformed hands or extra fingers, changing cookie box, duplicate glass, warped wrapper, impossible milk flow, floating crumbs, texture flicker, plastic-looking cookies, inconsistent tabletop or doodles that obscure the food.",
+            "reference_image_prompt": cookies_milk_storyboard,
+            "recommended_models": "GPT Image 2（分镜板）+ Seedance（视频）/ Pollo AI（作者工作流）",
+            "prompt_origin": "author_published_full_prompt_and_storyboard",
+            "quality_notes": "作者在正文中公开完整分镜板与视频提示词，数据库逐字保留。原提示词要求 15 秒、16:9、4K HDR、24 fps；公开视频实际为 14.778 秒、1076×1330，数据库以实际媒体规格归档，并将最后一镜收束到 14.778 秒。",
+            "tags": ["Seedance", "GPT Image 2", "Pollo AI", "POV", "ASMR", "曲奇", "牛奶", "美食广告", "手绘涂鸦", "产品英雄镜头", "微距摄影", "4:5", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 2.5, "曲奇盒打招呼", "曲奇盒和冰牛奶瓶置于木桌，双手滑入画面并轻轻转动盒子；白色涂鸦 HELLO!、HI!、闪光和箭头出现。", "桌面产品建立镜头转手部近景，浅景深。", "纸盒轻敲、桌面轻触与安静房间底噪。", "不露脸；盒体、牛奶瓶与双手首次锁定。"),
+                shot(2, 2.5, 5, "慢拆曲奇包装", "双手缓慢撕开曲奇包装；CRINKLE~、OPEN!、WOW! 和动态线条跟随撕口。", "包装超近景，镜头紧贴撕裂路径。", "突出清脆、层次丰富的包装摩擦声。", "包装从同一盒中取出，撕口和手指接触连续。"),
+                shot(3, 5, 7.5, "慢动作倒牛奶", "冰牛奶倒入透明杯，飞溅、气泡和冷凝水在窗光中闪亮；POUR~、FRESH!、水滴涂鸦短暂出现。", "玻璃杯微距慢动作，跟随奶流轻微下移。", "牛奶倾倒与玻璃轻碰声。", "奶流遵守重力和流体物理，不穿透杯壁或溢出。"),
+                shot(4, 7.5, 10, "曲奇蘸奶", "一块曲奇被缓慢浸入牛奶，再抬起让奶滴回杯中；DIP!、SOFT!、爱心与弧形箭头跟随曲奇。", "曲奇与液面同框的侧面近景，轻微跟随升降。", "蘸取、滴落和杯沿轻响。", "曲奇只软化不溶解，奶滴路径连续。"),
+                shot(5, 10, 12.5, "掰开与碎屑慢落", "双手把曲奇掰成两半，巧克力轻微拉丝，碎屑慢动作落下；CRUNCH!、YUM!、MMM!、星星和碎屑涂鸦出现。", "断裂点极近景与短暂高速摄影。", "清脆断裂、碎屑落桌与近距离咀嚼质感声。", "双手结构正确，巧克力只轻微拉伸，碎屑受重力下落。"),
+                shot(6, 12.5, 14.778, "产品英雄镜头与点赞", "曲奇盒、叠放曲奇和牛奶杯整齐成组，一只手放下最后一块曲奇并点赞；PERFECT!、BEST!、ENJOY! 与柔和星光环绕。", "低角度产品英雄构图，缓慢推近并停在清晰封面帧。", "曲奇落盘、玻璃轻响和桌面轻拍自然收尾。", "最终产品数量稳定，涂鸦不遮挡主体，手势完整可读。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1025,7 +1102,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 6 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 12 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 7 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 13 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1102,6 +1179,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 7–10 来自同一动画风格合辑；作者在回复中逐字公开四份 16:9 生图提示词和四份 Seedance 2.0 视频提示词，数据库按原文收录并标记为 `author_published_full_prompt`。
 - ID 11 的作者在正文中公开了完整 Seedance 2.0 视频提示词；原文要求 35 秒，公开视频实际为 31.201 秒、720×810，数据库保留原文并按实际媒体时长整理分镜。
 - ID 12 的作者在正文中公开了完整 Seedance 2.0 河畔露营牛肉河粉视频提示词；公开视频为 12.5 秒、1280×720，数据库保留原文并按烹饪步骤整理为 7 段分镜。
+- ID 13 的作者公开了 GPT Image 2 分镜板提示词与 Seedance 视频提示词；原文要求 15 秒、16:9，公开视频实际为 14.778 秒、1076×1330，数据库保留两份原文并按实际规格归档。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
