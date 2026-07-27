@@ -28,6 +28,7 @@
     mediaType: MEDIA_ALL,
     manageMediaType: MEDIA_VIDEO,
     exportMediaType: MEDIA_VIDEO,
+    assignNewCollectionToEditor: false,
     selectedId: null,
     tab: "prompt",
   };
@@ -78,6 +79,13 @@
     dropHelp: document.getElementById("dropHelp"),
     categoryOptions: document.getElementById("categoryOptions"),
     collectionOptions: document.getElementById("collectionOptions"),
+    openCollectionManager: document.getElementById("openCollectionManager"),
+    quickCreateCollection: document.getElementById("quickCreateCollection"),
+    collectionModal: document.getElementById("collectionModal"),
+    closeCollectionModal: document.getElementById("closeCollectionModal"),
+    collectionForm: document.getElementById("collectionForm"),
+    collectionName: document.getElementById("collectionName"),
+    collectionList: document.getElementById("collectionList"),
     exportModal: document.getElementById("exportModal"),
     exportModalTitle: document.getElementById("exportModalTitle"),
     exportModalDescription: document.getElementById("exportModalDescription"),
@@ -116,9 +124,32 @@
   };
   const nextUserId = () => `user-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
   const normalizeText = (value) => asText(value).replace(/\s+/g, " ").trim().toLocaleLowerCase();
+  const normalizeCollectionName = (value) => asText(value).replace(/\s+/g, " ").trim().slice(0, 40);
 
   function clone(value) {
     return JSON.parse(JSON.stringify(value));
+  }
+
+  function normalizeCollectionList(values) {
+    const result = [DEFAULT_COLLECTION];
+    for (const rawValue of values || []) {
+      const value = normalizeCollectionName(rawValue);
+      if (!value || result.some(item => normalizeText(item) === normalizeText(value))) continue;
+      result.push(value);
+    }
+    return [
+      DEFAULT_COLLECTION,
+      ...result.filter(value => value !== DEFAULT_COLLECTION).sort((a, b) => a.localeCompare(b, "zh-CN")),
+    ];
+  }
+
+  function syncCatalogCollections(catalog = state.catalog) {
+    if (!catalog) return [];
+    catalog.collections = normalizeCollectionList([
+      ...(Array.isArray(catalog.collections) ? catalog.collections : []),
+      ...(catalog.prompts || []).map(prompt => prompt.collection),
+    ]);
+    return catalog.collections;
   }
 
   function normalizeShot(shot, index) {
@@ -175,11 +206,16 @@
   }
 
   function normalizeCatalog(raw) {
+    const prompts = Array.isArray(raw?.prompts) ? raw.prompts.map(prompt => normalizePrompt(prompt)) : [];
     return {
       database_name: asText(raw?.database_name || "AI 视频提示词数据库"),
       version: asText(raw?.version || baseDatabase.version || "local"),
       sources: Array.isArray(raw?.sources) ? raw.sources : [],
-      prompts: Array.isArray(raw?.prompts) ? raw.prompts.map(prompt => normalizePrompt(prompt)) : [],
+      prompts,
+      collections: normalizeCollectionList([
+        ...(Array.isArray(raw?.collections) ? raw.collections : []),
+        ...prompts.map(prompt => prompt.collection),
+      ]),
       deletedBaseSlugs: Array.isArray(raw?.deletedBaseSlugs) ? raw.deletedBaseSlugs : [],
       saved_at: raw?.saved_at || nowIso(),
     };
@@ -203,6 +239,7 @@
       if (!sourceKeys.has(key)) catalog.sources.push(clone(source));
     }
     catalog.version = baseDatabase.version || catalog.version;
+    syncCatalogCollections(catalog);
     return catalog;
   }
 
@@ -239,6 +276,7 @@
   }
 
   async function saveCatalog() {
+    syncCatalogCollections();
     state.catalog.saved_at = nowIso();
     const data = clone(state.catalog);
     try {
@@ -398,11 +436,116 @@
       : state.catalog.prompts.filter(item => item.media_type === state.mediaType);
     fillSelect(el.category, [ALL, ...unique(prompts.map(item => item.category)).sort()], state.category);
     fillSelect(el.ratio, [ALL, ...unique(prompts.map(item => item.aspect_ratio)).sort()], state.ratio);
-    fillSelect(el.collection, [ALL, ...unique(prompts.map(item => item.collection)).sort()], state.collection);
+    const collections = syncCatalogCollections();
+    fillSelect(el.collection, [ALL, ...collections], state.collection);
     const categories = unique(prompts.map(item => item.category)).sort();
-    const collections = unique(prompts.map(item => item.collection)).sort();
     el.categoryOptions.innerHTML = categories.map(value => `<option value="${escapeHtml(value)}"></option>`).join("");
     el.collectionOptions.innerHTML = collections.map(value => `<option value="${escapeHtml(value)}"></option>`).join("");
+  }
+
+  function findCollection(name) {
+    const normalized = normalizeText(name);
+    return (state.catalog.collections || []).find(value => normalizeText(value) === normalized) || "";
+  }
+
+  function renderCollectionManager() {
+    const collections = syncCatalogCollections();
+    el.collectionList.innerHTML = collections.map(name => {
+      const count = state.catalog.prompts.filter(prompt => prompt.collection === name).length;
+      const isDefault = name === DEFAULT_COLLECTION;
+      return `<div class="collection-row">
+        <div>
+          <strong>${escapeHtml(name)}</strong>
+          <small>${count} 条提示词${isDefault ? " · 系统默认合集" : ""}</small>
+        </div>
+        <div class="collection-row-actions">
+          ${isDefault ? "" : `
+            <button type="button" data-rename-collection="${escapeHtml(name)}">重命名</button>
+            <button class="danger" type="button" data-delete-collection="${escapeHtml(name)}">删除</button>`}
+        </div>
+      </div>`;
+    }).join("");
+  }
+
+  function openCollectionDialog(assignToEditor = false) {
+    state.assignNewCollectionToEditor = assignToEditor;
+    el.collectionName.value = "";
+    renderCollectionManager();
+    el.collectionModal.classList.add("open");
+    document.body.style.overflow = "hidden";
+    setTimeout(() => el.collectionName.focus(), 50);
+  }
+
+  function closeCollectionDialog() {
+    el.collectionModal.classList.remove("open");
+    state.assignNewCollectionToEditor = false;
+    document.body.style.overflow =
+      el.modal.classList.contains("open") || el.exportModal.classList.contains("open") ? "hidden" : "";
+  }
+
+  async function createCollection(name) {
+    const value = normalizeCollectionName(name);
+    if (!value) {
+      showToast("请输入合集名称");
+      return;
+    }
+    const existing = findCollection(value);
+    if (existing) {
+      if (state.assignNewCollectionToEditor) {
+        el.editCollection.value = existing;
+        closeCollectionDialog();
+      }
+      showToast("该合集已经存在");
+      return;
+    }
+    state.catalog.collections.push(value);
+    await saveCatalog();
+    refreshOptions();
+    renderCollectionManager();
+    if (state.assignNewCollectionToEditor) {
+      el.editCollection.value = value;
+      closeCollectionDialog();
+    } else {
+      el.collectionName.value = "";
+      el.collectionName.focus();
+    }
+    showToast(`合集“${value}”已建立并自动保存`);
+  }
+
+  async function renameCollection(oldName) {
+    const proposed = window.prompt(`将合集“${oldName}”重命名为：`, oldName);
+    if (proposed == null) return;
+    const newName = normalizeCollectionName(proposed);
+    if (!newName || newName === oldName) return;
+    const existing = findCollection(newName);
+    if (existing && existing !== oldName) {
+      showToast("同名合集已经存在");
+      return;
+    }
+    state.catalog.collections = state.catalog.collections.map(name => name === oldName ? newName : name);
+    state.catalog.prompts.forEach(prompt => {
+      if (prompt.collection === oldName) prompt.collection = newName;
+    });
+    if (state.collection === oldName) state.collection = newName;
+    await saveCatalog();
+    render();
+    renderCollectionManager();
+    showToast(`合集已重命名为“${newName}”`);
+  }
+
+  async function deleteCollection(name) {
+    if (name === DEFAULT_COLLECTION) return;
+    const count = state.catalog.prompts.filter(prompt => prompt.collection === name).length;
+    if (!window.confirm(`确定删除合集“${name}”吗？\n\n其中 ${count} 条提示词会移入“${DEFAULT_COLLECTION}”，提示词本身不会被删除。`)) return;
+    state.catalog.prompts.forEach(prompt => {
+      if (prompt.collection === name) prompt.collection = DEFAULT_COLLECTION;
+    });
+    state.catalog.collections = state.catalog.collections.filter(value => value !== name);
+    if (state.collection === name) state.collection = ALL;
+    await saveCatalog();
+    render();
+    renderCollectionManager();
+    showToast(`合集“${name}”已删除，提示词已移入“${DEFAULT_COLLECTION}”`);
   }
 
   function filteredPrompts() {
@@ -802,7 +945,7 @@
         title: el.editTitle.value.trim(),
         slug: existing.slug || slugify(el.editTitle.value),
         category: el.editCategory.value.trim() || analysis.category,
-        collection: el.editCollection.value.trim() || DEFAULT_COLLECTION,
+        collection: normalizeCollectionName(el.editCollection.value) || DEFAULT_COLLECTION,
         aspect_ratio: el.editRatio.value.trim() || analysis.aspect_ratio,
         duration_sec: mediaType === MEDIA_VIDEO ? (Number(el.editDuration.value) || analysis.duration_sec) : 0,
         resolution: existing.resolution === "未识别" ? analysis.resolution : existing.resolution,
@@ -822,7 +965,7 @@
         media_type: mediaType,
         title: el.editTitle.value.trim(),
         category: el.editCategory.value.trim() || analysis.category,
-        collection: el.editCollection.value.trim() || DEFAULT_COLLECTION,
+        collection: normalizeCollectionName(el.editCollection.value) || DEFAULT_COLLECTION,
         aspect_ratio: el.editRatio.value.trim() || analysis.aspect_ratio,
         duration_sec: mediaType === MEDIA_VIDEO ? (Number(el.editDuration.value) || analysis.duration_sec) : 0,
         resolution: analysis.resolution,
@@ -899,7 +1042,7 @@
       shots: mediaType === MEDIA_VIDEO
         ? (Array.isArray(rawObject.shots) && rawObject.shots.length ? rawObject.shots : analysis.shots)
         : [],
-      collection: rawObject.collection || DEFAULT_COLLECTION,
+      collection: normalizeCollectionName(rawObject.collection) || DEFAULT_COLLECTION,
       prompt_origin: `本地导入：${filename}`,
       user_managed: true,
       created_at: nowIso(),
@@ -911,6 +1054,7 @@
     const files = [...fileList];
     if (!files.length) return;
     let imported = 0;
+    let importedCollections = 0;
     let skipped = 0;
     const errors = [];
     for (const file of files) {
@@ -919,6 +1063,15 @@
         let records;
         if (/\.json$/i.test(file.name) || file.type.includes("json")) {
           const parsed = JSON.parse(text);
+          if (Array.isArray(parsed?.collections)) {
+            for (const rawCollection of parsed.collections) {
+              const collection = normalizeCollectionName(rawCollection);
+              if (collection && !findCollection(collection)) {
+                state.catalog.collections.push(collection);
+                importedCollections += 1;
+              }
+            }
+          }
           records = Array.isArray(parsed) ? parsed : Array.isArray(parsed?.prompts) ? parsed.prompts : [parsed];
         } else {
           records = [text];
@@ -941,7 +1094,7 @@
         errors.push(`${file.name}：${error.message}`);
       }
     }
-    if (imported) {
+    if (imported || importedCollections) {
       await saveCatalog();
       state.category = ALL;
       state.ratio = ALL;
@@ -951,7 +1104,7 @@
     }
     el.importSummary.classList.add("show");
     el.importSummary.innerHTML = `
-      <strong>${state.manageMediaType === MEDIA_IMAGE ? "图片" : "视频"}提示词导入完成：新增 ${imported} 条，跳过 ${skipped} 条。</strong>
+      <strong>${state.manageMediaType === MEDIA_IMAGE ? "图片" : "视频"}提示词导入完成：新增 ${imported} 条，新增合集 ${importedCollections} 个，跳过 ${skipped} 条。</strong>
       ${errors.length ? `<p>${errors.map(escapeHtml).join("<br>")}</p>` : "<p>新记录已保存到当前浏览器数据库。</p>"}`;
     el.fileInput.value = "";
   }
@@ -1034,6 +1187,25 @@
       state.collection = event.target.value;
       render();
     });
+    el.openCollectionManager.addEventListener("click", () => openCollectionDialog(false));
+    el.quickCreateCollection.addEventListener("click", () => openCollectionDialog(true));
+    el.closeCollectionModal.addEventListener("click", closeCollectionDialog);
+    el.collectionModal.addEventListener("click", event => {
+      if (event.target === el.collectionModal) closeCollectionDialog();
+    });
+    el.collectionForm.addEventListener("submit", event => {
+      event.preventDefault();
+      createCollection(el.collectionName.value);
+    });
+    el.collectionList.addEventListener("click", event => {
+      const renameButton = event.target.closest("[data-rename-collection]");
+      if (renameButton) {
+        renameCollection(renameButton.dataset.renameCollection);
+        return;
+      }
+      const deleteButton = event.target.closest("[data-delete-collection]");
+      if (deleteButton) deleteCollection(deleteButton.dataset.deleteCollection);
+    });
     el.mediaFilterButtons.forEach(button => {
       button.addEventListener("click", () => {
         state.mediaType = button.dataset.mediaFilter;
@@ -1102,6 +1274,10 @@
     el.autoAnalyzeButton.addEventListener("click", applyAnalysisToEditor);
     el.promptForm.addEventListener("submit", saveEditor);
     document.addEventListener("keydown", event => {
+      if (event.key === "Escape" && el.collectionModal.classList.contains("open")) {
+        closeCollectionDialog();
+        return;
+      }
       if (event.key === "Escape" && el.exportModal.classList.contains("open")) {
         closeExportModal();
         return;
@@ -1111,7 +1287,7 @@
         return;
       }
       if (event.key === "/" && document.activeElement !== el.search &&
-          !el.modal.classList.contains("open")) {
+          !el.modal.classList.contains("open") && !el.collectionModal.classList.contains("open")) {
         event.preventDefault();
         el.search.focus();
       }

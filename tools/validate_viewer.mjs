@@ -35,6 +35,8 @@ for (const id of [
   "openImportButton", "exportButton", "manageModal", "fileInput", "promptForm",
   "exportModal", "exportData", "copyExportButton", "downloadExportButton",
   "openImageImportButton", "exportImageButton", "editMediaType", "durationField",
+  "openCollectionManager", "quickCreateCollection", "collectionModal", "closeCollectionModal",
+  "collectionForm", "collectionName", "collectionList",
 ]) {
   if (!html.includes(`id="${id}"`)) {
     throw new Error(`Missing required element #${id}`);
