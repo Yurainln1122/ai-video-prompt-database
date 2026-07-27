@@ -50,6 +50,17 @@ STARBUCKS_ANIME_PROMPT = (
     "colors, expressive character animation, and upbeat acoustic music create a cheerful, "
     "inspiring atmosphere. End with a close-up of the Starbucks Caffè Latte bottles."
 )
+PHO_ANIME_X_URL = "https://x.com/noorwithwifi/status/2080998165013217284"
+PHO_ANIME_PROMPT = (
+    "Create a cinematic anime-style cooking video showing the outdoor preparation of authentic "
+    "beef pho at a peaceful riverside campsite. Begin with slicing marbled beef, preparing "
+    "ginger, onions, whole spices, fresh Thai basil, bean sprouts, and lime, then simmer beef "
+    "bones, aromatics, and spices in a cast-iron pot over a crackling campfire to create a rich "
+    "broth. Finally, place rice noodles in a ceramic bowl, top with thin beef slices, pour "
+    "steaming broth to gently cook the meat, and finish with herbs, chili, red onion, and lime. "
+    "Capture warm golden lighting, cozy camping vibes, detailed food close-ups, smooth "
+    "transitions, and beautiful anime-inspired visuals."
+)
 
 
 def read_utf8(name: str) -> str:
@@ -216,6 +227,22 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(STARBUCKS_ANIME_PROMPT),
             "raw_excerpt": "Made with Seedance 2.0\n\nPrompt:\n\n" + STARBUCKS_ANIME_PROMPT,
         },
+        {
+            "id": 9,
+            "source_type": "x_video",
+            "title": "Seedance 2.0 河畔露营牛肉河粉烹饪动画",
+            "locator": PHO_ANIME_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata_thumbnail",
+            "notes": (
+                "作者在帖子正文中公开完整英文 prompt，并注明使用 Seedance 2.0。"
+                "公开视频媒体元数据为 12.5 秒、1280×720（16:9）。内容依次包含切大理石纹牛肉、"
+                "准备姜、洋葱、整粒香料、泰国罗勒、豆芽和青柠；篝火铸铁锅熬制牛骨香料汤；"
+                "米粉入碗、铺薄牛肉片、浇滚汤烫熟，最后以香草、辣椒、红洋葱和青柠装饰。"
+            ),
+            "sha256": sha256_text(PHO_ANIME_PROMPT),
+            "raw_excerpt": "Made with Seedance 2.0\n\nPrompt:\n\n" + PHO_ANIME_PROMPT,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -356,6 +383,7 @@ Shot 5 (3s): Crane up—the streams rejoin NIA completely as thousands of ground
 One character, no dialogue, no explosion, random debris, chaotic noise, face dissolution, missing limbs, colour drift, costume change or generated text. Finish fully reassembled with no loose particles crossing the face."""
 
     starbucks_anime_video = STARBUCKS_ANIME_PROMPT
+    pho_anime_video = PHO_ANIME_PROMPT
 
     prompts = [
         {
@@ -724,6 +752,41 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(6, 26.5, 31.201, "瓶装拿铁英雄镜头", "以多瓶 Starbucks Caffè Latte 的清晰近景结束，产品成为唯一视觉焦点。", "桌面产品英雄镜头，缓慢推近，背景柔和虚化。", "音乐形成明亮收束，可加入轻微瓶身落桌声。", "标签朝向统一、瓶型无变形，停留足够时间形成广告封面。"),
             ],
         },
+        {
+            "id": 12,
+            "source_id": 9,
+            "slug": "seedance-anime-riverside-camp-beef-pho-cooking",
+            "title": "河畔露营牛肉河粉：金色篝火料理动画",
+            "category": "日系二维美食动画 / 户外烹饪",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 12.5,
+            "resolution": "1280×720",
+            "style_summary": "电影感日系二维美食动画：河畔露营、金色暖光、篝火炊烟、细腻食材微距与顺滑转场。",
+            "scene_summary": "宁静河畔露营地，以木质料理台、铸铁锅和篝火完成牛肉河粉的备料、熬汤、装碗、浇汤和装饰。",
+            "subject_summary": "大理石纹牛肉、牛骨、姜、洋葱、整粒香料、泰国罗勒、豆芽、青柠、辣椒、红洋葱、米粉与陶瓷碗。",
+            "core_mechanic": "用滚烫牛骨香料汤浇在米粉和薄切生牛肉上，让肉片在镜头前由红色自然变为柔嫩熟色，再以新鲜香草完成英雄碗。",
+            "camera_language": "河畔建立镜头、俯拍备料、刀工微距、篝火铸铁锅近景、蒸汽慢推、浇汤特写与成品英雄环绕。",
+            "lighting_color": "夕阳与篝火形成金色主光，河水使用柔和蓝绿反光；食材保持自然红、绿、白与暖棕色。",
+            "audio_design": "河水、微风和鸟鸣底噪，刀切砧板声、香料落盘声、篝火噼啪、汤汁沸腾、浇汤声与轻柔温暖配乐。",
+            "continuity_rules": "同一河畔营地、木桌、铸铁锅、陶瓷碗和食材组合保持连续；牛肉必须从薄切生肉经热汤逐渐变色，不瞬间替换；配料只在正确步骤出现。",
+            "master_prompt": pho_anime_video,
+            "negative_prompt": "No photoreal live action or glossy 3D CGI; no deformed hands, warped knife, floating ingredients, changing pot or bowl, duplicated utensils, instant ingredient teleportation, muddy or gelatinous broth, plastic-looking beef, noodles merging into a solid mass, steam without heat source, uncontrolled fire, incorrect garnish order, text, subtitles, logos, watermarks or flicker.",
+            "reference_image_prompt": "",
+            "recommended_models": "Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在帖子正文中公开完整英文 prompt，数据库逐字保留；公开视频媒体元数据为 12.5 秒、1280×720。原文未给分镜时间轴，数据库依据烹饪步骤整理为 7 段可执行镜头。",
+            "tags": ["Seedance 2.0", "日系二维动画", "美食动画", "越南河粉", "牛肉河粉", "河畔露营", "篝火烹饪", "食材微距", "浇汤", "16:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 1.5, "河畔露营与食材建立", "金色晨昏光照亮宁静河畔营地，木桌摆着牛肉、香草、香料和蔬菜。", "宽幅环境建立后快速推向料理台。", "河水、微风、鸟鸣与轻柔音乐起。", "营地、木桌、铸铁锅和陶瓷碗的位置锁定。"),
+                shot(2, 1.5, 3.3, "薄切牛肉与备料", "刀锋切开大理石纹牛肉，并快速展示姜、洋葱、整粒香料、泰国罗勒、豆芽和青柠。", "俯拍与极近景刀工蒙太奇，匹配切换食材。", "清脆刀切、砧板和香料落盘声。", "牛肉切片薄而连续，手指与刀具结构正确。"),
+                shot(3, 3.3, 5.2, "牛骨香料入锅", "牛骨、姜、洋葱与整粒香料依次进入篝火上的铸铁锅。", "锅沿低角度近景转俯拍，跟随食材落入汤中。", "篝火噼啪、食材落锅与液体翻动声。", "每种食材只加入一次，铸铁锅外形不变。"),
+                shot(4, 5.2, 7.2, "熬出浓郁清汤", "汤汁在篝火上稳定沸腾，金色蒸汽升起，牛骨与香料在清亮汤中缓慢翻滚。", "贴近锅面的慢推与蒸汽逆光特写。", "持续沸腾声与温暖配乐上扬。", "汤体保持清亮有流动性，火焰来自锅下篝火。"),
+                shot(5, 7.2, 9, "米粉与薄牛肉装碗", "米粉放入陶瓷碗，薄牛肉片整齐铺在表面。", "碗内俯拍，米粉落下后切到牛肉铺放微距。", "米粉轻落和陶瓷轻响。", "同一陶瓷碗，牛肉仍呈自然生红色。"),
+                shot(6, 9, 10.8, "滚汤烫熟牛肉", "滚烫清汤浇入碗中，蒸汽涌起，薄牛肉片沿浇汤路径逐渐由红转熟。", "浇汤超近景，跟随汤流横移并停在肉片变色处。", "清晰浇汤、蒸汽与轻微滋声。", "牛肉必须渐变受热，不瞬间换片；汤不溢出碗。"),
+                shot(7, 10.8, 12.5, "香草装饰与英雄碗", "泰国罗勒、豆芽、辣椒、红洋葱和青柠完成装饰，热气中的牛肉河粉成为最终焦点。", "配料落点微距后轻微环绕成品英雄镜头。", "配料轻落声，音乐温暖收束。", "配料顺序清楚，成品碗完整稳定并留出封面停顿。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -962,7 +1025,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 5 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 11 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 6 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 12 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1038,6 +1101,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 4–6 的三个 X 视频作者未公开完整原始提示词，相关条目统一标记为反推版本，不会与作者原始 prompt 混淆。
 - ID 7–10 来自同一动画风格合辑；作者在回复中逐字公开四份 16:9 生图提示词和四份 Seedance 2.0 视频提示词，数据库按原文收录并标记为 `author_published_full_prompt`。
 - ID 11 的作者在正文中公开了完整 Seedance 2.0 视频提示词；原文要求 35 秒，公开视频实际为 31.201 秒、720×810，数据库保留原文并按实际媒体时长整理分镜。
+- ID 12 的作者在正文中公开了完整 Seedance 2.0 河畔露营牛肉河粉视频提示词；公开视频为 12.5 秒、1280×720，数据库保留原文并按烹饪步骤整理为 7 段分镜。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
