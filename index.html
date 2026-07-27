@@ -776,11 +776,27 @@
     }
     .form-field { display: flex; flex-direction: column; gap: 7px; }
     .form-field.full { grid-column: 1 / -1; }
+    .field-label-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
     .form-field label {
       color: #5d5667;
       font-size: 11px;
       font-weight: 700;
     }
+    .inline-action {
+      padding: 0;
+      border: 0;
+      color: var(--violet);
+      background: transparent;
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+    }
+    .inline-action:hover { color: #4f2db3; }
     .form-field input,
     .form-field select,
     .form-field textarea {
@@ -889,6 +905,78 @@
       font-size: 10px;
       font-weight: 700;
     }
+    .collection-filter { margin-top: 10px; }
+    .collection-filter .field-label-row { margin-bottom: 6px; }
+    .collection-filter .field-label { margin: 0; }
+    .collection-filter select {
+      width: 100%;
+      height: 40px;
+      padding: 0 10px;
+      border: 1px solid #ddd7e3;
+      border-radius: 11px;
+      color: #50495b;
+      background: #fff;
+      font-size: 12px;
+    }
+    .collection-modal { width: min(580px, calc(100vw - 30px)); }
+    .collection-create-form {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 10px;
+    }
+    .collection-create-form input {
+      min-width: 0;
+      height: 42px;
+      padding: 0 12px;
+      border: 1px solid #ddd6e3;
+      border-radius: 10px;
+      outline: 0;
+      color: var(--ink);
+      background: #fff;
+      font-size: 12px;
+    }
+    .collection-create-form input:focus {
+      border-color: var(--violet);
+      box-shadow: 0 0 0 3px var(--violet-soft);
+    }
+    .collection-manager-help {
+      margin: 10px 0 16px;
+      color: var(--muted);
+      font-size: 10px;
+      line-height: 1.6;
+    }
+    .collection-list {
+      display: grid;
+      gap: 8px;
+      max-height: 340px;
+      overflow-y: auto;
+    }
+    .collection-row {
+      padding: 11px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 1px solid var(--line);
+      border-radius: 11px;
+      background: #fbfafc;
+    }
+    .collection-row strong { display: block; font-size: 12px; }
+    .collection-row small { display: block; margin-top: 3px; color: var(--muted); font-size: 9px; }
+    .collection-row-actions { display: flex; gap: 6px; }
+    .collection-row-actions button {
+      height: 29px;
+      padding: 0 9px;
+      border: 1px solid #ddd6e3;
+      border-radius: 8px;
+      color: #655d6f;
+      background: #fff;
+      cursor: pointer;
+      font-size: 9px;
+      font-weight: 700;
+    }
+    .collection-row-actions button:hover { border-color: #c9b9dc; color: var(--violet); }
+    .collection-row-actions button.danger:hover { border-color: #efb6c7; color: #b62f56; }
     .media-switch {
       margin: 14px 0 2px;
       padding: 4px;
@@ -1040,10 +1128,13 @@
             <select id="ratio" aria-label="按画幅筛选"></select>
           </label>
         </div>
-        <label style="margin-top:10px">
-          <span class="field-label">合集</span>
-          <select id="collection" aria-label="按合集筛选" style="width:100%;height:40px;padding:0 10px;border:1px solid #ddd7e3;border-radius:11px;background:#fff;color:#50495b;font-size:12px"></select>
-        </label>
+        <div class="collection-filter">
+          <div class="field-label-row">
+            <span class="field-label">合集</span>
+            <button id="openCollectionManager" class="inline-action" type="button">＋ 新建 / 管理</button>
+          </div>
+          <select id="collection" aria-label="按合集筛选"></select>
+        </div>
 
         <div class="result-meta">
           <span id="resultCount">0 个结果</span>
@@ -1114,7 +1205,10 @@
                 <input id="editCategory" list="categoryOptions" placeholder="例如：电影级动作">
               </div>
               <div class="form-field">
-                <label for="editCollection">合集</label>
+                <div class="field-label-row">
+                  <label for="editCollection">合集</label>
+                  <button id="quickCreateCollection" class="inline-action" type="button">＋ 新建合集</button>
+                </div>
                 <input id="editCollection" list="collectionOptions" placeholder="例如：待测试 / 美食系列">
               </div>
               <div class="form-field">
@@ -1147,6 +1241,26 @@
             </div>
           </form>
         </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="collectionModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="collectionModalTitle">
+    <div class="modal collection-modal">
+      <div class="modal-header">
+        <div>
+          <h2 id="collectionModalTitle">合集管理</h2>
+          <p>合集可以先独立建立，再把视频或图片提示词归入其中。</p>
+        </div>
+        <button id="closeCollectionModal" class="modal-close" type="button" aria-label="关闭合集管理">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="collectionForm" class="collection-create-form">
+          <input id="collectionName" maxlength="40" required autocomplete="off" placeholder="输入新合集名称，例如：水豚噜噜系列">
+          <button class="toolbar-button primary" type="submit">＋ 建立合集</button>
+        </form>
+        <p class="collection-manager-help">合集会自动保存在当前浏览器。删除合集时，其中的提示词会移入“未归档”，不会被删除。</p>
+        <div id="collectionList" class="collection-list"></div>
       </div>
     </div>
   </div>
