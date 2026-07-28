@@ -78,6 +78,8 @@ Macro shot of the cookie breaking in half. Chocolate stretches slightly while cr
 0:12.5–0:15
 Hero shot of the cookie box, stacked cookies, and glass of milk beautifully arranged together. A hand places the final cookie onto the plate and gives a thumbs-up. Camera slowly pushes in. Animated doodles: "PERFECT!", "BEST!", "ENJOY!", surrounded by soft sparkles and hand-drawn stars.
 Audio: Natural ASMR only—cardboard tapping, wrapper crinkles, milk pouring, glass clinks, cookie dipping, crunchy bites, falling crumbs, soft tabletop taps, and quiet room ambience. No background music, no subtitles, no logos, no watermarks, and no on-screen text other than the animated doodle words. Premium food commercial cinematography, realistic food physics, macro close-ups, physically accurate lighting, photorealistic 4K HDR, 16:9, 24 fps."""
+COFFEE_LIGHTHOUSE_X_URL = "https://x.com/icreatelife/status/2081740528173924586"
+COFFEE_LIGHTHOUSE_X_POST = "May your coffee taste great today!\nHappy Monday!"
 
 
 def read_utf8(name: str) -> str:
@@ -284,6 +286,23 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + COOKIES_MILK_VIDEO_PROMPT
             ),
         },
+        {
+            "id": 11,
+            "source_type": "x_video",
+            "title": "咖啡杯里的灯塔海洋：云海微缩梦境",
+            "locator": COFFEE_LIGHTHOUSE_X_URL,
+            "accessed_at": now,
+            "verification": "page_text_video_frames_metadata",
+            "notes": (
+                "作者帖文仅写“May your coffee taste great today! Happy Monday!”，未公开生成模型或"
+                "原始提示词。媒体元数据为 10.041 秒、832×1104（竖向约 3:4）。已核对开场、"
+                "4 秒、7 秒与结尾画面：透明玻璃杯悬置于厚重云海/奶泡之中，杯内是青绿色微缩"
+                "海洋与暖光灯塔；浪峰持续围绕灯塔起伏、破碎和重组，灯塔光束扫过水面。数据库"
+                "内容为依据帖子、关键帧与媒体规格反推的可复用版本，并非作者原始提示词。"
+            ),
+            "sha256": sha256_text(COFFEE_LIGHTHOUSE_X_POST),
+            "raw_excerpt": COFFEE_LIGHTHOUSE_X_POST,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -427,6 +446,18 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
     pho_anime_video = PHO_ANIME_PROMPT
     cookies_milk_storyboard = COOKIES_MILK_STORYBOARD_PROMPT
     cookies_milk_video = COOKIES_MILK_VIDEO_PROMPT
+    coffee_lighthouse_master = """生成一段约 10 秒、3:4 竖幅的超现实电影感微缩景观视频。主体是一只透明、厚壁、带圆形把手的玻璃咖啡杯，完整居中悬置在无边的白灰色云海与细密奶泡之间。杯中不是普通咖啡，而是一片深邃通透的青绿色微缩海洋；杯壁必须保持稳定、可见折射、焦散与水下纹理。海面中央始终只有一座奶白色圆柱灯塔，红棕色塔顶，底部立在极小的暗色礁石上，塔灯发出温暖琥珀光并缓慢扫过水面。
+
+[00:00-00:02.5] 从略高的正面中近景建立完整玻璃杯。左侧海面升起一堵比例夸张但细节真实的卷浪，浪尖翻白并朝灯塔弯曲；灯塔位于杯内偏右，暖灯与冷青海水形成强烈对比。镜头极缓慢推近，云层像浓密奶泡一样在杯底和远景轻柔流动。
+
+[00:02.5-00:05] 海浪沿杯口绕行并暂时回落成旋涡，水面反射灯塔双向扫动的金色光束。镜头轻微横移和下沉，让透明杯壁的折射、水线、气泡与水下流动更清晰。灯塔结构、杯把方向与杯体尺寸保持不变。
+
+[00:05-00:07.5] 灯塔与小礁石逐渐成为画面视觉中心，海面短暂舒展后再次聚集能量。灯光横向扫过云层和波纹，水面形成明亮金色反射带；镜头缓慢环绕几度，制造微缩世界的立体视差，但不切换场景。
+
+[00:07.5-00:10.041] 新一轮高浪从杯内后侧抬升，卷过灯塔周围并在杯口边缘炸成细碎水花；浪体不能溢出成无规则洪水，必须始终像被杯中微缩物理约束。结尾停在灯塔仍然清晰、浪峰形成优美弧线、暖光穿透水雾的英雄画面。
+
+整体风格：超现实微缩摄影、梦境咖啡意象、宏观食物广告质感与海洋电影摄影融合；真实玻璃折射、体积云、体积光、细腻水花、动态焦散、浅景深、柔和胶片颗粒、冷青与暖金互补调色。镜头运动稳定舒缓，所有形变连续，无硬切、无文字、无人物、无品牌。声音可使用低沉而柔和的海浪拍击、细小水滴、远风、极轻灯塔机械转动声与克制的梦幻氛围音，无对白。"""
+    coffee_lighthouse_image = """超现实微缩摄影，一只透明厚壁玻璃咖啡杯完整居中，圆形金色玻璃把手朝右，杯子悬置在无边白灰色云海与细密奶泡之中；杯内盛着通透的青绿色微缩海洋，一座奶白色圆柱灯塔立在小型暗色礁石上，红棕色塔顶发出温暖琥珀光束；一堵高细节卷浪沿杯口弯曲，白色浪花在灯塔旁飞溅，水下焦散、玻璃折射、冷凝高光和金色反射带清晰可见。冷青海水与暖金灯光互补，电影级体积云与体积光，微距镜头，浅景深，精致梦境广告质感，写实水体物理，3:4 竖幅，无人物、无文字、无品牌、无水印。"""
 
     prompts = [
         {
@@ -864,6 +895,38 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(6, 12.5, 14.778, "产品英雄镜头与点赞", "曲奇盒、叠放曲奇和牛奶杯整齐成组，一只手放下最后一块曲奇并点赞；PERFECT!、BEST!、ENJOY! 与柔和星光环绕。", "低角度产品英雄构图，缓慢推近并停在清晰封面帧。", "曲奇落盘、玻璃轻响和桌面轻拍自然收尾。", "最终产品数量稳定，涂鸦不遮挡主体，手势完整可读。"),
             ],
         },
+        {
+            "id": 14,
+            "source_id": 11,
+            "slug": "surreal-coffee-cup-lighthouse-ocean",
+            "title": "咖啡杯里的灯塔海洋：云海微缩梦境",
+            "category": "超现实微缩景观 / 概念广告",
+            "language": "zh-CN",
+            "aspect_ratio": "3:4",
+            "duration_sec": 10.041,
+            "resolution": "832×1104",
+            "style_summary": "超现实微缩摄影：透明咖啡杯、青绿色杯中海洋、暖光灯塔、云海奶泡与真实卷浪物理。",
+            "scene_summary": "一只透明玻璃杯悬置在厚重白灰云海之中，杯内形成完整微缩海域，海浪围绕杯中灯塔循环起伏。",
+            "subject_summary": "同一只厚壁透明玻璃杯、右侧圆形把手、单座奶白灯塔、红棕塔顶、小型暗礁、青绿色海水与云状奶泡。",
+            "core_mechanic": "把咖啡杯稳定地变成一个受杯壁约束的微缩海洋，让卷浪、旋涡、水花与灯塔扫光持续演化，同时保持杯体和灯塔不漂移。",
+            "camera_language": "略高正面中近景建立，极慢推近、数度横移与轻微环绕；依靠玻璃折射、浪峰和灯塔光束制造连续视差，无硬切。",
+            "lighting_color": "冷青海水与暖琥珀灯塔光互补，白灰体积云包围杯体，金色反射穿透水雾；浅景深、柔和胶片颗粒与动态焦散。",
+            "audio_design": "低沉柔和的海浪拍击、细碎水滴、远风、极轻灯塔机械转动与克制梦幻氛围音；无对白。",
+            "continuity_rules": "杯体厚度、右侧把手、灯塔结构与礁石位置稳定；始终只有一座灯塔；海水和水花受杯中微缩物理约束，不能穿透杯壁或无规律溢出；云层连续缓慢流动。",
+            "master_prompt": coffee_lighthouse_master,
+            "negative_prompt": "No people, hands, spoon, saucer, coffee beans, text, subtitles, logos or watermarks; no extra lighthouse, changing cup handle, warped glass rim, opaque plastic cup, lighthouse scale drift, floating lighthouse, water penetrating the glass, uncontrolled flood, frozen wave, muddy water, random scene cuts, camera shake, flicker, duplicated objects or inconsistent cloud direction.",
+            "reference_image_prompt": coffee_lighthouse_image,
+            "recommended_models": "Seedance 2.0 / Veo 3.1 / Kling 3.0（复现建议；作者未注明模型）",
+            "prompt_origin": "reverse_engineered_from_public_video_frames",
+            "quality_notes": "作者未公开原始提示词或生成模型。数据库依据帖文、0 秒、4 秒、7 秒与结尾关键帧以及媒体元数据反推；实际视频为 10.041 秒、832×1104，按约 3:4 归档。",
+            "tags": ["超现实", "微缩景观", "咖啡杯", "灯塔", "杯中海洋", "卷浪", "云海", "奶泡意象", "玻璃折射", "体积光", "概念广告", "3:4", "反推提示词"],
+            "shots": [
+                shot(1, 0, 2.5, "卷浪与灯塔建立", "透明杯悬在云海中，杯内青绿色巨浪从左侧卷起，暖光灯塔位于杯中偏右。", "略高正面中近景，极慢推近。", "低沉海浪、细小水花与远风。", "杯把始终朝右；单座灯塔、杯体和云海首次锁定。"),
+                shot(2, 2.5, 5, "回浪与双向扫光", "卷浪沿杯口回落成旋涡，灯塔的暖金光束扫过水面并形成明亮反射。", "轻微横移和下沉，突出杯壁折射与水线。", "回浪、细碎水滴与极轻机械转动声。", "水体不得穿透杯壁，灯塔结构和比例不变。"),
+                shot(3, 5, 7.5, "礁石灯塔英雄构图", "海面暂时舒展，灯塔与小礁石成为中心，扫光穿过云层与波纹。", "缓慢环绕数度并轻推，制造微缩视差。", "海面涌动减弱，梦幻氛围音轻微上扬。", "始终只有一座灯塔，礁石不漂移，云层方向连续。"),
+                shot(4, 7.5, 10.041, "浪峰重组与暖光收束", "后侧海浪再次抬升并绕向灯塔，在杯口形成细碎白色水花，暖光穿透浪雾完成英雄帧。", "镜头稳定靠近后停顿，让卷浪弧线、灯塔和完整杯体同时可读。", "浪声增强后柔和收束，水滴与远风淡出。", "浪峰受杯内空间约束；结尾杯体、把手和灯塔必须清晰完整。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1102,7 +1165,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 7 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 13 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 8 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 14 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1180,6 +1243,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 11 的作者在正文中公开了完整 Seedance 2.0 视频提示词；原文要求 35 秒，公开视频实际为 31.201 秒、720×810，数据库保留原文并按实际媒体时长整理分镜。
 - ID 12 的作者在正文中公开了完整 Seedance 2.0 河畔露营牛肉河粉视频提示词；公开视频为 12.5 秒、1280×720，数据库保留原文并按烹饪步骤整理为 7 段分镜。
 - ID 13 的作者公开了 GPT Image 2 分镜板提示词与 Seedance 视频提示词；原文要求 15 秒、16:9，公开视频实际为 14.778 秒、1076×1330，数据库保留两份原文并按实际规格归档。
+- ID 14 的作者未公开原始提示词或生成模型；数据库依据帖文、四个关键帧和 10.041 秒、832×1104 的媒体元数据反推，并明确标记为 `reverse_engineered_from_public_video_frames`。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
