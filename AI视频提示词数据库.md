@@ -1,6 +1,6 @@
 # AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 9 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 15 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 10 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 16 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -21,8 +21,9 @@
 | 13 | POV 曲奇蘸牛奶 ASMR：手绘涂鸦美食广告 | 写实美食广告 / POV ASMR | 4:5 | 14.778s | author_published_full_prompt_and_storyboard |
 | 14 | 咖啡杯里的灯塔海洋：云海微缩梦境 | 超现实微缩景观 / 概念广告 | 3:4 | 10.041s | reverse_engineered_from_public_video_frames |
 | 15 | 韩系蜂蜜黄油杏仁：从晨间到夜晚的生活方式广告 | 写实食品广告 / 韩系生活方式 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
+| 16 | 7UP Extra Fizz 过度清洁：三维家庭喜剧汽水广告 | 三维卡通饮料广告 / 家庭喜剧 | 16:9 | 60.046s | author_published_full_prompt |
 
-共 15 条主提示词、84 条分镜、115 个去重标签。
+共 16 条主提示词、91 条分镜、126 个去重标签。
 
 ## 文件说明
 
@@ -102,3 +103,4 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 13 的作者公开了 GPT Image 2 分镜板提示词与 Seedance 视频提示词；原文要求 15 秒、16:9，公开视频实际为 14.778 秒、1076×1330，数据库保留两份原文并按实际规格归档。
 - ID 14 的作者未公开原始提示词或生成模型；数据库依据帖文、四个关键帧和 10.041 秒、832×1104 的媒体元数据反推，并明确标记为 `reverse_engineered_from_public_video_frames`。
 - ID 15 的作者在回复中公开了完整韩系蜂蜜黄油杏仁视频提示词与八句韩语旁白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。发布演示版实际保留分镜板，与原提示词要求的全屏输出存在差异。
+- ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。

@@ -116,6 +116,37 @@ Final Korean narration:
 
 「꿀의 달콤함, 버터의 부드러운 풍미.」
 「달콤하고 고소한 매일의 즐거움, 허니버터 아몬드.」"""
+SEVEN_UP_CLEANING_X_URL = "https://x.com/Just_sharon7/status/2081971529823432803"
+SEVEN_UP_CLEANING_X_POST = (
+    "How much cleaning is too much cleaning?\n\n"
+    "Make your video like this using Product commercial skill on @Flovaai\n\n"
+    "Model used: Seedance 2.0"
+)
+SEVEN_UP_CLEANING_PROMPT = """A 60-second 3D Pixar-style animated commercial for 7UP Extra Fizz. Bright, vibrant, highly expressive cartoon rendering with smooth exaggerated animation, big emotional faces, soft rounded shapes, rich saturated colors, and cinematic lighting. Vertical smartphone aspect ratio with dynamic camera moves (sweeping low angles, playful tracking shots, extreme close-ups on expressions).
+
+*Setting:* A sunny, modern Western suburban home with open-plan living spaces, light wooden floors, white walls with geometric wood accent panels, large windows letting in golden afternoon light, and a cozy, slightly cluttered family feel.
+
+*Characters:*
+• Mom: Mid-50s Western woman, warm but dramatic, short stylish brown hair with a few gray streaks, wearing a soft beige cardigan over a patterned blouse and jeans.
+• Daughter: Early-20s, long reddish-brown hair in a high ponytail, wearing an olive-green polo shirt, gold heart necklace, and baggy light-wash jeans. Highly expressive Pixar-style face that goes from annoyed → exhausted → pure joy.
+
+*Scene breakdown:*
+
+0–6s: Close-up of a vintage green rotary phone on a glossy side table. Mom appears in the background holding the handset, eyes wide with urgency, waving her free hand dramatically as she speaks in English: “The guests are coming in an hour! Honey, hurry up! Clean every single fan blade, one by one — please, please, go go go!”
+
+6–12s: Cut to the daughter on the living-room sofa, scrolling on a peach smartphone. Her face scrunches into a classic Pixar annoyed expression (eyebrows knitted, mouth twisted). She lets out a big exaggerated sigh.
+
+12–22s: Mom marches in holding a green-handled mop, gesturing wildly. Daughter climbs a bright red stepladder and starts cleaning a dark wooden ceiling fan. She meticulously wipes each blade with a white cloth, her face showing increasing determination mixed with irritation. Camera circles around her as dust motes float in the light. She then dusts the geometric wooden wall panels with a long grey duster, dramatically wiping sweat from her forehead with a big cartoonish gesture.
+
+22–32s: Daughter now wears bright yellow rubber gloves. She crouches inside a wide-open stainless-steel refrigerator, vigorously scrubbing the white interior walls and shelves with a green microfiber cloth. Several green 7UP bottles are clearly visible on the door shelves. Her expression is pure focused effort, tongue slightly sticking out in concentration.
+
+32–42s: Outside on the front porch steps under a soft evening sky. Mom stands in the doorway still urging. Daughter holds the mop, shoulders slumped, and complains with big exaggerated exhaustion: “Mom, the stairs too?! This is getting a little extra!” She continues, voice rising: “I’m completely wiped from all this extra cleaning!”
+
+42–52s: Extreme close-up of the daughter’s tired face. She reaches for a cold green 7UP Extra Fizz bottle. With a satisfying twist and loud fizzy “PSSSHT!” sound effect, she opens it. Bubbles and tiny water droplets spray in a playful Pixar-style flourish. She takes a long, refreshing drink. Her entire face transforms — eyes light up, cheeks glow, a huge genuine smile spreads as energy returns to her body. She does a little joyful bounce.
+
+52–60s: Dynamic heroic product shot. The icy-cold 7UP Extra Fizz bottle rises against a bright blue sky. Dramatic water splash and exploding bubbles surround it in exaggerated, sparkling 3D animation. Bold, playful on-screen text pops in with a bounce: “INTRODUCING 7UP EXTRA FIZZ” next to the classic 7UP logo. Soft upbeat music swells into a fresh, fizzy climax.
+
+*Overall tone & style:* Warm, relatable, slightly comedic family chaos that feels like a Pixar short, transitioning into pure refreshing joy. Exaggerated facial expressions, squash-and-stretch animation, vibrant green product highlights, smooth camera movement, clear English dialogue, and upbeat background music that builds from stressed household energy to sparkling refreshment."""
 
 
 def read_utf8(name: str) -> str:
@@ -365,6 +396,29 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + HONEY_BUTTER_ALMOND_PROMPT
             ),
         },
+        {
+            "id": 13,
+            "source_type": "x_video",
+            "title": "Seedance 2.0 过度清洁家庭喜剧 7UP Extra Fizz 广告",
+            "locator": SEVEN_UP_CLEANING_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata",
+            "notes": (
+                "作者在主帖中公开完整 60 秒英文提示词，注明使用 Flova 的 Product commercial skill "
+                "和 Seedance 2.0。原提示词要求竖屏手机画幅，公开视频媒体元数据则为 60.046 秒、"
+                "3840×2160（16:9 横屏），存在画幅差异。内容以母亲临时通知客人来访、女儿进行"
+                "过度清洁为家庭喜剧主线，在疲惫峰值引出冰镇 7UP Extra Fizz，并以气泡水花产品"
+                "英雄镜头收尾。数据库逐字保留作者原始提示词，并按实际媒体规格归档。"
+            ),
+            "sha256": sha256_text(
+                SEVEN_UP_CLEANING_X_POST + SEVEN_UP_CLEANING_PROMPT
+            ),
+            "raw_excerpt": (
+                SEVEN_UP_CLEANING_X_POST
+                + "\n\nprompt\n\n"
+                + SEVEN_UP_CLEANING_PROMPT
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -522,6 +576,7 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
     coffee_lighthouse_image = """超现实微缩摄影，一只透明厚壁玻璃咖啡杯完整居中，圆形金色玻璃把手朝右，杯子悬置在无边白灰色云海与细密奶泡之中；杯内盛着通透的青绿色微缩海洋，一座奶白色圆柱灯塔立在小型暗色礁石上，红棕色塔顶发出温暖琥珀光束；一堵高细节卷浪沿杯口弯曲，白色浪花在灯塔旁飞溅，水下焦散、玻璃折射、冷凝高光和金色反射带清晰可见。冷青海水与暖金灯光互补，电影级体积云与体积光，微距镜头，浅景深，精致梦境广告质感，写实水体物理，3:4 竖幅，无人物、无文字、无品牌、无水印。"""
     honey_butter_video = HONEY_BUTTER_ALMOND_PROMPT
     honey_butter_storyboard = """Create a premium 4:5 Korean advertising storyboard sheet for a 15-second Honey Butter Almond commercial. Use the same young adult Korean woman with natural dark hair and a cream knit sweater, the same sealed yellow Korean-language Honey Butter Almond package, the same golden coated almonds, and consistent warm home interiors in every panel. Place one large opening hero image above a clean 3×3 grid of nine numbered panels with English shot titles and exact time ranges: 01 Opening Shot 0–2s, yellow package on a wooden bedside table in warm morning sunlight; 02 Daily Companion 2–4s, the woman working at a laptop with the package beside her; 03 Close-up Temptation 4–6s, fingers selecting one coated almond from a ceramic bowl; 04 Break Time 6–8s, she tastes the almond and smiles naturally; 05 Sharing with Friends 8–10s, she shares the bowl with two adult Korean friends; 06 On-the-Go Energy 10–11.5s, the sealed package slides into a cream canvas tote bag; 07 Cozy Night 11.5–13s, she relaxes on a sofa with a warm drink and an almond; 08 Sweet Ending 13–14s, ingredient macro with almonds, glass honey jar, wooden honey dipper and one clean butter cube; 09 Product Hero Shot 14–15s, yellow package beside a bowl of coated almonds. Photorealistic Korean lifestyle commercial, warm beige and honey-gold palette, natural sunlight, cozy practical lamps, shallow depth of field, premium food macro photography, polished agency storyboard layout, consistent product graphics and character identity. No extra products, duplicate packages, deformed hands, children, random text, logos beyond the package design or watermarks."""
+    seven_up_cleaning_video = SEVEN_UP_CLEANING_PROMPT
 
     prompts = [
         {
@@ -1028,6 +1083,41 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(9, 14, 15.041, "Product Hero Shot：产品英雄镜头", "黄色包装正面居中，旁边是盛满裹粉杏仁的陶瓷碗，蜂蜜与黄油作为简洁辅景。", "正面广告英雄构图，微推后留出清晰停顿。", "终句「달콤하고 고소한 매일의 즐거움, 허니버터 아몬드.」；品牌尾音收束。", "包装文字、碗内杏仁数量和背景陈设稳定，主体无遮挡。"),
             ],
         },
+        {
+            "id": 16,
+            "source_id": 13,
+            "slug": "seedance-7up-extra-fizz-overcleaning-family-comedy",
+            "title": "7UP Extra Fizz 过度清洁：三维家庭喜剧汽水广告",
+            "category": "三维卡通饮料广告 / 家庭喜剧",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 60.046,
+            "resolution": "3840×2160",
+            "style_summary": "明亮饱和的皮克斯式三维卡通广告：圆润造型、夸张大表情、顺滑弹性动画、家庭喜剧节奏与电影级产品水花。",
+            "scene_summary": "阳光充足的现代西式郊区住宅，从客厅、吊扇、木质墙板、冰箱一路清洁到门廊台阶，最终转入蓝天背景的汽水英雄镜头。",
+            "subject_summary": "短棕发带灰发的戏剧化母亲；红棕高马尾、橄榄绿 Polo 衫、金色心形项链和浅色宽松牛仔裤的年轻女儿；绿色 7UP Extra Fizz 瓶。",
+            "core_mechanic": "以越来越离谱的清洁任务持续累积女儿的疲惫和抱怨，在情绪最低点用开瓶气泡、冰水滴和畅饮完成“疲惫→焕发活力”的产品转折。",
+            "camera_language": "复古电话极近景、沙发人物中景、环绕梯子与吊扇、冰箱内部广角、门廊低角度、疲惫表情极近景、开瓶气泡微距和蓝天产品升起英雄镜头。",
+            "lighting_color": "室内使用金色午后窗光、浅木色与白墙；绿色产品作为贯穿全片的高饱和视觉锚点，结尾转为亮蓝天空、纯白水花和闪耀气泡。",
+            "audio_design": "清晰英文对白、夸张叹气与清洁摩擦声；门廊抱怨推高喜剧张力，开瓶用响亮 PSSSHT、气泡和水滴喷溅声完成转折，轻快配乐从家庭忙乱推进到清爽高潮。",
+            "continuity_rules": "母女身份、年龄、发型和服装始终一致；绿色拖把、红色梯子、黄色手套、白布、灰色长掸和绿色抹布只在对应任务出现；7UP 瓶外形、标签和绿色玻璃稳定，冰箱门架中的瓶数不跳变。",
+            "master_prompt": seven_up_cleaning_video,
+            "negative_prompt": "No photoreal live action, flat 2D animation, horror tone, child characters, extra family members, changing hair or outfits, malformed hands, extra fingers, unstable facial identity, floating cleaning tools, warped ceiling fan, unsafe ladder physics, daughter trapped inside the refrigerator, duplicate bottles, drifting 7UP label, incorrect bottle color, flat soda with no bubbles, muddy water splash, unreadable final headline, random text, subtitles, watermarks, flicker or abrupt lighting changes.",
+            "reference_image_prompt": "",
+            "recommended_models": "Flova Product commercial skill + Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在主帖逐字公开完整 60 秒英文提示词，并注明 Flova Product commercial skill 与 Seedance 2.0。原提示词要求 vertical smartphone aspect ratio，但公开视频实际为 60.046 秒、3840×2160 横屏；数据库保留原文并以实际媒体规格归档。",
+            "tags": ["Seedance 2.0", "Flova", "Product commercial skill", "7UP", "Extra Fizz", "三维卡通", "皮克斯式", "饮料广告", "家庭喜剧", "过度清洁", "夸张表情", "气泡水花", "产品英雄镜头", "16:9", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 6, "紧急来客电话", "复古绿色旋转电话占据前景，母亲在背景握着听筒，睁大眼睛挥手，催促女儿逐片清洁每一片吊扇叶。", "电话极近景转母亲中近景，略带低角度和戏剧性推近。", "母亲对白：“The guests are coming in an hour! Honey, hurry up! Clean every single fan blade, one by one — please, please, go go go!”", "母亲短棕灰发、米色开衫和花纹上衣首次锁定；电话始终为复古绿色。"),
+                shot(2, 6, 12, "女儿夸张叹气", "女儿坐在客厅沙发上刷桃色手机，眉毛紧皱、嘴角扭曲，发出夸张长叹。", "人物中景快速推到表情特写，强调卡通面部挤压。", "手机轻触、夸张叹气与轻快但焦躁的配乐。", "女儿红棕高马尾、橄榄绿 Polo、心形项链和浅色宽松牛仔裤保持固定。"),
+                shot(3, 12, 22, "吊扇与墙板过度清洁", "母亲挥舞绿色拖把继续指挥；女儿爬上红色梯子，用白布逐片擦拭深木色吊扇，再用灰色长掸清理几何木墙板并夸张擦汗。", "围绕梯子和吊扇的环绕镜头，随后跟踪长掸横移；逆光尘埃可见。", "拖把落地、布擦叶片、掸灰和女儿喘气声。", "梯子稳定，吊扇停转后再擦；清洁工具不得互换或悬浮。"),
+                shot(4, 22, 32, "钻进冰箱清洁", "戴黄色橡胶手套的女儿蹲进敞开的不锈钢冰箱，用绿色超细纤维布用力擦洗白色内壁和层架；门架摆着数瓶绿色 7UP。", "冰箱内部广角看向女儿，切手套与抹布近景。", "湿布摩擦、玻璃瓶轻碰和专注的呼吸声。", "冰箱保持通风安全的卡通语境；黄色手套、绿色布与门架瓶数连续。"),
+                shot(5, 32, 42, "门廊台阶也要清洁", "傍晚门廊上，母亲仍站在门口催促；女儿拄着拖把肩膀下垂，对连台阶也要清洁感到崩溃。", "门廊低角度双人中景，逐渐推到女儿疲惫表情。", "女儿对白：“Mom, the stairs too?! This is getting a little extra!”、“I’m completely wiped from all this extra cleaning!”", "同一绿色拖把；天空从下午自然过渡到柔和傍晚。"),
+                shot(6, 42, 52, "开瓶畅饮恢复活力", "疲惫表情极近景后，女儿拿起冰镇绿色 7UP Extra Fizz，旋开瓶盖，气泡与水滴喷出；长饮后眼睛亮起、脸颊发光，笑容展开并开心弹跳。", "表情极近景切开瓶微距，再轻拉远捕捉弹跳全身。", "响亮“PSSSHT!”、密集气泡、水滴喷溅和吞咽声；配乐由疲惫转为清爽上扬。", "同一女儿与瓶体；表情变化连续，瓶盖和液体遵守物理。"),
+                shot(7, 52, 60.046, "Extra Fizz 产品英雄镜头", "冰镇 7UP Extra Fizz 瓶在亮蓝天空前动态升起，夸张水花和爆裂气泡环绕；“INTRODUCING 7UP EXTRA FIZZ”与经典标志弹跳出现。", "仰拍产品升起，短暂环绕后正面定格，留出广告尾帧。", "水花、气泡爆裂与轻快音乐进入清新高潮。", "产品标签清晰稳定，水花不遮挡瓶身与标题，结尾文字可读。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1266,7 +1356,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 9 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 15 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 10 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 16 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1346,6 +1436,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 13 的作者公开了 GPT Image 2 分镜板提示词与 Seedance 视频提示词；原文要求 15 秒、16:9，公开视频实际为 14.778 秒、1076×1330，数据库保留两份原文并按实际规格归档。
 - ID 14 的作者未公开原始提示词或生成模型；数据库依据帖文、四个关键帧和 10.041 秒、832×1104 的媒体元数据反推，并明确标记为 `reverse_engineered_from_public_video_frames`。
 - ID 15 的作者在回复中公开了完整韩系蜂蜜黄油杏仁视频提示词与八句韩语旁白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。发布演示版实际保留分镜板，与原提示词要求的全屏输出存在差异。
+- ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
