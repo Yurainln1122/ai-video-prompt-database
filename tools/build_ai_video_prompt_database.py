@@ -80,6 +80,42 @@ Hero shot of the cookie box, stacked cookies, and glass of milk beautifully arra
 Audio: Natural ASMR only—cardboard tapping, wrapper crinkles, milk pouring, glass clinks, cookie dipping, crunchy bites, falling crumbs, soft tabletop taps, and quiet room ambience. No background music, no subtitles, no logos, no watermarks, and no on-screen text other than the animated doodle words. Premium food commercial cinematography, realistic food physics, macro close-ups, physically accurate lighting, photorealistic 4K HDR, 16:9, 24 fps."""
 COFFEE_LIGHTHOUSE_X_URL = "https://x.com/icreatelife/status/2081740528173924586"
 COFFEE_LIGHTHOUSE_X_POST = "May your coffee taste great today!\nHappy Monday!"
+HONEY_BUTTER_ALMOND_X_URL = "https://x.com/kentdhani/status/2081661227642863898"
+HONEY_BUTTER_ALMOND_PROMPT_URL = "https://x.com/kentdhani/status/2081661231115780306"
+HONEY_BUTTER_ALMOND_X_POST = (
+    "Creating Sick Korean Ads using GPT Image 2 storyboard + Seedance 2.0 only!\n\n"
+    "Try this prompt 🔽"
+)
+HONEY_BUTTER_ALMOND_PROMPT = """Create a 15-second photorealistic Korean Honey Butter Almond commercial using @image1 only as the visual reference for the female model, yellow product package, coated almonds, home interiors, friends, ingredients, and scene progression. Convert it into continuous full-screen live-action footage without showing storyboard grids, numbers, timecodes, headings, captions, borders, or graphic overlays.
+
+Begin with the yellow Honey Butter Almond package standing on a wooden bedside table in warm morning sunlight. A young Korean woman in a cream knit sweater later works at her laptop with the package beside her. Show a premium macro shot of her selecting one golden honey-butter-coated almond from a ceramic bowl.
+
+Korean narration:
+
+「기분 좋은 하루의 시작.」
+「집중이 필요할 때, 달콤하고 고소하게.」
+
+She tastes one almond naturally, smiles with satisfaction, and says:
+
+「달콤하고 고소해서 자꾸 손이 가!」
+
+Transition to a cozy gathering where she shares a bowl of almonds with two adult Korean friends. She says:
+
+「맛있는 건 같이 먹어야지!」
+
+Show the sealed yellow package sliding neatly into her cream canvas tote bag. At night, she relaxes on a sofa with a warm drink and calmly enjoys another almond.
+
+Korean narration:
+
+「가볍게 챙겨, 언제 어디서나.」
+「하루의 끝까지, 달콤한 휴식.」
+
+Show a cinematic ingredient macro featuring golden almonds, a glass honey jar, a wooden honey dipper, and one clean butter cube. End with a premium hero shot of the yellow Honey Butter Almond package beside a bowl of coated almonds.
+
+Final Korean narration:
+
+「꿀의 달콤함, 버터의 부드러운 풍미.」
+「달콤하고 고소한 매일의 즐거움, 허니버터 아몬드.」"""
 
 
 def read_utf8(name: str) -> str:
@@ -303,6 +339,32 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(COFFEE_LIGHTHOUSE_X_POST),
             "raw_excerpt": COFFEE_LIGHTHOUSE_X_POST,
         },
+        {
+            "id": 12,
+            "source_type": "x_video_thread",
+            "title": "GPT Image 2 + Seedance 2.0 韩系蜂蜜黄油杏仁广告",
+            "locator": HONEY_BUTTER_ALMOND_X_URL,
+            "accessed_at": now,
+            "verification": "author_video_prompt_key_frames_video_metadata",
+            "notes": (
+                "作者主帖注明使用 GPT Image 2 制作分镜板、Seedance 2.0 生成视频，并在紧随其后的"
+                f"回复 {HONEY_BUTTER_ALMOND_PROMPT_URL} 中公开完整英文视频提示词和八句韩语旁白。"
+                "公开视频媒体元数据为 15.041 秒、1820×2280（4:5）。关键帧显示发布版本采用"
+                "上方连续实拍广告、下方持续显示九格分镜板的演示版式；这与原提示词要求的全屏画面、"
+                "不显示网格/编号/时间码存在差异。数据库逐字保留作者视频提示词，分镜生图提示词"
+                "则依据公开视频中的九格分镜板反推并明确标注。"
+            ),
+            "sha256": sha256_text(
+                HONEY_BUTTER_ALMOND_X_POST + HONEY_BUTTER_ALMOND_PROMPT
+            ),
+            "raw_excerpt": (
+                HONEY_BUTTER_ALMOND_X_POST
+                + "\n\nAuthor prompt reply:\n"
+                + HONEY_BUTTER_ALMOND_PROMPT_URL
+                + "\n\nPrompt I Used:\n\n"
+                + HONEY_BUTTER_ALMOND_PROMPT
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -458,6 +520,8 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
 
 整体风格：超现实微缩摄影、梦境咖啡意象、宏观食物广告质感与海洋电影摄影融合；真实玻璃折射、体积云、体积光、细腻水花、动态焦散、浅景深、柔和胶片颗粒、冷青与暖金互补调色。镜头运动稳定舒缓，所有形变连续，无硬切、无文字、无人物、无品牌。声音可使用低沉而柔和的海浪拍击、细小水滴、远风、极轻灯塔机械转动声与克制的梦幻氛围音，无对白。"""
     coffee_lighthouse_image = """超现实微缩摄影，一只透明厚壁玻璃咖啡杯完整居中，圆形金色玻璃把手朝右，杯子悬置在无边白灰色云海与细密奶泡之中；杯内盛着通透的青绿色微缩海洋，一座奶白色圆柱灯塔立在小型暗色礁石上，红棕色塔顶发出温暖琥珀光束；一堵高细节卷浪沿杯口弯曲，白色浪花在灯塔旁飞溅，水下焦散、玻璃折射、冷凝高光和金色反射带清晰可见。冷青海水与暖金灯光互补，电影级体积云与体积光，微距镜头，浅景深，精致梦境广告质感，写实水体物理，3:4 竖幅，无人物、无文字、无品牌、无水印。"""
+    honey_butter_video = HONEY_BUTTER_ALMOND_PROMPT
+    honey_butter_storyboard = """Create a premium 4:5 Korean advertising storyboard sheet for a 15-second Honey Butter Almond commercial. Use the same young adult Korean woman with natural dark hair and a cream knit sweater, the same sealed yellow Korean-language Honey Butter Almond package, the same golden coated almonds, and consistent warm home interiors in every panel. Place one large opening hero image above a clean 3×3 grid of nine numbered panels with English shot titles and exact time ranges: 01 Opening Shot 0–2s, yellow package on a wooden bedside table in warm morning sunlight; 02 Daily Companion 2–4s, the woman working at a laptop with the package beside her; 03 Close-up Temptation 4–6s, fingers selecting one coated almond from a ceramic bowl; 04 Break Time 6–8s, she tastes the almond and smiles naturally; 05 Sharing with Friends 8–10s, she shares the bowl with two adult Korean friends; 06 On-the-Go Energy 10–11.5s, the sealed package slides into a cream canvas tote bag; 07 Cozy Night 11.5–13s, she relaxes on a sofa with a warm drink and an almond; 08 Sweet Ending 13–14s, ingredient macro with almonds, glass honey jar, wooden honey dipper and one clean butter cube; 09 Product Hero Shot 14–15s, yellow package beside a bowl of coated almonds. Photorealistic Korean lifestyle commercial, warm beige and honey-gold palette, natural sunlight, cozy practical lamps, shallow depth of field, premium food macro photography, polished agency storyboard layout, consistent product graphics and character identity. No extra products, duplicate packages, deformed hands, children, random text, logos beyond the package design or watermarks."""
 
     prompts = [
         {
@@ -927,6 +991,43 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(4, 7.5, 10.041, "浪峰重组与暖光收束", "后侧海浪再次抬升并绕向灯塔，在杯口形成细碎白色水花，暖光穿透浪雾完成英雄帧。", "镜头稳定靠近后停顿，让卷浪弧线、灯塔和完整杯体同时可读。", "浪声增强后柔和收束，水滴与远风淡出。", "浪峰受杯内空间约束；结尾杯体、把手和灯塔必须清晰完整。"),
             ],
         },
+        {
+            "id": 15,
+            "source_id": 12,
+            "slug": "korean-honey-butter-almond-lifestyle-commercial",
+            "title": "韩系蜂蜜黄油杏仁：从晨间到夜晚的生活方式广告",
+            "category": "写实食品广告 / 韩系生活方式",
+            "language": "en + ko",
+            "aspect_ratio": "4:5",
+            "duration_sec": 15.041,
+            "resolution": "1820×2280",
+            "style_summary": "写实韩系食品广告：暖米色家居、蜂蜜金色调、自然晨光与夜间暖灯、人物生活方式叙事和高端食材微距。",
+            "scene_summary": "从晨间卧室床头柜、居家办公、午后分享、随身帆布包到夜间沙发休息，最后以蜂蜜、黄油和杏仁产品英雄镜头收尾。",
+            "subject_summary": "同一名深色自然长发、奶油色针织衫的年轻韩国女性；同一款黄色韩文蜂蜜黄油杏仁包装、金色裹粉杏仁、陶瓷碗、蜂蜜罐、木质蜂蜜棒和黄油块。",
+            "core_mechanic": "把黄色产品包装贯穿晨间、专注工作、独享、好友分享、随身携带与夜间放松六种生活场景，再用蜂蜜和黄油食材微距兑现口味卖点。",
+            "camera_language": "床头产品建立、人物居家中景、手部取食微距、自然试吃反应、三人分享中景、帆布包插入特写、夜间沙发氛围镜头、蜂蜜滴落宏观与最终正面英雄镜头。",
+            "lighting_color": "晨间金色窗光、奶油米白家居、蜂蜜琥珀和杏仁金棕；夜景使用柔和钨丝灯，产品黄色始终是视觉锚点。",
+            "audio_design": "八句韩语旁白与自然对白贯穿场景，辅以包装轻响、杏仁落碗与咀嚼声、朋友轻笑、帆布摩擦、杯子轻碰和蜂蜜滴落；温暖克制的韩系广告配乐。",
+            "continuity_rules": "女性脸型、发型和奶油色针织衫保持一致；黄色包装的韩文图形、封口状态和尺寸稳定；只在随身镜头将密封包装放入同一只奶油色帆布包；朋友均为成年韩国人；杏仁、蜂蜜和黄油只在对应镜头出现。",
+            "master_prompt": honey_butter_video,
+            "negative_prompt": "No storyboard grids, numbers, timecodes, headings, captions, borders or graphic overlays in the generated full-screen commercial; no changing model identity, hairstyle or sweater, no malformed hands, extra fingers, duplicated package, drifting Korean package text, open package inside the tote bag, children, extra friends, floating almonds, plastic food texture, messy butter, impossible honey flow, random logos, subtitles, watermarks, flicker or abrupt location changes.",
+            "reference_image_prompt": honey_butter_storyboard,
+            "recommended_models": "GPT Image 2（分镜板）+ Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_video_prompt_storyboard_reverse_engineered",
+            "quality_notes": "作者在回复中公开完整英文视频提示词与八句韩语旁白，数据库逐字保留。作者未公开 GPT Image 2 分镜板的原始提示词，数据库中的生图提示词依据公开视频所示九格分镜板反推。原视频提示词要求全屏且不显示分镜网格，但发布演示版实际在下方持续显示九格分镜板；媒体规格为 15.041 秒、1820×2280。",
+            "tags": ["GPT Image 2", "Seedance 2.0", "韩系广告", "蜂蜜黄油杏仁", "食品广告", "生活方式", "韩语旁白", "产品包装", "好友分享", "居家场景", "食材微距", "产品英雄镜头", "4:5", "作者原始视频提示词"],
+            "shots": [
+                shot(1, 0, 2, "Opening Shot：晨间床头产品", "黄色蜂蜜黄油杏仁包装立在木质床头柜，旁有闹钟、书本与小花，暖晨光照入卧室。", "略低产品中近景，缓慢推近并保持包装文字正面可读。", "旁白「기분 좋은 하루의 시작.」；清晨环境与轻柔配乐起。", "首次锁定黄色包装、卧室暖米色调和产品比例。"),
+                shot(2, 2, 4, "Daily Companion：居家工作", "奶油色针织衫的年轻韩国女性在笔记本电脑前工作，黄色包装稳定放在旁边。", "肩侧中景转桌面近景，人物与产品同框。", "旁白「집중이 필요할 때, 달콤하고 고소하게.」；轻微键盘声。", "同一女性、针织衫和产品包装；桌面空间方向连续。"),
+                shot(3, 4, 6, "Close-up Temptation：取一颗杏仁", "手指从陶瓷碗中挑起一颗金色蜂蜜黄油裹粉杏仁，背景蜂蜜罐柔和虚化。", "食物宏观特写，焦点从碗中杏仁转到指尖单颗。", "杏仁轻碰陶瓷碗与细腻包装环境声。", "手指结构正确，只取一颗；涂层细腻不结块。"),
+                shot(4, 6, 8, "Break Time：自然试吃", "女性把杏仁送入口中，自然咀嚼后露出满足微笑。", "温暖人物中近景，微推捕捉克制真实反应。", "对白「달콤하고 고소해서 자꾸 손이 가!」；清脆咀嚼声。", "人物身份、针织衫和家居光线保持一致。"),
+                shot(5, 8, 10, "Sharing with Friends：好友分享", "女性与两名成年韩国朋友围坐，分享同一碗杏仁并自然交谈微笑。", "三人中景结合手递杏仁近景，保持视线方向。", "对白「맛있는 건 같이 먹어야지!」；朋友轻笑与碗碟轻响。", "仅两名成年朋友；黄色包装和同一碗杏仁保持可见。"),
+                shot(6, 10, 11.5, "On-the-Go Energy：装入帆布包", "双手把密封的黄色包装整齐滑入奶油色帆布托特包。", "胸口以下手部特写，跟随包装垂直下移。", "帆布摩擦与包装轻响。", "包装必须密封、正面图形稳定，帆布包颜色与尺寸不变。"),
+                shot(7, 11.5, 13, "Cozy Night：夜间放松", "夜晚暖灯下，女性坐在沙发上，身旁有热饮，平静地享用另一颗杏仁。", "侧面中近景，浅景深与柔和钨丝灯散景。", "旁白「가볍게 챙겨, 언제 어디서나.」「하루의 끝까지, 달콤한 휴식.」；杯子轻碰声。", "同一女性与针织衫，明确从白天过渡到夜晚。"),
+                shot(8, 13, 14, "Sweet Ending：蜂蜜黄油食材微距", "金色杏仁、玻璃蜂蜜罐、木质蜂蜜棒和一块干净黄油组成食材画面，蜂蜜缓慢滴落。", "极近景慢动作，焦点沿蜂蜜丝移动到杏仁和黄油。", "旁白「꿀의 달콤함, 버터의 부드러운 풍미.」；蜂蜜滴落与柔和音乐上扬。", "只出现一块黄油，蜂蜜流动连续且不悬浮。"),
+                shot(9, 14, 15.041, "Product Hero Shot：产品英雄镜头", "黄色包装正面居中，旁边是盛满裹粉杏仁的陶瓷碗，蜂蜜与黄油作为简洁辅景。", "正面广告英雄构图，微推后留出清晰停顿。", "终句「달콤하고 고소한 매일의 즐거움, 허니버터 아몬드.」；品牌尾音收束。", "包装文字、碗内杏仁数量和背景陈设稳定，主体无遮挡。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1165,7 +1266,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 8 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 14 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 9 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 15 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1244,6 +1345,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 12 的作者在正文中公开了完整 Seedance 2.0 河畔露营牛肉河粉视频提示词；公开视频为 12.5 秒、1280×720，数据库保留原文并按烹饪步骤整理为 7 段分镜。
 - ID 13 的作者公开了 GPT Image 2 分镜板提示词与 Seedance 视频提示词；原文要求 15 秒、16:9，公开视频实际为 14.778 秒、1076×1330，数据库保留两份原文并按实际规格归档。
 - ID 14 的作者未公开原始提示词或生成模型；数据库依据帖文、四个关键帧和 10.041 秒、832×1104 的媒体元数据反推，并明确标记为 `reverse_engineered_from_public_video_frames`。
+- ID 15 的作者在回复中公开了完整韩系蜂蜜黄油杏仁视频提示词与八句韩语旁白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。发布演示版实际保留分镜板，与原提示词要求的全屏输出存在差异。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
