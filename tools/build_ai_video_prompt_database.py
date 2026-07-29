@@ -176,6 +176,70 @@ Child dialogue:
 「おいしい！」
 「パリパリ、おいしい！」
 「きざみのり、だいすき！」"""
+STARBUCKS_GALAXY_X_URL = (
+    "https://x.com/AiwithLariab/status/2082320700552155226"
+)
+STARBUCKS_GALAXY_X_POST = (
+    "From a single prompt to a blockbuster Starbucks commercial.\n"
+    "GPT Image 2 + Seedance 2.0"
+)
+STARBUCKS_GALAXY_PROMPT = """Create a    15-secondultra-photorealistic Hollywood commercial titled "STARBUCKS — COFFEE GALAXY" with the subtitle "A Universe Brewed FromMoments." The film should feel like a premium Super Bowl advertisement, blending Interstellar-scale cosmic visuals with luxurious Starbucks Reserve aesthetics. Every shot features seamless cinematic transitions, physically accurate coffee simulations, volumetric lighting, hyper-detailed textures, and luxury product cinematography.
+Scene 01 (0.0–1.5s): Deep outer space filled with millions of glowing roasted coffee beans floating like stars. A warm golden cosmic light rises from the center of the galaxy as a premium Starbucks cup slowly appears at the heart of the universe. Slow drone fly-through descends toward the cup. Ultra-wide establishing shot, 20mm anamorphic, cinematic HDR, volumetric lighting.
+Scene 02 (1.5–3.0s): Extreme macro of a roasted coffee bean. The bean transforms into an enormous mountain range made of coffee textures, caramel valleys, chocolate cliffs, and aromatic steam. Slow macro slider across the bean surface with shallow depth of field. 100mm Leica macro lens.
+Scene 03 (3.0–4.5s): A premium Starbucks cup floats above a rotating coffee planet. Roasted beans, cinnamon sticks, vanilla pods, chocolate flakes, and golden coffee dust orbit around the cup like miniature planets. Elegant 360° orbit shot with floating particles and luxury golden rim lighting.
+Scene 04 (4.5–6.0s): Fresh espresso pours dramatically into the Starbucks cup. The espresso stream transforms into a glowing cosmic river flowing through space while coffee steam expands into a massive nebula across the galaxy. High-speed liquid macro transitions into slow motion. Hyper-realistic fluid simulation.
+Scene 05 (6.0–7.5s): FPV flight through the Coffee Galaxy. Fly naturally between floating coffee planets, caramel rings, milk-cloud nebulae, cocoa asteroids, sparkling sugar dust, and roasted coffee bean constellations. Dynamic cinematic speed with volumetric coffee mist and cosmic sunlight.
+Scene 06 (7.5–9.0s): Top-down macro view of espresso as silky milk slowly pours in. Cream forms a beautiful spiral galaxy inside the cup before evolving into elegant latte art. Smooth rotating descent, ultra-detailed liquid simulation, soft café lighting.
+Scene 07 (9.0–10.5s): Reveal a luxurious Starbucks Reserve café floating among the stars. Warm conversations, rich wooden interiors, glowing hanging lights, and panoramic windows overlooking the Coffee Galaxy. Smooth gimbal walk-through transitions from the cozy café to the infinite universe outside.
+Scene 08 (10.5–12.0s): Everything freezes in time. Coffee beans, milk droplets, espresso splashes, chocolate particles, steam, and golden dust remain suspended around the Starbucks cup. Bullet-time camera pushes through the frozen particles toward the product with sparkling highlights and cinematic depth.
+Scene 09 (12.0–13.5s): Hero product shot. The Starbucks cup stands majestically on a floating coffee planet surrounded by rotating caramel waterfalls, glowing coffee rings, nebula clouds, and golden sunrise light. Slow circular orbit emphasizes premium branding and luxury craftsmanship.
+Scene 10 (13.5–15.0s): The Coffee Galaxy dissolves into a clean Starbucks green background. The Starbucks logo fades in with elegant cinematic lighting. The tagline "BREW YOUR MOMENT" appears beneath the logo. Slow graceful zoom-out ending with premium brand recall."""
+DEEP_HYDRATION_X_URL = (
+    "https://x.com/soaima70480/status/2082331258072514792"
+)
+DEEP_HYDRATION_VIDEO_URL = (
+    "https://x.com/soaima70480/status/2082331258072514792/video/2"
+)
+DEEP_HYDRATION_X_POST = "Gpt image 2+ seedance 2.0\n\nPrompt:"
+DEEP_HYDRATION_STORYBOARD_PROMPT = """Create a premium Hollywood-style advertising storyboard sheet for a luxury moisturizing face cream commercial. Display 10 ultra-realistic cinematic storyboard frames arranged in a 2×5 presentation grid on a pristine white storyboard board. Each frame features a thin black border, bold scene numbers (01–10), a duration timestamp, and a concise production caption beneath it. The overall design should resemble a professional advertising agency pitch board for a world-class skincare campaign.
+Title: DEEP HYDRATION
+Subtitle: 15-Second Premium Face Cream Commercial
+Scene 01 (0.0–1.5s) — Pure Reveal
+A luxurious crystal-glass face cream jar slowly rises from perfectly clear water, surrounded by soft white light, delicate mist, and elegant ripples, creating an atmosphere of purity and luxury.
+Scene 02 (1.5–3.0s) — Premium Detail
+Extreme macro beauty shot of the premium glass jar covered in sparkling condensation. Sharp reflections emphasize the luxurious glass craftsmanship and premium packaging.
+Scene 03 (3.0–4.5s) — Hydration Ingredients
+Pure water droplets, hyaluronic acid molecules, aloe vera gel, white blossoms, botanical extracts, and moisture particles gracefully float around the product in slow motion.
+Scene 04 (4.5–6.0s) — Hydration Burst
+Crystal-clear water splashes dynamically around the cream jar while glowing hydration particles and delicate botanical petals swirl elegantly through the air.
+Scene 05 (6.0–7.5s) — Cream Texture
+A silky ribbon of rich white moisturizer flows gracefully through the air, twisting smoothly around the product to showcase its luxurious texture.
+Scene 06 (7.5–9.0s) — Skin Absorption
+Macro close-up of the cream spreading effortlessly across flawless, healthy skin. Hydration particles glow beneath the surface, revealing a radiant, moisturized finish.
+Scene 07 (9.0–10.5s) — Healthy Glow
+Beautiful hydrated skin illuminated by soft natural daylight. Tiny floating water droplets and subtle botanical elements reinforce freshness, softness, and long-lasting moisture.
+Scene 08 (10.5–12.0s) — Hydration Freeze
+Time freezes as water splashes, floating droplets, cream ribbons, botanical petals, and glowing hydration particles create a perfectly balanced premium beauty composition.
+Scene 09 (12.0–13.5s) — Hero Product
+The face cream jar stands proudly on a reflective glass surface surrounded by crystal-clear water, luminous hydration particles, and soft volumetric light in a dramatic hero shot.
+Scene 10 (13.5–15.0s) — Brand Signature
+Minimal white studio background. The brand logo fades in gracefully with the elegant tagline:
+"Hydration That Lasts."
+Caption: Brand Signature
+Visual Direction
+Inspired by world-class luxury hydration skincare campaigns emphasizing purity, deep moisture, luminous healthy skin, silky cream textures, crystal-clear water, botanical science, and clean beauty aesthetics.
+Color Palette
+Pure White
+Soft Sky Blue
+Crystal Water Blue
+Silver Highlights
+Natural Beige
+Lighting
+Soft beauty lighting, diffused daylight, volumetric glow, clean studio reflections, premium cosmetic illumination.
+Camera
+ARRI Alexa 35, Cooke Anamorphic 50mm lens, macro beauty cinematography, ultra slow motion, shallow depth of field, precision focus.
+Style
+Luxury skincare advertising, premium beauty campaign, high-end cosmetic photography, Hollywood commercial storyboard, advertising agency presentation board, ultra-photorealistic, HDR, 8K, masterpiece quality, impeccable product realism, cinematic composition, flawless visual storytelling."""
 
 
 def read_utf8(name: str) -> str:
@@ -474,6 +538,54 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + KIZAMI_NORI_PROMPT
             ),
         },
+        {
+            "id": 15,
+            "source_type": "x_video",
+            "title": "GPT Image 2 + Seedance 2.0 Starbucks Coffee Galaxy 宇宙广告",
+            "locator": STARBUCKS_GALAXY_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata_photo",
+            "notes": (
+                "作者在主帖中公开完整 15 秒英文提示词，并注明使用 GPT Image 2 与 Seedance 2.0。"
+                "提示词把星际尺度的宇宙奇观与 Starbucks Reserve 奢华美学结合，依次呈现咖啡豆星空、"
+                "咖啡豆山脉、咖啡行星、浓缩咖啡宇宙河流、FPV 银河穿越、银河拿铁、星空臻选咖啡馆、"
+                "子弹时间冻结、行星产品英雄镜头和绿色品牌尾帧。公开视频媒体元数据为 15.116 秒、"
+                "720×1280（9:16 竖屏），另附一张 720×1283 竖图。数据库逐字保留作者原始提示词，"
+                "并按实际视频规格和 10 个 1.5 秒场景归档。"
+            ),
+            "sha256": sha256_text(
+                STARBUCKS_GALAXY_X_POST + STARBUCKS_GALAXY_PROMPT
+            ),
+            "raw_excerpt": (
+                STARBUCKS_GALAXY_X_POST
+                + "\n\nPROMPT:\n"
+                + STARBUCKS_GALAXY_PROMPT
+            ),
+        },
+        {
+            "id": 16,
+            "source_type": "x_video",
+            "title": "GPT Image 2 + Seedance 2.0 Deep Hydration 奢华面霜广告",
+            "locator": DEEP_HYDRATION_X_URL,
+            "accessed_at": now,
+            "verification": "author_storyboard_prompt_video_metadata_visual_check",
+            "notes": (
+                "作者在主帖中公开完整 10 镜头英文分镜板提示词，并注明使用 GPT Image 2 与 "
+                "Seedance 2.0。帖子第一项媒体为 576×864 的 2×5 竖版专业广告分镜板，第二项为"
+                "实际 15.092 秒、1280×720（16:9）的成片。分镜依次呈现水中产品揭示、玻璃罐微距、"
+                "补水成分、动态水花、乳霜质地、皮肤吸收、健康光泽、补水冻结、产品英雄镜头与"
+                "“Hydration That Lasts.” 品牌尾帧。数据库逐字保留作者分镜生图提示词；"
+                f"全屏视频生成提示词依据同一 10 镜头结构派生，视频入口为 {DEEP_HYDRATION_VIDEO_URL}。"
+            ),
+            "sha256": sha256_text(
+                DEEP_HYDRATION_X_POST + DEEP_HYDRATION_STORYBOARD_PROMPT
+            ),
+            "raw_excerpt": (
+                DEEP_HYDRATION_X_POST
+                + "\n\n"
+                + DEEP_HYDRATION_STORYBOARD_PROMPT
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -634,6 +746,23 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
     seven_up_cleaning_video = SEVEN_UP_CLEANING_PROMPT
     kizami_nori_video = KIZAMI_NORI_PROMPT
     kizami_nori_storyboard = """Create a premium 4:5 Japanese advertising storyboard sheet for a 15-second Kizami Nori children’s commercial. Use the same three Japanese children, the same white-and-blue Kizami Nori package, the same white ceramic bowl of thin dry roasted shredded seaweed, and a consistent bright dining room that transforms into a magical turquoise underwater world. Arrange nine numbered panels in a clean 3×3 grid: 01 a Japanese boy in a striped blue shirt tastes crisp Kizami Nori beside the package; 02 the boy looks upward with delighted surprise; 03 the dining room transforms into an underwater world with turquoise light, bubbles, colorful fish, coral and floating seaweed imagery; 04 premium macro of a hand taking thin crisp seaweed from the ceramic bowl; 05 the striped-shirt boy, a second boy and a girl in denim overalls share the seaweed; 06 appetizing macro of dry roasted shredded Kizami Nori in the bowl; 07 the girl takes a natural bite and smiles; 08 all three children laugh and enjoy Kizami Nori around the table; 09 clean product hero shot with the white-and-blue package upright behind the bowl, striped-shirt boy smiling on the left and girl smiling on the right. Photorealistic Japanese kids food commercial, natural child expressions, bright soft daylight, crisp food texture, premium macro photography, polished agency storyboard layout, consistent faces, wardrobe and package graphics. No adults, extra children, malformed hands, duplicate packages, wet or soggy seaweed, random text, logos beyond the package design or watermarks."""
+    starbucks_galaxy_video = STARBUCKS_GALAXY_PROMPT
+    starbucks_galaxy_storyboard = """Create a premium 9:16 vertical storyboard sheet for a 15-second Hollywood-style “STARBUCKS — COFFEE GALAXY” commercial. Arrange ten cinematic panels in chronological order with consistent Starbucks cup design and luxurious Starbucks Reserve styling: 01 glowing roasted coffee beans form a deep-space star field around a cup at the galactic center; 02 extreme macro coffee bean becomes caramel valleys and chocolate mountain cliffs; 03 the cup floats above a rotating coffee planet while beans, cinnamon, vanilla, chocolate and golden dust orbit it; 04 espresso pours into the cup and transforms into a glowing cosmic river while steam becomes a nebula; 05 FPV flight passes coffee planets, caramel rings, milk-cloud nebulae, cocoa asteroids and sugar dust; 06 top-down espresso and silky milk create a spiral galaxy that resolves into latte art; 07 a luxurious warm-wood Starbucks Reserve café floats among the stars with panoramic galaxy windows; 08 coffee beans, milk droplets, espresso splashes, chocolate, steam and golden dust freeze in bullet time around the cup; 09 the cup stands on a floating coffee planet with caramel waterfalls, glowing rings and a golden sunrise; 10 clean Starbucks green end card with logo and “BREW YOUR MOMENT”. Ultra-photorealistic Super Bowl commercial, Interstellar-scale cosmic spectacle, 20mm anamorphic wides and 100mm macro detail, cinematic HDR, volumetric lighting, physically accurate coffee and milk simulation, golden rim light, hyper-detailed luxury product cinematography. No malformed cup, drifting logo, duplicated ingredients, muddy liquid, broken orbit paths, random text or watermarks."""
+    deep_hydration_video = """Create a 15-second, full-screen 16:9 ultra-photorealistic Hollywood luxury moisturizing face cream commercial titled “DEEP HYDRATION”. Use the supplied 2×5 storyboard only as the visual, product and shot-sequence reference. Do not reproduce the storyboard board, grid, borders, scene numbers, timestamps or production captions in the finished video. Keep the same crystal-glass cream jar, silver lid, label design, white moisturizer, botanical ingredients and clean luxury art direction throughout.
+
+Scene 01 (0.0–1.5s) — Pure Reveal: The crystal-glass face cream jar slowly rises from perfectly clear water, surrounded by soft white light, delicate mist and elegant ripples.
+Scene 02 (1.5–3.0s) — Premium Detail: Extreme macro beauty shot of sparkling condensation, sharp glass reflections and premium packaging craftsmanship.
+Scene 03 (3.0–4.5s) — Hydration Ingredients: Pure water droplets, hyaluronic acid molecules, aloe vera gel, white blossoms, botanical extracts and moisture particles float gracefully around the product in ultra slow motion.
+Scene 04 (4.5–6.0s) — Hydration Burst: Crystal-clear water splashes dynamically around the jar while glowing hydration particles and delicate botanical petals swirl through the air.
+Scene 05 (6.0–7.5s) — Cream Texture: A silky ribbon of rich white moisturizer flows through the air and twists smoothly around the product.
+Scene 06 (7.5–9.0s) — Skin Absorption: Macro close-up of the cream spreading effortlessly across healthy skin as subtle hydration particles glow beneath the surface, revealing a radiant moisturized finish.
+Scene 07 (9.0–10.5s) — Healthy Glow: Beautiful hydrated skin in soft natural daylight, with tiny floating water droplets and restrained botanical accents.
+Scene 08 (10.5–12.0s) — Hydration Freeze: Freeze water splashes, droplets, cream ribbons, botanical petals and glowing hydration particles in a balanced bullet-time beauty composition while the camera continues a smooth move.
+Scene 09 (12.0–13.5s) — Hero Product: The cream jar stands on reflective glass, surrounded by crystal-clear water, luminous hydration particles and soft volumetric light.
+Scene 10 (13.5–15.0s) — Brand Signature: Dissolve to a minimal white studio background. The stable brand logo fades in gracefully with the exact tagline “Hydration That Lasts.”
+
+Visual direction: world-class luxury hydration skincare campaign emphasizing purity, deep moisture, luminous healthy skin, silky cream texture, crystal-clear water, botanical science and clean beauty. Palette: pure white, soft sky blue, crystal water blue, silver highlights and natural beige. Soft beauty lighting, diffused daylight, volumetric glow and clean studio reflections. ARRI Alexa 35, Cooke Anamorphic 50mm lens, macro beauty cinematography, ultra slow motion, shallow depth of field and precision focus. Seamless transitions, physically believable water and cream, ultra-photorealistic HDR, impeccable product realism and cinematic composition."""
+    deep_hydration_storyboard = DEEP_HYDRATION_STORYBOARD_PROMPT
 
     prompts = [
         {
@@ -1211,6 +1340,44 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(8, 12.5, 15.041, "刻海苔产品英雄镜头", "白蓝刻海苔包装直立在盛满海苔丝的陶瓷碗后方；条纹衫男孩在左、女孩在右微笑，构成洁净产品尾帧。", "正面产品英雄构图，缓慢推近并留出清晰停顿。", "终句「きざみのり、だいすき！」；品牌尾音与轻柔气泡声收束。", "包装图形、碗内海苔、男孩和女孩位置稳定，主体无遮挡。"),
             ],
         },
+        {
+            "id": 18,
+            "source_id": 15,
+            "slug": "starbucks-coffee-galaxy-hollywood-commercial",
+            "title": "Starbucks Coffee Galaxy：宇宙咖啡好莱坞广告",
+            "category": "奢华品牌广告 / 宇宙奇观",
+            "language": "en",
+            "aspect_ratio": "9:16",
+            "duration_sec": 15.116,
+            "resolution": "720×1280",
+            "style_summary": "超写实好莱坞超级碗式商业大片：以《星际穿越》尺度的宇宙奇观融合 Starbucks Reserve 奢华美学、电影级 HDR、体积光、精细流体模拟与高端产品摄影。",
+            "scene_summary": "从咖啡豆星空与银河中心的杯子出发，依次穿越咖啡豆山脉、配料轨道、浓缩咖啡宇宙河、咖啡银河、银河拉花与星际 Reserve 咖啡馆，最后以冻结粒子、咖啡行星英雄镜头和绿色品牌尾帧收束。",
+            "subject_summary": "同一只高端 Starbucks 杯、烘焙咖啡豆、咖啡行星、焦糖环、肉桂、香草、巧克力、牛奶云、糖粉、浓缩咖啡与漂浮在星空中的 Starbucks Reserve 咖啡馆。",
+            "core_mechanic": "把咖啡豆、浓缩咖啡、牛奶、焦糖和蒸汽逐层放大为行星、山脉、河流与星云，让每一次咖啡制作动作都自然转译为宇宙尺度景观，再回收到可识别的杯子、品牌绿色与广告标语。",
+            "camera_language": "20mm anamorphic 超广角无人机下降、100mm Leica 微距滑轨、360° 产品环绕、高速液体微距转慢动作、FPV 穿越、顶视旋转下降、稳定器步入、子弹时间推镜、英雄镜头圆周环绕和尾帧优雅拉远。",
+            "lighting_color": "深空黑、Starbucks 绿、咖啡金棕、焦糖琥珀、可可深褐和牛奶白；以金色宇宙日出、奢华轮廓光、电影级 HDR、体积光与发光粒子贯穿全片。",
+            "audio_design": "派生音频设计：从低沉电影配乐与咖啡豆颗粒声起步，叠加浓缩咖啡倾注、宇宙掠过、奶液旋涡、温暖咖啡馆人声和冻结瞬间的静音抽离，最终以宏大但克制的品牌和弦收束。",
+            "continuity_rules": "杯体比例、品牌标志与绿色色值稳定；咖啡豆和配料轨道连续；咖啡、牛奶、焦糖与蒸汽遵守可信流体和粒子物理；各场景通过相同物质形态无缝变换；最终品牌标志和“BREW YOUR MOMENT”必须清晰可读。",
+            "master_prompt": starbucks_galaxy_video,
+            "negative_prompt": "No malformed cup, warped lid, drifting or misspelled Starbucks logo, changing brand green, duplicated ingredients, broken orbit paths, random planets, muddy coffee, plastic milk, impossible liquid flow, noisy steam, flat lighting, low-detail textures, jitter, flicker, abrupt cuts, unreadable “BREW YOUR MOMENT” text, extra slogans, subtitles or watermarks.",
+            "reference_image_prompt": starbucks_galaxy_storyboard,
+            "recommended_models": "GPT Image 2 + Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_prompt",
+            "quality_notes": "作者在主帖逐字公开完整 10 场景英文提示词，并注明 GPT Image 2 + Seedance 2.0，数据库保留原文。作者只公开一份主提示词，数据库中的十格参考生图提示词是按原场景结构整理的派生版。原文要求 15 秒；公开视频实际为 15.116 秒、720×1280 竖屏，按实际媒体规格归档。",
+            "tags": ["GPT Image 2", "Seedance 2.0", "Starbucks", "Coffee Galaxy", "咖啡广告", "奢华品牌广告", "宇宙奇观", "超级碗广告", "产品摄影", "咖啡流体", "体积光", "FPV", "子弹时间", "品牌尾帧", "9:16", "作者原始提示词"],
+            "shots": [
+                shot(1, 0, 1.5, "咖啡豆星空与银河中心", "数百万颗发光烘焙咖啡豆像星辰悬浮在深空，金色宇宙光从中心升起，一只高端 Starbucks 杯在银河核心显现。", "20mm anamorphic 超广角建立镜头，无人机式穿越并向杯子缓慢下降。", "低沉电影配乐、细微咖啡豆颗粒漂浮声与宇宙低频。", "首次锁定杯体比例、标志方向、深空黑和金色核心光。"),
+                shot(2, 1.5, 3, "咖啡豆化为山脉", "一颗烘焙咖啡豆在极端微距中扩展为咖啡纹理山脉、焦糖山谷、巧克力峭壁和芳香蒸汽。", "100mm Leica 微距滑轨横移，浅景深沿豆体纹理探索。", "细腻烘焙裂纹声、低沉地貌隆起声与蒸汽轻嘶。", "豆体表面纹理连续放大，不出现硬切或材质跳变。"),
+                shot(3, 3, 4.5, "咖啡行星配料轨道", "Starbucks 杯悬浮在旋转咖啡行星上方，咖啡豆、肉桂棒、香草荚、巧克力碎片和金色咖啡粉像微型行星般绕杯运行。", "优雅 360° 环绕镜头，以浅景深和金色轮廓光突出产品。", "轨道掠过声、细碎香料颗粒声与配乐上扬。", "杯体和标志稳定；各配料拥有清晰、互不碰撞的连续轨道。"),
+                shot(4, 4.5, 6, "浓缩咖啡化为宇宙河", "新鲜浓缩咖啡倾入杯中，液流延伸为穿过太空的发光宇宙河，咖啡蒸汽扩散成横跨银河的巨大星云。", "高速液体宏观摄影无缝转入慢动作宇宙广角。", "浓缩咖啡倾注、杯壁回响与宽阔宇宙呼啸。", "液流从杯口连续延伸；咖啡和蒸汽运动符合真实物理。"),
+                shot(5, 6, 7.5, "FPV 穿越咖啡银河", "镜头穿过咖啡行星、焦糖环、牛奶云星云、可可小行星、闪耀糖粉和咖啡豆星座。", "动态 FPV 飞行，在体积咖啡雾和宇宙阳光中自然变速穿梭。", "高速掠过、颗粒擦肩和节奏加速的电影配乐。", "沿前一镜宇宙河进入同一银河空间，障碍物尺度和速度可信。"),
+                shot(6, 7.5, 9, "银河旋涡化为拉花", "顶视浓缩咖啡，丝滑牛奶缓慢注入并形成杯中的螺旋银河，随后演化为优雅拉花。", "顶视宏观镜头平滑旋转下降，最终稳定在杯面上方。", "牛奶细流、咖啡旋涡与柔和咖啡馆音色。", "牛奶与咖啡混合连续，银河纹理必须自然收束为可辨识拉花。"),
+                shot(7, 9, 10.5, "星际 Starbucks Reserve 咖啡馆", "奢华 Starbucks Reserve 咖啡馆漂浮在星海，暖木内饰、发光吊灯、自然交谈的人群和全景窗外的 Coffee Galaxy 同时显现。", "稳定器平滑步入，从温暖室内走向俯瞰无限宇宙的全景窗。", "克制咖啡馆谈话、杯碟轻响与温暖空间氛围。", "Reserve 内饰保持高端写实，窗外银河与前序宇宙方向连续。"),
+                shot(8, 10.5, 12, "冻结咖啡粒子子弹时间", "咖啡豆、牛奶液滴、浓缩咖啡飞溅、巧克力颗粒、蒸汽和金色粉尘全部冻结在杯子周围。", "子弹时间镜头穿过冻结粒子并向产品持续推进，闪光和景深层次清晰。", "环境声突然抽离，只保留低频脉冲与细微高光闪烁声。", "所有粒子完全静止，杯子与标志不漂移，相机仍顺畅运动。"),
+                shot(9, 12, 13.5, "咖啡行星产品英雄镜头", "Starbucks 杯威严地立在漂浮咖啡行星上，焦糖瀑布、发光咖啡环、星云和金色日出围绕产品。", "缓慢圆周环绕英雄镜头，以奢华构图强调品牌和工艺。", "宏大配乐回归，焦糖流动和远景宇宙低频叠加。", "标志始终正面可读，焦糖瀑布和咖啡环不遮挡杯体。"),
+                shot(10, 13.5, 15.116, "绿色品牌尾帧", "Coffee Galaxy 溶解为干净的 Starbucks 绿色背景，品牌标志淡入，下方出现“BREW YOUR MOMENT”。", "正面居中构图，优雅缓慢拉远并留出品牌停顿。", "配乐收束为清晰品牌和弦，环境声干净淡出。", "品牌绿准确稳定，标志与标语无错字、无遮挡并保持清晰。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1449,7 +1616,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 11 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 17 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 12 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 18 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1531,6 +1698,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 15 的作者在回复中公开了完整韩系蜂蜜黄油杏仁视频提示词与八句韩语旁白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。发布演示版实际保留分镜板，与原提示词要求的全屏输出存在差异。
 - ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。
 - ID 17 的作者在回复中公开了完整日系刻海苔儿童广告视频提示词与六句日语对白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。原文要求全屏且不显示网格、数字或角标，发布演示版实际保留分镜板；媒体规格为 15.041 秒、1820×2280。
+- ID 18 的作者在主帖公开了完整 Starbucks Coffee Galaxy 十场景英文提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留主提示词，并按相同场景结构补充派生十格生图提示词。原文要求 15 秒，公开视频实际为 15.116 秒、720×1280 竖屏。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
