@@ -1378,6 +1378,44 @@ Visual direction: world-class luxury hydration skincare campaign emphasizing pur
                 shot(10, 13.5, 15.116, "绿色品牌尾帧", "Coffee Galaxy 溶解为干净的 Starbucks 绿色背景，品牌标志淡入，下方出现“BREW YOUR MOMENT”。", "正面居中构图，优雅缓慢拉远并留出品牌停顿。", "配乐收束为清晰品牌和弦，环境声干净淡出。", "品牌绿准确稳定，标志与标语无错字、无遮挡并保持清晰。"),
             ],
         },
+        {
+            "id": 19,
+            "source_id": 16,
+            "slug": "deep-hydration-luxury-face-cream-commercial",
+            "title": "Deep Hydration：奢华面霜补水广告",
+            "category": "奢华护肤广告 / 美妆产品",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 15.092,
+            "resolution": "1280×720",
+            "style_summary": "超写实好莱坞奢华护肤广告：以纯净水、丝滑乳霜、植物科学和健康光泽构成洁净高级的补水叙事，结合美容微距、超慢动作、体积光与高端产品摄影。",
+            "scene_summary": "水中升起水晶玻璃面霜罐，经包装凝露微距、透明质酸与芦荟等补水成分、水花爆发和乳霜丝带，转入皮肤吸收与水润光泽，再以冻结水花、反射台产品英雄镜头和“Hydration That Lasts.”白色尾帧收束。",
+            "subject_summary": "同一只水晶玻璃面霜罐与银色罐盖、稳定标签、丰润白色乳霜、清水、水滴、透明质酸分子、芦荟凝胶、白花、植物精华、健康皮肤和发光补水粒子。",
+            "core_mechanic": "让“深层补水”从可见的水与活性成分进入乳霜质地，再落到皮肤吸收和健康光泽；通过动态水花与冻结粒子制造高潮，最终把所有补水意象回收到稳定清晰的产品与品牌承诺。",
+            "camera_language": "ARRI Alexa 35 与 Cooke Anamorphic 50mm 美容摄影，水中低角度揭示、玻璃罐极端微距、成分慢动作环绕、流体高速摄影、皮肤宏观特写、浅景深健康光泽、子弹时间推进、反射台英雄镜头和尾帧优雅淡入。",
+            "lighting_color": "纯白、柔和天蓝、水晶水蓝、银色高光与自然米色；使用柔和美容光、漫射日光、洁净棚拍反射、通透体积光和克制的发光补水粒子。",
+            "audio_design": "派生音频设计：柔和高级的美容广告音乐贯穿，叠加清水涌动、凝露细响、水花冲击、乳霜丝滑掠过和轻柔呼吸感；补水冻结瞬间短暂抽离环境声，产品英雄与品牌尾帧以清澈品牌和弦收束，无对白。",
+            "continuity_rules": "玻璃罐比例、银色罐盖、标签文字与开合状态稳定；水、凝露、乳霜丝带和皮肤遵守可信物理；同一配方的白色乳霜不变色；植物元素克制且不遮挡产品；皮肤保持真实纹理；最终品牌标志与“Hydration That Lasts.”清晰可读。",
+            "master_prompt": deep_hydration_video,
+            "negative_prompt": "No storyboard board, 2×5 grid, borders, scene numbers, timestamps or production captions in the finished full-screen video; no warped glass jar, changing lid, drifting or misspelled label, duplicate product, cloudy dirty water, implausible splash physics, broken cream ribbon, plastic skin, poreless waxy face, deformed hands, excessive flowers, chaotic particles, harsh clipping, flat lighting, flicker, jitter, abrupt cuts, unreadable “Hydration That Lasts.” text, extra slogans, subtitles or watermarks.",
+            "reference_image_prompt": deep_hydration_storyboard,
+            "recommended_models": "GPT Image 2（作者分镜提示词）+ Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_storyboard_prompt_video_prompt_derived",
+            "quality_notes": "作者在主帖逐字公开完整 10 场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库原样保留该提示词。作者没有另行公开全屏视频提示词，因此 master_prompt 是依据作者的场景、镜头、光色和风格要求整理的派生版，并明确排除分镜网格、编号、时间码和制作字幕。帖子第一媒体为 576×864 分镜图，第二媒体为 15.092 秒、1280×720（16:9）成片。",
+            "tags": ["GPT Image 2", "Seedance 2.0", "Deep Hydration", "奢华护肤广告", "面霜", "补水", "美妆广告", "产品摄影", "玻璃包装", "透明质酸", "芦荟", "乳霜质地", "水花", "健康光泽", "子弹时间", "产品英雄镜头", "16:9", "作者原始分镜提示词", "派生视频提示词"],
+            "shots": [
+                shot(1, 0, 1.5, "Pure Reveal｜纯净揭示", "水晶玻璃面霜罐从完全清澈的水中缓慢升起，柔白光、薄雾与优雅涟漪营造纯净奢华感。", "水面低角度中近景缓慢推近，以超慢动作捕捉罐体破水。", "低沉清澈的水声、细微涟漪与高级美容广告音乐起奏。", "首次锁定玻璃罐、银色盖、标签比例与清澈水体。"),
+                shot(2, 1.5, 3, "Premium Detail｜包装微距", "玻璃罐表面覆盖闪耀凝露，锐利反射突出玻璃工艺与高端包装细节。", "极端美容微距沿罐身轻滑，精准焦点从凝露移到标签与银色边缘。", "凝露轻响与细腻玻璃高频质感。", "罐体、盖子和标签与上一镜完全一致，无文字漂移。"),
+                shot(3, 3, 4.5, "Hydration Ingredients｜补水成分", "水滴、透明质酸分子、芦荟凝胶、白花、植物精华与补水粒子在产品周围优雅漂浮。", "浅景深慢动作环绕，依次掠过成分并回焦产品。", "轻柔水滴、空气掠过与晶莹粒子音色。", "成分数量克制、尺度可信，不遮挡产品与标签。"),
+                shot(4, 4.5, 6, "Hydration Burst｜补水爆发", "清澈水花动态环抱面霜罐，发光补水粒子与细小植物花瓣在空中优雅旋转。", "高速流体摄影转超慢动作环绕，保持产品居中稳定。", "清脆水花冲击与音乐节奏上扬。", "水花物理连贯，罐体不漂移，花瓣不穿透包装。"),
+                shot(5, 6, 7.5, "Cream Texture｜乳霜质地", "丰润白色保湿霜形成丝滑飘带，在空中顺滑扭转并环绕产品，展示细腻厚润质地。", "宏观侧移跟随乳霜飘带，焦点在乳霜纹理与产品间平滑转换。", "柔滑掠过声与轻柔上升音效。", "乳霜保持纯白、连续、细腻，不断裂、不滴漏、不变成液体。"),
+                shot(6, 7.5, 9, "Skin Absorption｜皮肤吸收", "乳霜在健康真实的皮肤上轻松铺开，皮下补水粒子柔和发亮，显现水润通透的完成效果。", "皮肤宏观特写缓慢推移，以精确焦点呈现乳霜吸收前后纹理。", "克制涂抹声、柔和呼吸感与温暖音乐层。", "皮肤纹理真实，无塑料感；乳霜用量自然，手部结构正确。"),
+                shot(7, 9, 10.5, "Healthy Glow｜水润光泽", "健康水润肌肤沐浴在柔和自然日光中，少量悬浮水滴和植物元素强调清新、柔软与持久保湿。", "美容中近景结合浅景深侧向滑移，柔和高光沿肌肤移动。", "自然空气感、细微水滴与音乐进入明亮段落。", "肤色与上一镜一致，植物元素克制，不遮挡主要肌肤。"),
+                shot(8, 10.5, 12, "Hydration Freeze｜补水冻结", "水花、水滴、乳霜丝带、花瓣与发光补水粒子在空中完全冻结，形成平衡高级的美妆构图。", "子弹时间镜头穿过静止流体与粒子向产品平滑推进。", "环境声短暂抽离，只留低频脉冲与晶莹高光声。", "所有流体与粒子彻底静止，相机继续移动；产品不抖动、不漂移。"),
+                shot(9, 12, 13.5, "Hero Product｜产品英雄镜头", "面霜罐稳立在反射玻璃台面，清澈水体、发光补水粒子与柔和体积光共同围出戏剧性英雄构图。", "低角度缓慢圆周环绕并轻推产品，标签保持正面可读。", "音乐恢复并形成清澈奢华的品牌高潮。", "倒影、玻璃罐和标签对齐，水与粒子不遮挡产品。"),
+                shot(10, 13.5, 15.092, "Brand Signature｜品牌签名", "画面溶解到极简白色棚拍背景，品牌标志优雅淡入，下方出现准确标语“Hydration That Lasts.”。", "正面居中固定构图，极轻微拉远并留出品牌停顿。", "清澈品牌和弦收束，水声与环境声干净淡出。", "只保留准确品牌标志与指定标语，无其他文字、字幕或水印。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1616,7 +1654,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 12 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 18 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 13 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 19 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1699,6 +1737,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。
 - ID 17 的作者在回复中公开了完整日系刻海苔儿童广告视频提示词与六句日语对白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。原文要求全屏且不显示网格、数字或角标，发布演示版实际保留分镜板；媒体规格为 15.041 秒、1820×2280。
 - ID 18 的作者在主帖公开了完整 Starbucks Coffee Galaxy 十场景英文提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留主提示词，并按相同场景结构补充派生十格生图提示词。原文要求 15 秒，公开视频实际为 15.116 秒、720×1280 竖屏。
+- ID 19 的作者在主帖公开完整 Deep Hydration 十场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留分镜原文。作者未另行公开全屏视频提示词，数据库依据同一十镜头结构派生视频版并明确标注；成片规格为 15.092 秒、1280×720。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 

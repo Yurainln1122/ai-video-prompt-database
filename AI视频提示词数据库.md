@@ -1,6 +1,6 @@
 # AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 12 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 18 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 13 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 19 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -24,8 +24,9 @@
 | 16 | 7UP Extra Fizz 过度清洁：三维家庭喜剧汽水广告 | 三维卡通饮料广告 / 家庭喜剧 | 16:9 | 60.046s | author_published_full_prompt |
 | 17 | 日系刻海苔：儿童海底幻想食品广告 | 写实儿童食品广告 / 日系奇幻 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
 | 18 | Starbucks Coffee Galaxy：宇宙咖啡好莱坞广告 | 奢华品牌广告 / 宇宙奇观 | 9:16 | 15.116s | author_published_full_prompt |
+| 19 | Deep Hydration：奢华面霜补水广告 | 奢华护肤广告 / 美妆产品 | 16:9 | 15.092s | author_published_storyboard_prompt_video_prompt_derived |
 
-共 18 条主提示词、109 条分镜、145 个去重标签。
+共 19 条主提示词、119 条分镜、158 个去重标签。
 
 ## 文件说明
 
@@ -108,3 +109,4 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。
 - ID 17 的作者在回复中公开了完整日系刻海苔儿童广告视频提示词与六句日语对白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。原文要求全屏且不显示网格、数字或角标，发布演示版实际保留分镜板；媒体规格为 15.041 秒、1820×2280。
 - ID 18 的作者在主帖公开了完整 Starbucks Coffee Galaxy 十场景英文提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留主提示词，并按相同场景结构补充派生十格生图提示词。原文要求 15 秒，公开视频实际为 15.116 秒、720×1280 竖屏。
+- ID 19 的作者在主帖公开完整 Deep Hydration 十场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留分镜原文。作者未另行公开全屏视频提示词，数据库依据同一十镜头结构派生视频版并明确标注；成片规格为 15.092 秒、1280×720。
