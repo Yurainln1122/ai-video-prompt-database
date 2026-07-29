@@ -147,6 +147,35 @@ SEVEN_UP_CLEANING_PROMPT = """A 60-second 3D Pixar-style animated commercial for
 52–60s: Dynamic heroic product shot. The icy-cold 7UP Extra Fizz bottle rises against a bright blue sky. Dramatic water splash and exploding bubbles surround it in exaggerated, sparkling 3D animation. Bold, playful on-screen text pops in with a bounce: “INTRODUCING 7UP EXTRA FIZZ” next to the classic 7UP logo. Soft upbeat music swells into a fresh, fizzy climax.
 
 *Overall tone & style:* Warm, relatable, slightly comedic family chaos that feels like a Pixar short, transitioning into pure refreshing joy. Exaggerated facial expressions, squash-and-stretch animation, vibrant green product highlights, smooth camera movement, clear English dialogue, and upbeat background music that builds from stressed household energy to sparkling refreshment."""
+KIZAMI_NORI_X_URL = "https://x.com/kentdhani/status/2082174113779769694"
+KIZAMI_NORI_VIDEO_URL = (
+    "https://x.com/kentdhani/status/2082174113779769694/video/1"
+)
+KIZAMI_NORI_PROMPT_URL = (
+    "https://x.com/kentdhani/status/2082174116749336947"
+)
+KIZAMI_NORI_X_POST = (
+    "Creating Kids Ads just using GPT Image 2 + Seedance 2.0 in only one prompt!\n\n"
+    "Copy my prompt⬇️"
+)
+KIZAMI_NORI_PROMPT = """Create a 15-second photorealistic Japanese Kizami Nori commercial using @image1 only as the visual reference for the children, product, underwater atmosphere, compositions, and action flow. Convert it into normal full-screen live-action footage. Do not reproduce any grid, borders, digits, corner labels, or graphic text from the reference.
+
+A Japanese boy in a striped blue shirt tastes crispy Kizami Nori beside the product package and reacts happily. As he looks upward, the bright dining space transforms into a magical underwater world filled with turquoise light, bubbles, colorful fish, coral, and floating seaweed imagery. Show a premium macro shot of a hand taking thin, crisp Kizami Nori from a ceramic bowl.
+
+Continue with a second boy and a girl in denim overalls sharing the seaweed together. Show an appetizing close-up of the dry roasted seaweed, followed by the girl taking a natural bite and smiling. Then show all three children laughing and enjoying Kizami Nori around the table.
+
+End with a clean product hero shot: the white-and-blue Kizami Nori package standing upright behind a bowl of shredded seaweed, with the striped-shirt boy smiling on the left and the girl smiling on the right.
+
+Only the children speak in Japanese. No adult narrator or adult voice.
+
+Child dialogue:
+
+「パリパリ！」
+「海みたい！」
+「いっしょに食べよう！」
+「おいしい！」
+「パリパリ、おいしい！」
+「きざみのり、だいすき！」"""
 
 
 def read_utf8(name: str) -> str:
@@ -419,6 +448,32 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + SEVEN_UP_CLEANING_PROMPT
             ),
         },
+        {
+            "id": 14,
+            "source_type": "x_video_thread",
+            "title": "GPT Image 2 + Seedance 2.0 日系刻海苔儿童广告",
+            "locator": KIZAMI_NORI_X_URL,
+            "accessed_at": now,
+            "verification": "author_video_prompt_storyboard_video_metadata",
+            "notes": (
+                "作者主帖注明使用 GPT Image 2 与 Seedance 2.0，并在紧随其后的"
+                f"回复 {KIZAMI_NORI_PROMPT_URL} 中公开完整 15 秒英文视频提示词和六句日语儿童对白。"
+                "公开视频媒体元数据为 15.041 秒、1820×2280（4:5）。画面与原文一致："
+                "条纹蓝衫男孩品尝刻海苔，明亮餐厅转入青绿色梦幻海底世界，三个孩子分享海苔，"
+                "最后以白蓝包装和海苔碗收尾。发布演示版在下方持续显示九格参考分镜，"
+                "与原提示词要求的全屏实拍、不得显示网格/数字/标签存在差异。"
+                f"视频入口为 {KIZAMI_NORI_VIDEO_URL}；数据库逐字保留作者视频提示词，"
+                "分镜生图提示词依据公开视频中的九格参考图反推并明确标注。"
+            ),
+            "sha256": sha256_text(KIZAMI_NORI_X_POST + KIZAMI_NORI_PROMPT),
+            "raw_excerpt": (
+                KIZAMI_NORI_X_POST
+                + "\n\nAuthor prompt reply:\n"
+                + KIZAMI_NORI_PROMPT_URL
+                + "\n\nPrompt\n\n"
+                + KIZAMI_NORI_PROMPT
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -577,6 +632,8 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
     honey_butter_video = HONEY_BUTTER_ALMOND_PROMPT
     honey_butter_storyboard = """Create a premium 4:5 Korean advertising storyboard sheet for a 15-second Honey Butter Almond commercial. Use the same young adult Korean woman with natural dark hair and a cream knit sweater, the same sealed yellow Korean-language Honey Butter Almond package, the same golden coated almonds, and consistent warm home interiors in every panel. Place one large opening hero image above a clean 3×3 grid of nine numbered panels with English shot titles and exact time ranges: 01 Opening Shot 0–2s, yellow package on a wooden bedside table in warm morning sunlight; 02 Daily Companion 2–4s, the woman working at a laptop with the package beside her; 03 Close-up Temptation 4–6s, fingers selecting one coated almond from a ceramic bowl; 04 Break Time 6–8s, she tastes the almond and smiles naturally; 05 Sharing with Friends 8–10s, she shares the bowl with two adult Korean friends; 06 On-the-Go Energy 10–11.5s, the sealed package slides into a cream canvas tote bag; 07 Cozy Night 11.5–13s, she relaxes on a sofa with a warm drink and an almond; 08 Sweet Ending 13–14s, ingredient macro with almonds, glass honey jar, wooden honey dipper and one clean butter cube; 09 Product Hero Shot 14–15s, yellow package beside a bowl of coated almonds. Photorealistic Korean lifestyle commercial, warm beige and honey-gold palette, natural sunlight, cozy practical lamps, shallow depth of field, premium food macro photography, polished agency storyboard layout, consistent product graphics and character identity. No extra products, duplicate packages, deformed hands, children, random text, logos beyond the package design or watermarks."""
     seven_up_cleaning_video = SEVEN_UP_CLEANING_PROMPT
+    kizami_nori_video = KIZAMI_NORI_PROMPT
+    kizami_nori_storyboard = """Create a premium 4:5 Japanese advertising storyboard sheet for a 15-second Kizami Nori children’s commercial. Use the same three Japanese children, the same white-and-blue Kizami Nori package, the same white ceramic bowl of thin dry roasted shredded seaweed, and a consistent bright dining room that transforms into a magical turquoise underwater world. Arrange nine numbered panels in a clean 3×3 grid: 01 a Japanese boy in a striped blue shirt tastes crisp Kizami Nori beside the package; 02 the boy looks upward with delighted surprise; 03 the dining room transforms into an underwater world with turquoise light, bubbles, colorful fish, coral and floating seaweed imagery; 04 premium macro of a hand taking thin crisp seaweed from the ceramic bowl; 05 the striped-shirt boy, a second boy and a girl in denim overalls share the seaweed; 06 appetizing macro of dry roasted shredded Kizami Nori in the bowl; 07 the girl takes a natural bite and smiles; 08 all three children laugh and enjoy Kizami Nori around the table; 09 clean product hero shot with the white-and-blue package upright behind the bowl, striped-shirt boy smiling on the left and girl smiling on the right. Photorealistic Japanese kids food commercial, natural child expressions, bright soft daylight, crisp food texture, premium macro photography, polished agency storyboard layout, consistent faces, wardrobe and package graphics. No adults, extra children, malformed hands, duplicate packages, wet or soggy seaweed, random text, logos beyond the package design or watermarks."""
 
     prompts = [
         {
@@ -1118,6 +1175,42 @@ One character, no dialogue, no explosion, random debris, chaotic noise, face dis
                 shot(7, 52, 60.046, "Extra Fizz 产品英雄镜头", "冰镇 7UP Extra Fizz 瓶在亮蓝天空前动态升起，夸张水花和爆裂气泡环绕；“INTRODUCING 7UP EXTRA FIZZ”与经典标志弹跳出现。", "仰拍产品升起，短暂环绕后正面定格，留出广告尾帧。", "水花、气泡爆裂与轻快音乐进入清新高潮。", "产品标签清晰稳定，水花不遮挡瓶身与标题，结尾文字可读。"),
             ],
         },
+        {
+            "id": 17,
+            "source_id": 14,
+            "slug": "japanese-kizami-nori-kids-underwater-commercial",
+            "title": "日系刻海苔：儿童海底幻想食品广告",
+            "category": "写实儿童食品广告 / 日系奇幻",
+            "language": "en + ja",
+            "aspect_ratio": "4:5",
+            "duration_sec": 15.041,
+            "resolution": "1820×2280",
+            "style_summary": "写实日系儿童食品广告：明亮自然餐厅、清脆刻海苔微距、真实儿童反应与青绿色梦幻海底世界无缝融合。",
+            "scene_summary": "白蓝刻海苔包装与陶瓷碗置于明亮餐桌，餐厅随男孩抬头转化为充满气泡、彩色鱼群、珊瑚和漂浮海藻的海底幻想空间，最后回到三名儿童和产品英雄镜头。",
+            "subject_summary": "同一名蓝色条纹衫日本男孩、第二名日本男孩、穿牛仔背带裤的日本女孩；同一款白蓝刻海苔包装、白色陶瓷碗和薄脆干燥海苔丝。",
+            "core_mechanic": "以第一口“パリパリ”的酥脆口感触发海洋联想，让现实餐厅连续变成梦幻海底世界，再通过三名儿童分享、自然试吃和笑声把口感、乐趣与产品包装收束到同一记忆点。",
+            "camera_language": "产品与男孩同框建立、入口与表情近景、仰视转场、海底广角、手取海苔宏观、儿童分享中景、女孩咬食特写、三人笑声群像和正面产品英雄镜头。",
+            "lighting_color": "现实餐厅使用明亮柔和日光、洁净白色与包装蓝色；幻想段转为通透青绿体积光、气泡高光和彩色鱼群，海苔保持自然深绿黑色与干燥脆感。",
+            "audio_design": "仅由儿童说六句日语对白，无成人旁白或成人声音；辅以包装轻响、海苔清脆咬声、孩子笑声、柔和气泡、水下空间氛围与轻快日系广告音乐。",
+            "continuity_rules": "三名儿童的脸型、发型、年龄、蓝色条纹衫和牛仔背带裤始终一致；白蓝包装的尺寸与图形稳定；海苔始终薄、干燥、酥脆，不变成湿海藻；餐厅到海底的转化连续，陶瓷碗、餐桌与儿童空间关系可追踪。",
+            "master_prompt": kizami_nori_video,
+            "negative_prompt": "No storyboard grids, borders, digits, corner labels, headings or graphic text in the generated full-screen commercial; no adults, adult narrator or adult voice; no changing child identity, age, hairstyle or wardrobe; no extra children, malformed hands, extra fingers, duplicate package, drifting Japanese package graphics, wet or slimy seaweed, seaweed turning into noodles, choking, messy eating, frightening deep ocean, aggressive fish, muddy water, random subtitles, logos, watermarks, flicker or abrupt transformation cuts.",
+            "reference_image_prompt": kizami_nori_storyboard,
+            "recommended_models": "GPT Image 2（参考分镜）+ Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_video_prompt_storyboard_reverse_engineered",
+            "quality_notes": "作者在回复中公开完整 15 秒英文视频提示词与六句日语儿童对白，数据库逐字保留。作者未公开 GPT Image 2 参考图的原始提示词，数据库中的分镜生图提示词依据公开视频所示九格参考图反推。原视频提示词要求全屏且不显示网格、边框、数字或角标，但发布演示版实际在下方持续显示九格分镜板；媒体规格为 15.041 秒、1820×2280。",
+            "tags": ["GPT Image 2", "Seedance 2.0", "日系广告", "刻海苔", "儿童食品广告", "海底幻想", "日语对白", "亲子食品", "分享", "海苔微距", "产品包装", "产品英雄镜头", "4:5", "作者原始视频提示词"],
+            "shots": [
+                shot(1, 0, 2, "第一口酥脆", "蓝色条纹衫日本男孩坐在明亮餐桌旁，从白色陶瓷碗取一小撮刻海苔送入口中；白蓝包装清晰立在旁边。", "产品与人物同框中近景，切入口和海苔脆片微距。", "男孩说「パリパリ！」；突出清脆咬声与包装轻响。", "首次锁定男孩、条纹衫、包装、陶瓷碗和海苔形态。"),
+                shot(2, 2, 3.5, "惊喜抬头", "男孩眼睛发亮、开心抬头，像从脆响中联想到大海。", "从表情特写跟随视线轻微上仰，背景开始泛出青绿色光。", "男孩说「海みたい！」；轻快音乐加入水泡般音色。", "男孩脸型和服装不变，现实餐厅仍清晰可辨。"),
+                shot(3, 3.5, 5.5, "餐厅化为海底世界", "明亮餐厅无缝转化为通透青绿色海底空间，气泡上升，彩色鱼群游过，珊瑚和漂浮海藻围绕男孩但不遮挡产品。", "仰视转海底广角，平滑环绕制造鱼群与桌面的视差。", "柔和气泡、水下空间氛围与音乐上扬，无成人声音。", "餐桌、男孩和包装位置可追踪；转化连续无硬切。"),
+                shot(4, 5.5, 7, "手取刻海苔宏观", "一只儿童的手从陶瓷碗中取起薄、干燥、酥脆的刻海苔丝，表面烘烤纹理清晰。", "高端食品宏观特写，焦点从碗中海苔移到指尖。", "海苔轻摩擦与陶瓷碗细响。", "手指结构正确，只取适量；海苔不湿、不粘连、不变形为面条。"),
+                shot(5, 7, 9, "三名孩子一起分享", "第二名男孩与穿牛仔背带裤的女孩加入桌边，三名孩子自然传递并分享同一碗刻海苔。", "三人中景结合递碗和取食手部近景，保持视线方向。", "孩子说「いっしょに食べよう！」；自然笑声和碗碟轻响。", "仅三名儿童；服装、包装位置和同一只陶瓷碗保持连续。"),
+                shot(6, 9, 10.5, "海苔质感与女孩试吃", "先展示干燥烘烤刻海苔的诱人近景，再由女孩自然取食、轻咬并露出满足微笑。", "海苔极近景切女孩侧面中近景，短推捕捉真实反应。", "女孩说「おいしい！」；清脆咬声清晰。", "女孩牛仔背带裤与发型固定；咀嚼自然安全，无夸张塞食。"),
+                shot(7, 10.5, 12.5, "海底餐桌快乐群像", "三名儿童围桌笑着继续享用刻海苔，气泡和彩色鱼群在青绿背景中缓慢游动。", "稳定三人群像，轻微横移后推近笑脸和分享动作。", "孩子们说「パリパリ、おいしい！」；笑声与轻快音乐进入高潮。", "三人身份和座位方向稳定，海底元素不遮挡脸与产品。"),
+                shot(8, 12.5, 15.041, "刻海苔产品英雄镜头", "白蓝刻海苔包装直立在盛满海苔丝的陶瓷碗后方；条纹衫男孩在左、女孩在右微笑，构成洁净产品尾帧。", "正面产品英雄构图，缓慢推近并留出清晰停顿。", "终句「きざみのり、だいすき！」；品牌尾音与轻柔气泡声收束。", "包装图形、碗内海苔、男孩和女孩位置稳定，主体无遮挡。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1356,7 +1449,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 10 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 16 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 11 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 17 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1437,6 +1530,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 14 的作者未公开原始提示词或生成模型；数据库依据帖文、四个关键帧和 10.041 秒、832×1104 的媒体元数据反推，并明确标记为 `reverse_engineered_from_public_video_frames`。
 - ID 15 的作者在回复中公开了完整韩系蜂蜜黄油杏仁视频提示词与八句韩语旁白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。发布演示版实际保留分镜板，与原提示词要求的全屏输出存在差异。
 - ID 16 的作者在主帖公开完整 7UP Extra Fizz 三维家庭喜剧广告提示词，并注明 Flova Product commercial skill 与 Seedance 2.0；原文要求竖屏手机画幅，公开视频实际为 3840×2160 横屏。
+- ID 17 的作者在回复中公开了完整日系刻海苔儿童广告视频提示词与六句日语对白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。原文要求全屏且不显示网格、数字或角标，发布演示版实际保留分镜板；媒体规格为 15.041 秒、1820×2280。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
