@@ -277,6 +277,59 @@ Audio: Natural ambience only—birds singing, leaves rustling, fruit market chat
 
 Negative Prompt: No distorted hands, no duplicate people, no deformed bottle, no AI artifacts, no blurry label, no low resolution, no cartoon style, no flickering, no oversaturated colours, no text overlays."""
 
+COLLECTION_CATALOG = [
+    {
+        "name": "电影奇观与概念 VFX",
+        "description": "电影级动作、时间操控、超现实场景与高概念视觉特效。",
+    },
+    {
+        "name": "搞笑短片与社媒 Vlog",
+        "description": "真人或混合媒介的轻喜剧、POV、Vlog 与社交平台短视频。",
+    },
+    {
+        "name": "日系动画与生活叙事",
+        "description": "日系二维动画、夏日故事、城市日常与户外美食叙事。",
+    },
+    {
+        "name": "实验动画与视觉风格",
+        "description": "石墨、针幕、粒子流、墨线赛璐璐等风格化运动实验。",
+    },
+    {
+        "name": "美食与餐饮广告",
+        "description": "餐厅探店、食品包装、烹饪过程、ASMR 与食欲微距广告。",
+    },
+    {
+        "name": "饮料与生活方式广告",
+        "description": "汽水、果汁等饮品与人物生活方式结合的品牌广告。",
+    },
+    {
+        "name": "奢华品牌与产品大片",
+        "description": "高端品牌、美妆护肤与电影级产品英雄视觉。",
+    },
+]
+PROMPT_COLLECTIONS = {
+    1: "电影奇观与概念 VFX",
+    2: "搞笑短片与社媒 Vlog",
+    3: "搞笑短片与社媒 Vlog",
+    4: "电影奇观与概念 VFX",
+    5: "美食与餐饮广告",
+    6: "日系动画与生活叙事",
+    7: "实验动画与视觉风格",
+    8: "实验动画与视觉风格",
+    9: "实验动画与视觉风格",
+    10: "实验动画与视觉风格",
+    11: "日系动画与生活叙事",
+    12: "日系动画与生活叙事",
+    13: "美食与餐饮广告",
+    14: "电影奇观与概念 VFX",
+    15: "美食与餐饮广告",
+    16: "饮料与生活方式广告",
+    17: "美食与餐饮广告",
+    18: "奢华品牌与产品大片",
+    19: "奢华品牌与产品大片",
+    20: "饮料与生活方式广告",
+}
+
 
 def read_utf8(name: str) -> str:
     return (ROOT / name).read_text(encoding="utf-8").strip()
@@ -1519,6 +1572,8 @@ Premium beverage advertising, luxury commercial cinematography, ultra-realistic 
             ],
         },
     ]
+    for prompt in prompts:
+        prompt["collection"] = PROMPT_COLLECTIONS[prompt["id"]]
     return sources, prompts
 
 
@@ -1543,6 +1598,7 @@ CREATE TABLE prompts (
     slug TEXT NOT NULL UNIQUE,
     title TEXT NOT NULL,
     category TEXT NOT NULL,
+    collection TEXT NOT NULL,
     language TEXT NOT NULL,
     aspect_ratio TEXT NOT NULL,
     duration_sec REAL NOT NULL,
@@ -1594,6 +1650,7 @@ SELECT
     p.slug,
     p.title,
     p.category,
+    p.collection,
     p.aspect_ratio,
     p.duration_sec,
     p.resolution,
@@ -1660,7 +1717,7 @@ def create_database(sources: list[dict], prompts: list[dict]) -> None:
         conn.execute(
             """
             CREATE VIRTUAL TABLE prompt_fts USING fts5(
-                title, category, style_summary, scene_summary, subject_summary,
+                title, category, collection, style_summary, scene_summary, subject_summary,
                 core_mechanic, master_prompt, negative_prompt, tags
             )
             """
@@ -1669,14 +1726,15 @@ def create_database(sources: list[dict], prompts: list[dict]) -> None:
             conn.execute(
                 """
                 INSERT INTO prompt_fts
-                (rowid, title, category, style_summary, scene_summary, subject_summary,
+                (rowid, title, category, collection, style_summary, scene_summary, subject_summary,
                  core_mechanic, master_prompt, negative_prompt, tags)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 (
                     prompt["id"],
                     prompt["title"],
                     prompt["category"],
+                    prompt["collection"],
                     prompt["style_summary"],
                     prompt["scene_summary"],
                     prompt["subject_summary"],
@@ -1734,6 +1792,18 @@ def export_json(sources: list[dict], prompts: list[dict]) -> None:
         {
             "database_name": "AI视频提示词数据库",
             "version": "1.0.0",
+            "collections": [item["name"] for item in COLLECTION_CATALOG],
+            "collection_catalog": [
+                {
+                    **item,
+                    "prompt_ids": [
+                        prompt["id"]
+                        for prompt in prompts
+                        if prompt["collection"] == item["name"]
+                    ],
+                }
+                for item in COLLECTION_CATALOG
+            ],
             "sources": sources,
             "prompts": prompts,
         },
@@ -1749,9 +1819,15 @@ def export_json(sources: list[dict], prompts: list[dict]) -> None:
 
 def export_index(prompts: list[dict]) -> None:
     rows = "\n".join(
-        f"| {p['id']} | {p['title']} | {p['category']} | {p['aspect_ratio']} | "
+        f"| {p['id']} | {p['title']} | {p['collection']} | {p['category']} | {p['aspect_ratio']} | "
         f"{p['duration_sec']:g}s | {p['prompt_origin']} |"
         for p in prompts
+    )
+    collection_rows = "\n".join(
+        f"| {item['name']} | "
+        f"{sum(prompt['collection'] == item['name'] for prompt in prompts)} | "
+        f"{item['description']} |"
+        for item in COLLECTION_CATALOG
     )
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
@@ -1760,11 +1836,17 @@ def export_index(prompts: list[dict]) -> None:
 
 ## 数据概览
 
-| ID | 标题 | 分类 | 画幅 | 时长 | 来源性质 |
-|---:|---|---|---|---:|---|
+| ID | 标题 | 合集 | 分类 | 画幅 | 时长 | 来源性质 |
+|---:|---|---|---|---|---:|---|
 {rows}
 
-共 {len(prompts)} 条主提示词、{sum(len(p['shots']) for p in prompts)} 条分镜、{len({tag for p in prompts for tag in p['tags']})} 个去重标签。
+共 {len(prompts)} 条主提示词、{sum(len(p['shots']) for p in prompts)} 条分镜、{len({tag for p in prompts for tag in p['tags']})} 个去重标签，整理为 {len(COLLECTION_CATALOG)} 个策展合集。
+
+## 合集概览
+
+| 合集 | 条目数 | 收录范围 |
+|---|---:|---|
+{collection_rows}
 
 ## 文件说明
 
@@ -1777,7 +1859,7 @@ def export_index(prompts: list[dict]) -> None:
 ## 核心表
 
 - `sources`：来源、校验方式、内容哈希与原文。
-- `prompts`：风格、场景、角色、核心机制、镜头、灯光、音频、连续性、完整提示词、负面提示词。
+- `prompts`：合集、分类、风格、场景、角色、核心机制、镜头、灯光、音频、连续性、完整提示词、负面提示词。
 - `shots`：按时间段拆分的动作、镜头、音效和连续性。
 - `tags` / `prompt_tags`：规范化标签。
 - `prompt_catalog`：便于浏览的汇总视图。
@@ -1788,6 +1870,12 @@ def export_index(prompts: list[dict]) -> None:
 ```sql
 -- 浏览全部条目
 SELECT * FROM prompt_catalog ORDER BY id;
+
+-- 查看每个合集的条目数量
+SELECT collection, COUNT(*) AS prompt_count
+FROM prompts
+GROUP BY collection
+ORDER BY prompt_count DESC, collection;
 
 -- 找竖屏搞笑视频
 SELECT title, duration_sec, style_summary

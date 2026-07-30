@@ -29,6 +29,20 @@ const database = sandbox.window.AI_VIDEO_PROMPT_DB;
 if (!database || !Array.isArray(database.prompts) || !database.prompts.length) {
   throw new Error("Browser data contains no prompts");
 }
+if (!Array.isArray(database.collections) || database.collections.length < 2) {
+  throw new Error("Browser data contains no curated collections");
+}
+if (!Array.isArray(database.collection_catalog) ||
+    database.collection_catalog.length !== database.collections.length) {
+  throw new Error("Collection catalog is missing or inconsistent");
+}
+
+const collectionNames = new Set(database.collections);
+for (const prompt of database.prompts) {
+  if (!collectionNames.has(prompt.collection)) {
+    throw new Error(`Prompt ${prompt.id} has invalid collection: ${prompt.collection}`);
+  }
+}
 
 for (const id of [
   "app", "search", "category", "ratio", "collection", "promptList", "detail", "toast",
@@ -55,6 +69,7 @@ console.log(JSON.stringify({
   prompts: database.prompts.length,
   shots: shotCount,
   sources: database.sources.length,
+  collections: database.collections.length,
   inlineJavaScript: "syntax-ok",
   managerJavaScript: "syntax-ok",
   requiredElements: "ok",

@@ -444,7 +444,14 @@
     fillSelect(el.category, [ALL, ...unique(prompts.map(item => item.category)).sort()], state.category);
     fillSelect(el.ratio, [ALL, ...unique(prompts.map(item => item.aspect_ratio)).sort()], state.ratio);
     const collections = syncCatalogCollections();
-    fillSelect(el.collection, [ALL, ...collections], state.collection);
+    el.collection.innerHTML = [ALL, ...collections].map(value => {
+      const count = value === ALL
+        ? prompts.length
+        : prompts.filter(prompt => prompt.collection === value).length;
+      const label = value === ALL ? `全部合集 · ${count}` : `${value} · ${count}`;
+      return `<option value="${escapeHtml(value)}">${escapeHtml(label)}</option>`;
+    }).join("");
+    el.collection.value = [ALL, ...collections].includes(state.collection) ? state.collection : ALL;
     const categories = unique(prompts.map(item => item.category)).sort();
     el.categoryOptions.innerHTML = categories.map(value => `<option value="${escapeHtml(value)}"></option>`).join("");
     refreshEditorCollectionOptions();
@@ -583,11 +590,15 @@
     const videoCount = state.catalog.prompts.filter(item => item.media_type === MEDIA_VIDEO).length;
     const imageCount = state.catalog.prompts.filter(item => item.media_type === MEDIA_IMAGE).length;
     const shotCount = state.catalog.prompts.reduce((sum, item) => sum + item.shots.length, 0);
+    const collectionCount = syncCatalogCollections()
+      .filter(name => name !== DEFAULT_COLLECTION)
+      .filter(name => state.catalog.prompts.some(item => item.collection === name))
+      .length;
     el.topStats.innerHTML = `
       <span><strong>${videoCount}</strong> 视频</span>
       <i></i><span><strong>${imageCount}</strong> 图片</span>
-      <i></i><span><strong>${shotCount}</strong> 分镜</span>
-      <i></i><span>本地自动保存</span>`;
+      <i></i><span><strong>${collectionCount}</strong> 合集</span>
+      <i></i><span><strong>${shotCount}</strong> 分镜</span>`;
   }
 
   function renderList() {
@@ -620,6 +631,7 @@
               ${item.media_type === MEDIA_IMAGE ? "图片" : "视频"}
             </span>
           </span>
+          <span class="card-collection">${escapeHtml(item.collection)}</span>
           <span class="card-description">${escapeHtml(item.style_summary || item.category)}</span>
           <span class="tag-row">
             ${(item.tags || []).slice(0, 3).map(tag => `<em class="tag">${escapeHtml(tag)}</em>`).join("")}

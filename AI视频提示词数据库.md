@@ -4,30 +4,42 @@
 
 ## 数据概览
 
-| ID | 标题 | 分类 | 画幅 | 时长 | 来源性质 |
-|---:|---|---|---|---:|---|
-| 1 | 奇幻海盗舰队大战利维坦 | 电影级奇幻动作 / Boss 战 | 16:9 | 15s | local_source_full_text |
-| 2 | 水豚噜噜厨房倒盐恶作剧 | 真人实拍 + 2D 贴纸荒诞喜剧 | 9:16 | 10s | local_source_full_text |
-| 3 | 山地烧烤 Vlog：猫头鹰偷肉 | 户外 Vlog + 2D 贴纸搞笑短视频 | 9:16 | 10s | local_source_full_text |
-| 4 | 单指局部时间冻结：城市广场 | 超写实概念 VFX / 时间操控 | 16:9 | 43.285s | reconstructed_from_page_and_visual_evidence |
-| 5 | AI 外国人探店：暖色串烧餐厅广告 | AI 商业广告 / 餐饮探店 | 16:9 | 15.168s | reconstructed_from_page_and_visual_evidence |
-| 6 | 夏祭射击摊：大熊奖品反弹与友情代打 | 日系动漫短片 / 夏祭轻喜剧 | 16:9 | 25.708s | reconstructed_from_page_and_full_video_evidence |
-| 7 | AS-004 Mira Quill：Draw the Way | 实验动画 / 石墨运动研究 | 16:9 | 15s | author_published_full_prompt |
-| 8 | AS-058 Orin Vale：The Last Signal | 实验动画 / 针幕浮雕 | 16:9 | 15s | author_published_full_prompt |
-| 9 | AS-096 Nia Vector：Map the Storm | 实验动画 / 粒子流 | 16:9 | 15s | author_published_full_prompt |
-| 10 | AS-061 Kade Flux：Restart the Sky | 实验动画 / 墨线赛璐璐 CGI | 16:9 | 15s | author_published_full_prompt |
-| 11 | 日系二维城市晨间瓶装咖啡广告 | 日系二维商业动画 / 咖啡品牌广告 | 8:9 | 31.201s | author_published_full_prompt |
-| 12 | 河畔露营牛肉河粉：金色篝火料理动画 | 日系二维美食动画 / 户外烹饪 | 16:9 | 12.5s | author_published_full_prompt |
-| 13 | POV 曲奇蘸牛奶 ASMR：手绘涂鸦美食广告 | 写实美食广告 / POV ASMR | 4:5 | 14.778s | author_published_full_prompt_and_storyboard |
-| 14 | 咖啡杯里的灯塔海洋：云海微缩梦境 | 超现实微缩景观 / 概念广告 | 3:4 | 10.041s | reverse_engineered_from_public_video_frames |
-| 15 | 韩系蜂蜜黄油杏仁：从晨间到夜晚的生活方式广告 | 写实食品广告 / 韩系生活方式 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
-| 16 | 7UP Extra Fizz 过度清洁：三维家庭喜剧汽水广告 | 三维卡通饮料广告 / 家庭喜剧 | 16:9 | 60.046s | author_published_full_prompt |
-| 17 | 日系刻海苔：儿童海底幻想食品广告 | 写实儿童食品广告 / 日系奇幻 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
-| 18 | Starbucks Coffee Galaxy：宇宙咖啡好莱坞广告 | 奢华品牌广告 / 宇宙奇观 | 9:16 | 15.116s | author_published_full_prompt |
-| 19 | Deep Hydration：奢华面霜补水广告 | 奢华护肤广告 / 美妆产品 | 16:9 | 15.092s | author_published_storyboard_prompt_video_prompt_derived |
-| 20 | Taste Summer：热带芒果汁品牌广告 | 写实饮料广告 / 热带生活方式 | 266:311 | 14.129s | author_published_full_video_prompt_reference_image_prompt_derived |
+| ID | 标题 | 合集 | 分类 | 画幅 | 时长 | 来源性质 |
+|---:|---|---|---|---|---:|---|
+| 1 | 奇幻海盗舰队大战利维坦 | 电影奇观与概念 VFX | 电影级奇幻动作 / Boss 战 | 16:9 | 15s | local_source_full_text |
+| 2 | 水豚噜噜厨房倒盐恶作剧 | 搞笑短片与社媒 Vlog | 真人实拍 + 2D 贴纸荒诞喜剧 | 9:16 | 10s | local_source_full_text |
+| 3 | 山地烧烤 Vlog：猫头鹰偷肉 | 搞笑短片与社媒 Vlog | 户外 Vlog + 2D 贴纸搞笑短视频 | 9:16 | 10s | local_source_full_text |
+| 4 | 单指局部时间冻结：城市广场 | 电影奇观与概念 VFX | 超写实概念 VFX / 时间操控 | 16:9 | 43.285s | reconstructed_from_page_and_visual_evidence |
+| 5 | AI 外国人探店：暖色串烧餐厅广告 | 美食与餐饮广告 | AI 商业广告 / 餐饮探店 | 16:9 | 15.168s | reconstructed_from_page_and_visual_evidence |
+| 6 | 夏祭射击摊：大熊奖品反弹与友情代打 | 日系动画与生活叙事 | 日系动漫短片 / 夏祭轻喜剧 | 16:9 | 25.708s | reconstructed_from_page_and_full_video_evidence |
+| 7 | AS-004 Mira Quill：Draw the Way | 实验动画与视觉风格 | 实验动画 / 石墨运动研究 | 16:9 | 15s | author_published_full_prompt |
+| 8 | AS-058 Orin Vale：The Last Signal | 实验动画与视觉风格 | 实验动画 / 针幕浮雕 | 16:9 | 15s | author_published_full_prompt |
+| 9 | AS-096 Nia Vector：Map the Storm | 实验动画与视觉风格 | 实验动画 / 粒子流 | 16:9 | 15s | author_published_full_prompt |
+| 10 | AS-061 Kade Flux：Restart the Sky | 实验动画与视觉风格 | 实验动画 / 墨线赛璐璐 CGI | 16:9 | 15s | author_published_full_prompt |
+| 11 | 日系二维城市晨间瓶装咖啡广告 | 日系动画与生活叙事 | 日系二维商业动画 / 咖啡品牌广告 | 8:9 | 31.201s | author_published_full_prompt |
+| 12 | 河畔露营牛肉河粉：金色篝火料理动画 | 日系动画与生活叙事 | 日系二维美食动画 / 户外烹饪 | 16:9 | 12.5s | author_published_full_prompt |
+| 13 | POV 曲奇蘸牛奶 ASMR：手绘涂鸦美食广告 | 美食与餐饮广告 | 写实美食广告 / POV ASMR | 4:5 | 14.778s | author_published_full_prompt_and_storyboard |
+| 14 | 咖啡杯里的灯塔海洋：云海微缩梦境 | 电影奇观与概念 VFX | 超现实微缩景观 / 概念广告 | 3:4 | 10.041s | reverse_engineered_from_public_video_frames |
+| 15 | 韩系蜂蜜黄油杏仁：从晨间到夜晚的生活方式广告 | 美食与餐饮广告 | 写实食品广告 / 韩系生活方式 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
+| 16 | 7UP Extra Fizz 过度清洁：三维家庭喜剧汽水广告 | 饮料与生活方式广告 | 三维卡通饮料广告 / 家庭喜剧 | 16:9 | 60.046s | author_published_full_prompt |
+| 17 | 日系刻海苔：儿童海底幻想食品广告 | 美食与餐饮广告 | 写实儿童食品广告 / 日系奇幻 | 4:5 | 15.041s | author_published_full_video_prompt_storyboard_reverse_engineered |
+| 18 | Starbucks Coffee Galaxy：宇宙咖啡好莱坞广告 | 奢华品牌与产品大片 | 奢华品牌广告 / 宇宙奇观 | 9:16 | 15.116s | author_published_full_prompt |
+| 19 | Deep Hydration：奢华面霜补水广告 | 奢华品牌与产品大片 | 奢华护肤广告 / 美妆产品 | 16:9 | 15.092s | author_published_storyboard_prompt_video_prompt_derived |
+| 20 | Taste Summer：热带芒果汁品牌广告 | 饮料与生活方式广告 | 写实饮料广告 / 热带生活方式 | 266:311 | 14.129s | author_published_full_video_prompt_reference_image_prompt_derived |
 
-共 20 条主提示词、126 条分镜、174 个去重标签。
+共 20 条主提示词、126 条分镜、174 个去重标签，整理为 7 个策展合集。
+
+## 合集概览
+
+| 合集 | 条目数 | 收录范围 |
+|---|---:|---|
+| 电影奇观与概念 VFX | 3 | 电影级动作、时间操控、超现实场景与高概念视觉特效。 |
+| 搞笑短片与社媒 Vlog | 2 | 真人或混合媒介的轻喜剧、POV、Vlog 与社交平台短视频。 |
+| 日系动画与生活叙事 | 3 | 日系二维动画、夏日故事、城市日常与户外美食叙事。 |
+| 实验动画与视觉风格 | 4 | 石墨、针幕、粒子流、墨线赛璐璐等风格化运动实验。 |
+| 美食与餐饮广告 | 4 | 餐厅探店、食品包装、烹饪过程、ASMR 与食欲微距广告。 |
+| 饮料与生活方式广告 | 2 | 汽水、果汁等饮品与人物生活方式结合的品牌广告。 |
+| 奢华品牌与产品大片 | 2 | 高端品牌、美妆护肤与电影级产品英雄视觉。 |
 
 ## 文件说明
 
@@ -40,7 +52,7 @@
 ## 核心表
 
 - `sources`：来源、校验方式、内容哈希与原文。
-- `prompts`：风格、场景、角色、核心机制、镜头、灯光、音频、连续性、完整提示词、负面提示词。
+- `prompts`：合集、分类、风格、场景、角色、核心机制、镜头、灯光、音频、连续性、完整提示词、负面提示词。
 - `shots`：按时间段拆分的动作、镜头、音效和连续性。
 - `tags` / `prompt_tags`：规范化标签。
 - `prompt_catalog`：便于浏览的汇总视图。
@@ -51,6 +63,12 @@
 ```sql
 -- 浏览全部条目
 SELECT * FROM prompt_catalog ORDER BY id;
+
+-- 查看每个合集的条目数量
+SELECT collection, COUNT(*) AS prompt_count
+FROM prompts
+GROUP BY collection
+ORDER BY prompt_count DESC, collection;
 
 -- 找竖屏搞笑视频
 SELECT title, duration_sec, style_summary

@@ -1,13 +1,86 @@
 window.AI_VIDEO_PROMPT_DB = {
   "database_name": "AI视频提示词数据库",
   "version": "1.0.0",
+  "collections": [
+    "电影奇观与概念 VFX",
+    "搞笑短片与社媒 Vlog",
+    "日系动画与生活叙事",
+    "实验动画与视觉风格",
+    "美食与餐饮广告",
+    "饮料与生活方式广告",
+    "奢华品牌与产品大片"
+  ],
+  "collection_catalog": [
+    {
+      "name": "电影奇观与概念 VFX",
+      "description": "电影级动作、时间操控、超现实场景与高概念视觉特效。",
+      "prompt_ids": [
+        1,
+        4,
+        14
+      ]
+    },
+    {
+      "name": "搞笑短片与社媒 Vlog",
+      "description": "真人或混合媒介的轻喜剧、POV、Vlog 与社交平台短视频。",
+      "prompt_ids": [
+        2,
+        3
+      ]
+    },
+    {
+      "name": "日系动画与生活叙事",
+      "description": "日系二维动画、夏日故事、城市日常与户外美食叙事。",
+      "prompt_ids": [
+        6,
+        11,
+        12
+      ]
+    },
+    {
+      "name": "实验动画与视觉风格",
+      "description": "石墨、针幕、粒子流、墨线赛璐璐等风格化运动实验。",
+      "prompt_ids": [
+        7,
+        8,
+        9,
+        10
+      ]
+    },
+    {
+      "name": "美食与餐饮广告",
+      "description": "餐厅探店、食品包装、烹饪过程、ASMR 与食欲微距广告。",
+      "prompt_ids": [
+        5,
+        13,
+        15,
+        17
+      ]
+    },
+    {
+      "name": "饮料与生活方式广告",
+      "description": "汽水、果汁等饮品与人物生活方式结合的品牌广告。",
+      "prompt_ids": [
+        16,
+        20
+      ]
+    },
+    {
+      "name": "奢华品牌与产品大片",
+      "description": "高端品牌、美妆护肤与电影级产品英雄视觉。",
+      "prompt_ids": [
+        18,
+        19
+      ]
+    }
+  ],
   "sources": [
     {
       "id": 1,
       "source_type": "local_md",
       "title": "海盗舰队与巨兽激战提示词",
       "locator": "海盗舰队与巨兽激战提示词.md",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "full_text",
       "notes": "包含视频提示词与生图提示词；时间轴为 0–15 秒，但原文末尾另写 10s，存在时长冲突。",
       "sha256": "bb017f24c799f35f370a49ada8cc2193a158c496ba25c50cf8ea0db2ba1f6ecd",
@@ -18,7 +91,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "local_txt",
       "title": "搞笑做饭提示词",
       "locator": "搞笑做饭提示词.txt",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "full_text",
       "notes": "10 秒、9:16、真人实拍与二维贴纸合成。",
       "sha256": "fa5562038f87458c6973740ce4d01db694f220e5a28779683b6dfab0a705864e",
@@ -29,7 +102,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "local_txt",
       "title": "山地烧烤 Vlog 提示词",
       "locator": "山地烧烤vlog提示词.txt",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "full_text",
       "notes": "10 秒、竖屏、真人实拍与二维贴纸合成。",
       "sha256": "7f91e6e9dea1f7b66baba2e0df934d4de494e3682040c772dde5a307073be2c3",
@@ -40,7 +113,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "单指局部时间冻结",
       "locator": "https://x.com/andy_neon_/status/2080767882250842191",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "page_text_poster_video_metadata",
       "notes": "页面确认：1920×1080 横屏、约 43.285 秒。封面为强日照城市广场，前景鸽群，背景游客与纪念性喷泉/建筑。作者未公开完整原始提示词；数据库中的提示词为依据视频页面、封面与帖文说明反推的可复用版本。",
       "sha256": "dc2122166248cfa82d58227f79213f30b696bea894fb4d36d9e00eec71f5119a",
@@ -51,7 +124,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "AI 外国人探店：暖色串烧餐厅广告",
       "locator": "https://x.com/YangOnchain/status/2080727499894645240",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "page_text_poster_video_metadata",
       "notes": "页面确认：1280×720 横屏、约 15.168 秒。帖子主题为不用真人请托、只用 AI 为商家制作外国人探店短片；可见画面为暖色餐厅环境中的烤串英雄镜头。作者未公开完整原始提示词，数据库内容为可复用反推版本。",
       "sha256": "1b547d87e0ba4540a96ce3f3e5d2910247a43b328bea602552171e5e8f1056ee",
@@ -62,7 +135,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "夏祭射击摊：大熊奖品反弹与友情代打",
       "locator": "https://x.com/manaimovie/status/2080268691430928644",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "page_text_full_video_frames_metadata",
       "notes": "页面与媒体元数据确认：横屏 3760×2160、约 25.708 秒。已读取完整视频并按逐秒画面核对：三名浴衣少女在黄昏夏祭射击摊，金发女孩先击倒小盒奖品，随后瞄准泰迪熊；软木塞被熊的柔软腹部弹回并撞到她额头，蓝发同伴接枪命中，最后把熊送给她。作者未公开完整原始提示词，数据库内容为依据帖文、完整画面与媒体规格反推的可复用版本。",
       "sha256": "d15a8147de4ee3ce704039802fcf02a183e75c1ec836b2a0a7a2dd49888a11bb",
@@ -73,7 +146,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video_thread",
       "title": "100 种动画风格试验：首批四个 15 秒微短片",
       "locator": "https://x.com/sebatheepan/status/2080687176581259596",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompts_reference_prompts_full_video_frames_metadata",
       "notes": "主视频为 1080×1920 竖屏合辑、60.3 秒，包含四个约 15 秒微短片：graphite、pinscreen、particle flow、cel-banded CGI。作者在后续两条回复中公开了四份 16:9 角色与世界设定图提示词，以及四份 Seedance 2.0 完整视频提示词。生图原文：https://x.com/sebatheepan/status/2080687180532342996；视频原文：https://x.com/sebatheepan/status/2080687185150271772。",
       "sha256": "66b9008a39ec9dbccc937ecc37050845fc80e931c4679ecbfaaa3fb0d3f30999",
@@ -84,7 +157,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "Seedance 2.0 日系二维瓶装咖啡城市晨间广告",
       "locator": "https://x.com/noorwithwifi/status/2080914390782779861",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompt_video_metadata_thumbnail",
       "notes": "作者在帖子正文中公开了完整英文 prompt，并注明使用 Seedance 2.0。原 prompt 要求 35 秒，公开视频媒体元数据为 31.201 秒、720×810（8:9）。内容结构为城市明亮早晨、便利店取瓶装拿铁、饮用、咖啡馆工作与朋友社交、最终产品瓶特写。数据库保留作者原文，并按实际媒体时长整理分镜。",
       "sha256": "aa7be0744137e54d4143506503e210e8a51904efd3c51e050101f2b206f35f84",
@@ -95,7 +168,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "Seedance 2.0 河畔露营牛肉河粉烹饪动画",
       "locator": "https://x.com/noorwithwifi/status/2080998165013217284",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompt_video_metadata_thumbnail",
       "notes": "作者在帖子正文中公开完整英文 prompt，并注明使用 Seedance 2.0。公开视频媒体元数据为 12.5 秒、1280×720（16:9）。内容依次包含切大理石纹牛肉、准备姜、洋葱、整粒香料、泰国罗勒、豆芽和青柠；篝火铸铁锅熬制牛骨香料汤；米粉入碗、铺薄牛肉片、浇滚汤烫熟，最后以香草、辣椒、红洋葱和青柠装饰。",
       "sha256": "9635682c0a97ceab7c8cb72119311ecc1993d76409c010b66850338f730199b9",
@@ -106,7 +179,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "GPT Image 2 + Seedance 曲奇牛奶 POV ASMR 广告",
       "locator": "https://x.com/AIwithSynthia/status/2081581375790948730",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_storyboard_prompt_author_video_prompt_video_metadata",
       "notes": "作者在帖子正文中公开完整分镜板提示词与完整视频提示词，并注明使用 GPT Image 2、Seedance 和 Pollo AI。原提示词要求 15 秒、16:9、4K HDR、24 fps；公开视频媒体元数据为 14.778 秒、1076×1330（竖向约 4:5）。视频结构为曲奇盒介绍、拆包装、倒牛奶、蘸曲奇、掰开曲奇和产品英雄镜头，全程只有 POV 双手与自然 ASMR。",
       "sha256": "930935467abd5539087c20a5a7ba340dfafea9488b61005f979c8328e5e376a0",
@@ -117,7 +190,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "咖啡杯里的灯塔海洋：云海微缩梦境",
       "locator": "https://x.com/icreatelife/status/2081740528173924586",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "page_text_video_frames_metadata",
       "notes": "作者帖文仅写“May your coffee taste great today! Happy Monday!”，未公开生成模型或原始提示词。媒体元数据为 10.041 秒、832×1104（竖向约 3:4）。已核对开场、4 秒、7 秒与结尾画面：透明玻璃杯悬置于厚重云海/奶泡之中，杯内是青绿色微缩海洋与暖光灯塔；浪峰持续围绕灯塔起伏、破碎和重组，灯塔光束扫过水面。数据库内容为依据帖子、关键帧与媒体规格反推的可复用版本，并非作者原始提示词。",
       "sha256": "5405d9ce40792d0db0188c69d163f0d1c594ee146802c05eccec92830f3ce983",
@@ -128,7 +201,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video_thread",
       "title": "GPT Image 2 + Seedance 2.0 韩系蜂蜜黄油杏仁广告",
       "locator": "https://x.com/kentdhani/status/2081661227642863898",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_video_prompt_key_frames_video_metadata",
       "notes": "作者主帖注明使用 GPT Image 2 制作分镜板、Seedance 2.0 生成视频，并在紧随其后的回复 https://x.com/kentdhani/status/2081661231115780306 中公开完整英文视频提示词和八句韩语旁白。公开视频媒体元数据为 15.041 秒、1820×2280（4:5）。关键帧显示发布版本采用上方连续实拍广告、下方持续显示九格分镜板的演示版式；这与原提示词要求的全屏画面、不显示网格/编号/时间码存在差异。数据库逐字保留作者视频提示词，分镜生图提示词则依据公开视频中的九格分镜板反推并明确标注。",
       "sha256": "a3be324ef820d6ee5e21bb6d6166fb5539b4f0e0d357969f2aa3b487a384f58d",
@@ -139,7 +212,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "Seedance 2.0 过度清洁家庭喜剧 7UP Extra Fizz 广告",
       "locator": "https://x.com/Just_sharon7/status/2081971529823432803",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompt_video_metadata",
       "notes": "作者在主帖中公开完整 60 秒英文提示词，注明使用 Flova 的 Product commercial skill 和 Seedance 2.0。原提示词要求竖屏手机画幅，公开视频媒体元数据则为 60.046 秒、3840×2160（16:9 横屏），存在画幅差异。内容以母亲临时通知客人来访、女儿进行过度清洁为家庭喜剧主线，在疲惫峰值引出冰镇 7UP Extra Fizz，并以气泡水花产品英雄镜头收尾。数据库逐字保留作者原始提示词，并按实际媒体规格归档。",
       "sha256": "e38461b0114e5a2bbef8a6c51df7ad730d848d23cb9bde90917a1b168f40c069",
@@ -150,7 +223,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video_thread",
       "title": "GPT Image 2 + Seedance 2.0 日系刻海苔儿童广告",
       "locator": "https://x.com/kentdhani/status/2082174113779769694",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_video_prompt_storyboard_video_metadata",
       "notes": "作者主帖注明使用 GPT Image 2 与 Seedance 2.0，并在紧随其后的回复 https://x.com/kentdhani/status/2082174116749336947 中公开完整 15 秒英文视频提示词和六句日语儿童对白。公开视频媒体元数据为 15.041 秒、1820×2280（4:5）。画面与原文一致：条纹蓝衫男孩品尝刻海苔，明亮餐厅转入青绿色梦幻海底世界，三个孩子分享海苔，最后以白蓝包装和海苔碗收尾。发布演示版在下方持续显示九格参考分镜，与原提示词要求的全屏实拍、不得显示网格/数字/标签存在差异。视频入口为 https://x.com/kentdhani/status/2082174113779769694/video/1；数据库逐字保留作者视频提示词，分镜生图提示词依据公开视频中的九格参考图反推并明确标注。",
       "sha256": "2b430cc8460adc77e97b09a9a2b6336a4fd54f1383c9e1596bd86a288efe888a",
@@ -161,7 +234,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "GPT Image 2 + Seedance 2.0 Starbucks Coffee Galaxy 宇宙广告",
       "locator": "https://x.com/AiwithLariab/status/2082320700552155226",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompt_video_metadata_photo",
       "notes": "作者在主帖中公开完整 15 秒英文提示词，并注明使用 GPT Image 2 与 Seedance 2.0。提示词把星际尺度的宇宙奇观与 Starbucks Reserve 奢华美学结合，依次呈现咖啡豆星空、咖啡豆山脉、咖啡行星、浓缩咖啡宇宙河流、FPV 银河穿越、银河拿铁、星空臻选咖啡馆、子弹时间冻结、行星产品英雄镜头和绿色品牌尾帧。公开视频媒体元数据为 15.116 秒、720×1280（9:16 竖屏），另附一张 720×1283 竖图。数据库逐字保留作者原始提示词，并按实际视频规格和 10 个 1.5 秒场景归档。",
       "sha256": "317869981b89f76e5428728ebf6cdf8832c1509ae8e8ce65b83a5003c2a42de0",
@@ -172,7 +245,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "GPT Image 2 + Seedance 2.0 Deep Hydration 奢华面霜广告",
       "locator": "https://x.com/soaima70480/status/2082331258072514792",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_storyboard_prompt_video_metadata_visual_check",
       "notes": "作者在主帖中公开完整 10 镜头英文分镜板提示词，并注明使用 GPT Image 2 与 Seedance 2.0。帖子第一项媒体为 576×864 的 2×5 竖版专业广告分镜板，第二项为实际 15.092 秒、1280×720（16:9）的成片。分镜依次呈现水中产品揭示、玻璃罐微距、补水成分、动态水花、乳霜质地、皮肤吸收、健康光泽、补水冻结、产品英雄镜头与“Hydration That Lasts.” 品牌尾帧。数据库逐字保留作者分镜生图提示词；全屏视频生成提示词依据同一 10 镜头结构派生，视频入口为 https://x.com/soaima70480/status/2082331258072514792/video/2。",
       "sha256": "28a7bd597d5d4c1576d69ef959ccbbc361922616c097a44624156b3c009d4339",
@@ -183,7 +256,7 @@ window.AI_VIDEO_PROMPT_DB = {
       "source_type": "x_video",
       "title": "Higgsfield GPT Image 2 + Seedance 2.0 热带芒果汁广告",
       "locator": "https://x.com/AIwithkhan/status/2082315935248257437",
-      "accessed_at": "2026-07-30T09:02:56+08:00",
+      "accessed_at": "2026-07-30T10:02:58+08:00",
       "verification": "author_full_prompt_video_metadata",
       "notes": "作者在主帖公开完整英文视频提示词，注明使用 Higgsfield、GPT Image 2 与 Seedance 2.0。提示词要求以上传参考图锁定同一名女性角色，依次呈现热带厨房芒果变瓶、凝露水花产品微距、开瓶饮用、热带水果市场、金色时刻芒果园采摘与野餐，以及面向镜头递出产品的夕阳英雄收尾，并明确只使用自然环境声、无配乐。原文指定 16:9 横屏、4K HDR、24 fps；公开视频实际为 14.129 秒、1064×1244（266:311 竖版），存在明显画幅差异。视频入口为 https://x.com/AIwithkhan/status/2082315935248257437/video/1；数据库逐字保留作者原始视频提示词，参考生图提示词依据原文人物、产品和场景要求整理并明确标注为派生版。",
       "sha256": "c88e4b03dec4519e36f4acb228d1e5030891ab35264981e09a7f9c696cd67ce2",
@@ -278,7 +351,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "雷鸣、炮火、海浪与命令声叠加。",
           "continuity": "高潮延续追逐，不突然切换地点。"
         }
-      ]
+      ],
+      "collection": "电影奇观与概念 VFX"
     },
     {
       "id": 2,
@@ -356,7 +430,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "咕咚、咯噔、咚、滑稽收尾音。",
           "continuity": "橘子和肿包保留，褪白不改变角色结构。"
         }
-      ]
+      ],
+      "collection": "搞笑短片与社媒 Vlog"
     },
     {
       "id": 3,
@@ -435,7 +510,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "快速叫声、啄击、拍翅与冲击音。",
           "continuity": "贴纸粘附关系稳定，红色肿包仍在。"
         }
-      ]
+      ],
+      "collection": "搞笑短片与社媒 Vlog"
     },
     {
       "id": 4,
@@ -544,7 +620,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "自然城市声收尾。",
           "continuity": "不加入解释性文字或魔法残留。"
         }
-      ]
+      ],
+      "collection": "电影奇观与概念 VFX"
     },
     {
       "id": 5,
@@ -634,7 +711,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "突出滋滋声，音乐简洁收尾。",
           "continuity": "餐盘、桌面和食物形态保持稳定，不生成文字。"
         }
-      ]
+      ],
+      "collection": "美食与餐饮广告"
     },
     {
       "id": 6,
@@ -744,7 +822,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "轻快温柔配乐与远处夏祭声收尾。",
           "continuity": "蓝发少女仍拿红色丸子；女孩始终抱着同一只熊。"
         }
-      ]
+      ],
+      "collection": "日系动画与生活叙事"
     },
     {
       "id": 7,
@@ -833,7 +912,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "音乐在一次铅笔轻点上解决。",
           "continuity": "以完整可读英雄帧结束。"
         }
-      ]
+      ],
+      "collection": "实验动画与视觉风格"
     },
     {
       "id": 8,
@@ -922,7 +1002,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "克制铜管音与最终针响。",
           "continuity": "以清楚稳定的侧面剪影结束。"
         }
-      ]
+      ],
+      "collection": "实验动画与视觉风格"
     },
     {
       "id": 9,
@@ -1011,7 +1092,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "温暖钟音与深沉脉冲解决。",
           "continuity": "完全重组，脸前没有游离粒子。"
         }
-      ]
+      ],
+      "collection": "实验动画与视觉风格"
     },
     {
       "id": 10,
@@ -1100,7 +1182,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "涡轮低鸣与果断两音收尾。",
           "continuity": "以清楚剪影结束，动作必须先落点。"
         }
-      ]
+      ],
+      "collection": "实验动画与视觉风格"
     },
     {
       "id": 11,
@@ -1200,7 +1283,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "音乐形成明亮收束，可加入轻微瓶身落桌声。",
           "continuity": "标签朝向统一、瓶型无变形，停留足够时间形成广告封面。"
         }
-      ]
+      ],
+      "collection": "日系动画与生活叙事"
     },
     {
       "id": 12,
@@ -1310,7 +1394,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "配料轻落声，音乐温暖收束。",
           "continuity": "配料顺序清楚，成品碗完整稳定并留出封面停顿。"
         }
-      ]
+      ],
+      "collection": "日系动画与生活叙事"
     },
     {
       "id": 13,
@@ -1412,7 +1497,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "曲奇落盘、玻璃轻响和桌面轻拍自然收尾。",
           "continuity": "最终产品数量稳定，涂鸦不遮挡主体，手势完整可读。"
         }
-      ]
+      ],
+      "collection": "美食与餐饮广告"
     },
     {
       "id": 14,
@@ -1494,7 +1580,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "浪声增强后柔和收束，水滴与远风淡出。",
           "continuity": "浪峰受杯内空间约束；结尾杯体、把手和灯塔必须清晰完整。"
         }
-      ]
+      ],
+      "collection": "电影奇观与概念 VFX"
     },
     {
       "id": 15,
@@ -1627,7 +1714,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "终句「달콤하고 고소한 매일의 즐거움, 허니버터 아몬드.」；品牌尾音收束。",
           "continuity": "包装文字、碗内杏仁数量和背景陈设稳定，主体无遮挡。"
         }
-      ]
+      ],
+      "collection": "美食与餐饮广告"
     },
     {
       "id": 16,
@@ -1741,7 +1829,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "水花、气泡爆裂与轻快音乐进入清新高潮。",
           "continuity": "产品标签清晰稳定，水花不遮挡瓶身与标题，结尾文字可读。"
         }
-      ]
+      ],
+      "collection": "饮料与生活方式广告"
     },
     {
       "id": 17,
@@ -1864,7 +1953,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "终句「きざみのり、だいすき！」；品牌尾音与轻柔气泡声收束。",
           "continuity": "包装图形、碗内海苔、男孩和女孩位置稳定，主体无遮挡。"
         }
-      ]
+      ],
+      "collection": "美食与餐饮广告"
     },
     {
       "id": 18,
@@ -2009,7 +2099,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "配乐收束为清晰品牌和弦，环境声干净淡出。",
           "continuity": "品牌绿准确稳定，标志与标语无错字、无遮挡并保持清晰。"
         }
-      ]
+      ],
+      "collection": "奢华品牌与产品大片"
     },
     {
       "id": 19,
@@ -2157,7 +2248,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "清澈品牌和弦收束，水声与环境声干净淡出。",
           "continuity": "只保留准确品牌标志与指定标语，无其他文字、字幕或水印。"
         }
-      ]
+      ],
+      "collection": "奢华品牌与产品大片"
     },
     {
       "id": 20,
@@ -2277,7 +2369,8 @@ window.AI_VIDEO_PROMPT_DB = {
           "audio": "果园微风、树叶沙沙、远处笑声与鸟鸣自然淡出，无配乐。",
           "continuity": "夕阳方向和朋友位置与前序果园段一致；无字幕、标志叠加或水印。"
         }
-      ]
+      ],
+      "collection": "饮料与生活方式广告"
     }
   ]
 };
