@@ -306,6 +306,49 @@ All floating ingredients move back simultaneously and perfectly reconstruct the 
 8.2–10.0s
 A beautiful female hand enters smoothly from the right holding a premium silver dessert spoon. The spoon slowly presses into the tiramisu. The mascarpone cream visibly compresses, stretches and jiggles naturally, demonstrating extreme softness. The spoon cuts cleanly through every layer, lifting approximately half of the dessert. Cream slowly stretches before separating. Moist coffee-soaked ladyfingers, fluffy mascarpone layers and cocoa become clearly visible in cross-section. Small crumbs and cocoa particles gently fall. The lifted spoon pauses beside the dessert with the creamy bite fully visible while the remaining tiramisu retains its shape naturally.
 Style: luxury food commercial, ultra-realistic, cinematic macro photography, premium studio lighting, elegant infographic animation, minimalist UI, transparent dark glass panels, ultra-thin white connector lines, physically accurate food simulation, smooth spring animation, realistic cream deformation, high-end motion design, 8K, maximum realism."""
+THERMOS_X_URL = "https://x.com/soaima70480/status/2082690306906955897"
+THERMOS_X_POST = "GPT image 2 via chat Gpt\n\nPrompt:"
+THERMOS_PROMPT = """Create a 10-second ultra-realistic vertical (9:16) premium UGC-style product review commercial featuring a 500ml Stainless Steel SUS304 Thermos Bottle with a cute pink and cream puppy illustration. The bottle should have a premium matte finish with realistic metallic accents, crisp printed artwork, and luxurious craftsmanship.
+
+Use soft natural morning sunlight, warm pastel color grading, cinematic handheld camera movements, shallow depth of field, smooth rack focus transitions, soft creamy background bokeh, HDR lighting, realistic reflections, accurate shadows, and ultra-detailed textures. The environment should feel clean, cozy, modern, and lifestyle-oriented with premium commercial quality. Fast-paced editing with seamless cinematic transitions between every scene.
+
+Scene 1 (0.0–1.2s) – Hook Shot
+
+A hand holds the thermos close to the camera and slowly rotates it, revealing the adorable puppy design. The background is softly blurred with a warm, cozy morning atmosphere. Smooth handheld movement creates an engaging first impression.
+
+Scene 2 (1.2–2.4s) – Product & Packaging
+
+Place the thermos neatly beside its matching premium packaging box on a clean wooden table. The camera performs a slow top-down cinematic movement, emphasizing elegant branding and presentation.
+
+Scene 3 (2.4–3.6s) – SUS304 Interior Macro
+
+Extreme macro close-up inside the bottle, showcasing the polished SUS304 stainless steel interior with realistic metallic reflections, precision finishing, and premium craftsmanship.
+
+Scene 4 (3.6–4.8s) – One-Click Lid Mechanism
+
+Close-up slow-motion demonstration of the one-touch lock and flip-open lid. Capture the satisfying click, smooth opening action, and detailed hinge mechanism with premium cinematic lighting.
+
+Scene 5 (4.8–6.0s) – Water Pour Test
+
+Crystal-clear water is poured into the thermos, highlighting the 500ml capacity. Show realistic water physics, smooth ripples, natural reflections, and premium slow-motion detail.
+
+Scene 6 (6.0–7.2s) – Lifestyle Shot
+
+The thermos stands on a cozy outdoor picnic table beside neatly arranged books and light snacks. The camera slowly orbits around the bottle while warm morning sunlight creates a relaxing lifestyle atmosphere.
+
+Scene 7 (7.2–8.4s) – Anti-Slip Base Macro
+
+Extreme macro shot of the anti-slip silicone base. A slow rotating camera movement highlights the textured grip, premium finish, and product durability.
+
+Scene 8 (8.4–10.0s) – Hero Ending
+
+A hand picks up the thermos and gently presents it toward the camera with a soft natural smile in the background (face subtly blurred). End with a clean cinematic hero shot as elegant animated text fades in:
+
+"Cute • Practical • Keeps Your Drink Perfect"
+
+Visual Style
+
+Ultra-realistic • Premium Commercial • UGC Product Review • Soft Natural Morning Light • Pastel Pink Aesthetic • Cozy Lifestyle • Cinematic Camera Movements • Smooth Handheld Motion • Shallow Depth of Field • HDR • 4K • Hyper-Realistic Textures • Realistic Reflections • Soft Background Bokeh • Seamless Transitions • Luxury Advertising Style • No Watermark • No Extra Objects • Highly Detailed • Photorealistic • Modern Product Marketing."""
 
 COLLECTION_CATALOG = [
     {
@@ -359,6 +402,7 @@ PROMPT_COLLECTIONS = {
     19: "奢华品牌与产品大片",
     20: "饮料与生活方式广告",
     21: "美食与餐饮广告",
+    22: "奢华品牌与产品大片",
 }
 
 
@@ -757,6 +801,24 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + TIRAMISU_PROMPT_URL
             ),
         },
+        {
+            "id": 19,
+            "source_type": "x_video",
+            "title": "GPT Image 2 粉色幼犬图案 SUS304 保温杯 UGC 广告",
+            "locator": THERMOS_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata_photo",
+            "notes": (
+                "作者在主帖逐字公开完整 10 秒英文提示词，并注明通过 ChatGPT 使用 GPT Image 2。"
+                "提示词围绕一只 500ml SUS304 不锈钢保温杯展开，以粉色和奶油色幼犬插画、哑光杯身、"
+                "金属细节和配套包装作为视觉锚点，依次展示手持旋转、产品与包装、SUS304 内胆、"
+                "一键开盖、注水测试、户外野餐、硅胶防滑底和手持英雄收尾。"
+                "公开视频媒体元数据为 10.147 秒、720×1280（9:16 竖屏），另附一张 720×1080 图片。"
+                "数据库逐字保留作者原始提示词，并按实际视频规格整理为 8 段分镜。"
+            ),
+            "sha256": sha256_text(THERMOS_X_POST + THERMOS_PROMPT),
+            "raw_excerpt": THERMOS_X_POST + "\n\n" + THERMOS_PROMPT,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -946,6 +1008,12 @@ Premium beverage advertising, luxury commercial cinematography, ultra-realistic 
 Arrange twelve chronological panels in a clean professional advertising storyboard layout: 01 complete centered tiramisu hero frame on black; 02 the dessert deconstructs vertically into perfectly aligned floating layers; 03 chocolate decoration, cocoa powder, mascarpone dollops, ladyfingers and cream layers freeze in mid-air with sparse cocoa particles; 04 elegant rounded transparent dark-glass interface panels spring into place around the ingredients; 05 ultra-thin white connector lines attach each ingredient to its corresponding panel, with no text; 06 miniature macro video of chocolate melting, tempering and curling with a clean chocolate 3D icon; 07 cocoa beans transform into cocoa powder while mascarpone is whipped into silky cream; 08 ladyfingers bake and cool while espresso brews and soaks a biscuit; 09 all miniature videos stop as glass panels shrink, fold inward and connector lines retract; 10 every floating ingredient moves back simultaneously and reconstructs the tiramisu layer by layer; 11 a graceful adult female hand enters from the right with a premium silver spoon and presses through the soft dessert; 12 the spoon lifts approximately half of the tiramisu, revealing moist coffee-soaked ladyfingers, fluffy mascarpone and cocoa in cross-section while crumbs fall and the remaining dessert retains its shape.
 
 Ultra-realistic luxury food advertising, cinematic macro photography, premium studio lighting, shallow depth of field, physically accurate food materials, realistic cream compression, stretch and jiggle, elegant minimalist motion-design reference, transparent dark glass, ultra-thin white lines, restrained cocoa particles, black-and-cocoa palette, high-end agency presentation board, 8K detail. Static camera language and centered composition. No brand, logo, neon, bright HUD, lens flare, subtitles, random text, malformed hand, extra fingers, duplicate spoon, drifting layers, changing dessert proportions or cartoon texture."""
+    thermos_video = THERMOS_PROMPT
+    thermos_storyboard = """Create a premium vertical 9:16 advertising storyboard sheet with eight chronological frames for a 10-second ultra-realistic UGC-style product review commercial. Keep the exact same 500ml SUS304 stainless-steel thermos in every frame: matte pink-and-cream body, cute puppy illustration, crisp artwork, realistic metallic accents, one-touch lock and flip-open lid, polished steel interior, textured anti-slip silicone base, and matching premium packaging box.
+
+Frame 01: a natural hand holds the thermos close to camera and slowly rotates it, clearly revealing the puppy artwork against a warm creamy morning bokeh. Frame 02: the bottle and matching box sit neatly on a clean wooden table in an elegant top-down composition. Frame 03: extreme macro view inside the bottle shows polished SUS304 steel, precise finishing and realistic metallic reflections. Frame 04: close-up of the one-touch lock, hinge and flip-open lid captured at the satisfying click moment. Frame 05: crystal-clear water pours into the open bottle with realistic ripples, reflections and premium slow-motion detail. Frame 06: the bottle stands on a cozy outdoor picnic table beside a few neatly arranged books and light snacks in warm morning sun. Frame 07: extreme macro of the textured anti-slip silicone base in a rotating product composition. Frame 08: a hand presents the thermos toward camera while an adult with a soft natural smile remains subtly blurred in the background; reserve clean space for the exact line “Cute • Practical • Keeps Your Drink Perfect”.
+
+Soft natural morning sunlight, warm pastel pink-and-cream color grade, premium UGC product review, cinematic handheld compositions, smooth rack-focus references, shallow depth of field, soft creamy bokeh, HDR, accurate shadows, realistic reflections, hyper-detailed matte and metallic materials, clean cozy modern lifestyle styling, luxury commercial finish. Anatomically correct hands, stable product proportions, identical puppy print and packaging, readable final text. No duplicate bottle, extra objects, malformed hand, warped lid, changing illustration, blurry print, dirty steel, impossible water, clutter, random text or watermark."""
 
     prompts = [
         {
@@ -1668,6 +1736,42 @@ Ultra-realistic luxury food advertising, cinematic macro photography, premium st
                 shot(6, 8.2, 10.058, "银匙切开与横截面", "成年女性手从右侧平滑进入，持高端银匙缓慢压入提拉米苏；奶油明显压缩、拉伸并自然颤动，银匙切穿每一层后抬起约半份甜品。湿润咖啡手指饼干、蓬松马斯卡彭和可可横截面清晰可见，碎屑与可可粉轻落，匙中奶油甜品在剩余主体旁停顿。", "静态镜头保持甜品居中，以浅景深精准移焦银匙压入、奶油拉丝、横截面与最终停顿。", "近距离银匙压入奶油、切断湿润饼干、拉丝分离和碎屑落下的食物 ASMR。", "手部解剖正确且只从右侧进入；银匙不变形、不穿模；抬起部分约占一半，剩余甜品自然保持形状。"),
             ],
         },
+        {
+            "id": 22,
+            "source_id": 19,
+            "slug": "pink-puppy-sus304-thermos-ugc-product-commercial",
+            "title": "粉色幼犬 SUS304 保温杯：高级 UGC 产品评测广告",
+            "category": "写实 UGC 产品广告 / 保温杯",
+            "language": "en",
+            "aspect_ratio": "9:16",
+            "duration_sec": 10.147,
+            "resolution": "720×1280",
+            "style_summary": "超写实高级 UGC 产品评测广告：粉色与奶油色暖调、自然晨光、手持电影感、浅景深、奶油散景、HDR 反射和紧凑无缝转场兼顾亲和生活感与精品商业质感。",
+            "scene_summary": "从手持旋转揭示幼犬插画开始，经过木桌包装展示、SUS304 内胆微距、一键开盖、注水测试、户外野餐生活方式和防滑底特写，最终由人物手持产品面向镜头并显示卖点标语。",
+            "subject_summary": "同一只 500ml SUS304 不锈钢保温杯：粉色与奶油色哑光杯身、可爱幼犬插画、真实金属细节、一键锁扣与翻盖、抛光内胆、防滑硅胶底；配套包装盒、干净木桌、少量书本和轻食，以及只作为虚化背景出现的成年人物。",
+            "core_mechanic": "用“外观吸引—包装建立价值—材质证明—结构演示—容量/注水测试—生活场景—耐用细节—人物推荐”八步 UGC 评测链条，把可爱设计、材质、功能和使用氛围压缩进十秒。",
+            "camera_language": "近距离自然手持旋转、慢速顶视移动、内胆极端微距、开盖慢动作、注水高速细节、户外产品环绕、防滑底旋转宏观和浅景深人物后景产品英雄镜头；以顺滑移焦和快速无缝转场连接。",
+            "lighting_color": "柔和自然晨光、暖粉、奶油白、浅木色与克制银色金属高光；使用柔和 HDR、准确阴影、真实反射和奶油背景散景营造干净温馨的现代生活方式氛围。",
+            "audio_design": "派生音频设计：轻柔现代 UGC 音乐下叠加手握杯身摩擦、包装落桌、金属内胆清脆反射感、一键锁扣“咔哒”、翻盖开启、清水倾注与涟漪、户外晨间环境和硅胶底触桌声；英雄尾帧以轻盈品牌提示音收束，无旁白。",
+            "continuity_rules": "杯体容量、比例、粉奶配色、幼犬插画、哑光材质、锁扣、翻盖、内胆和硅胶底始终一致；包装盒图形与产品匹配；手部解剖正确；水流和反射符合真实物理；野餐道具数量克制；最终指定英文标语必须准确清晰。",
+            "master_prompt": thermos_video,
+            "negative_prompt": "No duplicate thermos, changing bottle proportions, drifting or distorted puppy illustration, blurry printed artwork, warped lid, broken one-touch lock, incorrect SUS304 interior, dirty metal, plastic-looking reflections, impossible water flow, leaking sealed bottle, malformed hands, extra fingers, changing skin tone, extra people, cluttered picnic props, harsh sunlight, flat lighting, jitter, flicker, abrupt cuts, misspelled “Cute • Practical • Keeps Your Drink Perfect” text, random captions, logos or watermarks.",
+            "reference_image_prompt": thermos_storyboard,
+            "recommended_models": "GPT Image 2 via ChatGPT（作者注明）；视频生成模型未公开",
+            "prompt_origin": "author_published_full_prompt_storyboard_prompt_derived",
+            "quality_notes": "作者在主帖逐字公开完整 8 场景英文提示词，并注明“GPT image 2 via chat Gpt”，数据库原样保留。作者未另行公开参考图或分镜板生成提示词，因此数据库中的八格参考生图提示词为派生版；音频设计同样为派生建议。原文要求 10 秒、9:16、4K，公开视频实际为 10.147 秒、720×1280，数据库按实际媒体规格归档，并保留 4K 为目标风格描述。",
+            "tags": ["GPT Image 2", "ChatGPT", "UGC 广告", "产品评测", "保温杯", "SUS304", "不锈钢", "500ml", "粉色产品", "幼犬插画", "哑光材质", "产品包装", "一键开盖", "注水测试", "防滑硅胶底", "户外野餐", "自然晨光", "浅景深", "产品微距", "生活方式广告", "产品英雄镜头", "9:16", "作者原始提示词", "派生生图提示词"],
+            "shots": [
+                shot(1, 0, 1.2, "Hook Shot｜手持旋转揭示", "一只手把保温杯举到镜头近处并缓慢旋转，粉色与奶油色幼犬插画完整显现，背景是温暖柔焦的晨间空间。", "近距离自然手持中近景，顺着杯身轻微移动并把焦点锁在插画。", "手握杯身轻响、柔和晨间环境和轻盈 UGC 音乐起奏。", "首次锁定杯体比例、配色、插画、哑光材质和手部肤色；手指结构正确。"),
+                shot(2, 1.2, 2.4, "Product & Packaging｜产品与包装", "保温杯与配套精品包装盒整齐摆在干净木桌上，构成简洁高级的开箱展示。", "缓慢顶视电影移动，以顺滑移焦依次强调产品和包装。", "包装轻触木桌与克制转场声。", "杯身和包装图形匹配，桌面整洁，不增加无关道具。"),
+                shot(3, 2.4, 3.6, "SUS304 Interior Macro｜内胆微距", "镜头深入瓶口，展示抛光 SUS304 不锈钢内胆、精密收口和真实金属反射。", "极端宏观特写沿瓶口向内缓慢推进，精确控制高光和焦点。", "细腻金属高频质感与轻微空间回响。", "内胆洁净且结构可信，瓶口、杯壁厚度和金属材质不变形。"),
+                shot(4, 3.6, 4.8, "One-Click Lid｜一键开盖", "手指按下单手锁扣，翻盖在满足感十足的“咔哒”瞬间平稳弹开，铰链结构清晰可见。", "锁扣与铰链近景慢动作，跟随翻盖弧线轻微上移。", "清晰“咔哒”锁扣声、翻盖开启声和轻柔音乐重拍。", "同一锁扣、翻盖与铰链；开合轨迹符合机械结构，不穿模、不松脱。"),
+                shot(5, 4.8, 6.0, "Water Pour Test｜注水测试", "晶莹清水倾入打开的保温杯，涟漪、反射和细小水滴以真实慢动作展示容量与内胆质感。", "瓶口上方斜俯宏观结合高速流体摄影，焦点跟随水流进入杯内。", "清晰注水、涟漪和少量水滴声。", "水流遵守重力且不外漏；杯身、开盖状态和 500ml 尺度感连续。"),
+                shot(6, 6.0, 7.2, "Lifestyle Shot｜晨间野餐", "保温杯立在舒适户外野餐桌上，旁边只有整齐书本和少量轻食，暖晨光塑造放松生活方式。", "低速环绕杯身，使用浅景深和柔和逆光把背景化为奶油散景。", "鸟鸣、微风、书页轻响与温暖音乐层。", "同一产品正面插画可辨；书本和轻食数量、位置在环绕中稳定。"),
+                shot(7, 7.2, 8.4, "Anti-Slip Base Macro｜防滑底微距", "保温杯底部的防滑硅胶纹理占据画面，旋转高光突出抓地结构、质感和耐用性。", "极端微距慢速旋转，沿硅胶纹理精确移焦。", "硅胶轻触桌面与克制旋转掠过声。", "底部尺寸与杯身一致，纹理清晰连续，不出现错误标记或变形。"),
+                shot(8, 8.4, 10.147, "Hero Ending｜人物推荐收尾", "一只手拿起保温杯并轻柔递向镜头，背景中的成年人物自然微笑但面部保持轻微虚化；画面以产品英雄构图显示“Cute • Practical • Keeps Your Drink Perfect”。", "产品近景稳定推向镜头，人物后景保持奶油散景，最后短暂停顿。", "拿起杯子的细响、轻盈品牌提示音与音乐收束。", "产品与手部清晰、人物不抢焦；指定标语拼写、圆点和大小写准确，无额外文字。"),
+            ],
+        },
     ]
     for prompt in prompts:
         prompt["collection"] = PROMPT_COLLECTIONS[prompt["id"]]
@@ -1929,7 +2033,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 15 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 21 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 16 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 22 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -2027,6 +2131,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 19 的作者在主帖公开完整 Deep Hydration 十场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留分镜原文。作者未另行公开全屏视频提示词，数据库依据同一十镜头结构派生视频版并明确标注；成片规格为 15.092 秒、1280×720。
 - ID 20 的作者在主帖公开完整热带芒果汁广告视频提示词，注明 Higgsfield、GPT Image 2 与 Seedance 2.0；数据库逐字保留视频原文，并依据人物、产品和场景要求补充派生七格生图提示词。原文要求 4K HDR、16:9、24 fps，公开视频实际为 14.129 秒、1064×1244 竖版。
 - ID 21 的作者在回复中逐字公开完整 10 秒、16:9 悬浮拆解提拉米苏 Seedance 提示词，并在主帖发布十二格 GPT Image 2 分镜板及成片；数据库原样保留视频原文，并依据公开分镜板和时间轴补充派生十二格生图提示词。公开视频实际为 10.058 秒、848×478。
+- ID 22 的作者在主帖逐字公开完整 10 秒、9:16 粉色幼犬图案 SUS304 保温杯 UGC 广告提示词，并注明通过 ChatGPT 使用 GPT Image 2；数据库原样保留作者提示词，补充派生八格生图提示词与音频设计。公开视频实际为 10.147 秒、720×1280，归入“奢华品牌与产品大片”合集。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
