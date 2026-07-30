@@ -240,6 +240,42 @@ Camera
 ARRI Alexa 35, Cooke Anamorphic 50mm lens, macro beauty cinematography, ultra slow motion, shallow depth of field, precision focus.
 Style
 Luxury skincare advertising, premium beauty campaign, high-end cosmetic photography, Hollywood commercial storyboard, advertising agency presentation board, ultra-photorealistic, HDR, 8K, masterpiece quality, impeccable product realism, cinematic composition, flawless visual storytelling."""
+MANGO_JUICE_X_URL = "https://x.com/AIwithkhan/status/2082315935248257437"
+MANGO_JUICE_VIDEO_URL = (
+    "https://x.com/AIwithkhan/status/2082315935248257437/video/1"
+)
+MANGO_JUICE_X_POST = (
+    "Taste summer in every sip\n\n"
+    "Created this on @higgsfield using GPT Image 2 and Seedance 2.0\n\n"
+    "Prompt 👇"
+)
+MANGO_JUICE_PROMPT = """Use the uploaded reference image as the exact character reference. Preserve her facial identity, hairstyle, eye color, makeup, skin tone, body proportions, delicate necklace, and facial consistency throughout every shot. Replace her current outfit with a fitted white sleeveless crop top, white pleated mini skirt, and white sneakers. Maintain realistic hand anatomy, natural expressions, and perfect character consistency.
+
+Create a premium mango juice commercial with a bright tropical summer aesthetic. The hero product is a realistic branded mango juice bottle featuring a vibrant orange label with fresh mango illustrations, green leaf accents, and a premium fruit juice logo. The bottle design must remain identical throughout the commercial.
+
+The video opens with the girl already on screen, standing in a sunlit tropical kitchen while holding a perfectly ripe mango beside her face. She smiles warmly at the camera, playfully tosses the mango into the air, and as it spins, it magically transforms into the chilled branded mango juice bottle. She catches it confidently, smiles, and says,
+
+"Taste summer in every sip."
+
+A cinematic macro sequence follows. Extreme close-ups showcase the bottle covered in sparkling condensation as golden mango juice splashes, fresh mango cubes, crushed ice, tropical leaves, and tiny water droplets explode around it in slow motion. Warm sunlight glistens beautifully across the premium label.
+
+She twists open the bottle with a satisfying crisp pop, takes a refreshing sip, closes her eyes for a moment, and smiles naturally as if enjoying the first taste of summer.
+
+The scene transitions to a lively tropical fruit market. Smooth handheld and gimbal shots follow her as she strolls between colorful fruit stalls, greets friendly vendors, samples fresh mango slices, laughs naturally, and carries the branded mango juice bottle while browsing baskets overflowing with ripe tropical fruit.
+
+She then arrives at a lush mango orchard during golden hour. She reaches up to pick ripe mangoes from the trees, fills a woven basket, and joins her friends for a relaxed picnic beneath the orchard canopy. Everyone enjoys the same branded mango juice while laughing, chatting, sharing fruit, and soaking in the warm evening sunlight.
+
+The final hero sequence shows her standing alone in the orchard as the sun sets behind endless rows of mango trees. She walks toward the camera with a bright smile, extends the chilled mango juice bottle close to the lens, and says,
+
+"Pure mango. Pure happiness."
+
+The camera slowly pulls back to reveal the glowing orchard, golden sunset, gently swaying leaves, and friends celebrating together in the background before fading out.
+
+Style: Premium beverage advertising, luxury commercial cinematography, ultra-realistic fruit textures, realistic liquid physics, glossy product photography, cinematic handheld and gimbal camera movements, shallow depth of field, vibrant tropical colour palette, premium brand campaign aesthetic, photorealistic 4K HDR, 16:9 widescreen, 24 fps.
+
+Audio: Natural ambience only—birds singing, leaves rustling, fruit market chatter, footsteps, bottle opening, sparkling fizz, juice pouring, soft laughter, breeze through the orchard, and gentle nature sounds. No background music, no subtitles, no logos, no watermarks, and no on-screen text.
+
+Negative Prompt: No distorted hands, no duplicate people, no deformed bottle, no AI artifacts, no blurry label, no low resolution, no cartoon style, no flickering, no oversaturated colours, no text overlays."""
 
 
 def read_utf8(name: str) -> str:
@@ -586,6 +622,31 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + DEEP_HYDRATION_STORYBOARD_PROMPT
             ),
         },
+        {
+            "id": 17,
+            "source_type": "x_video",
+            "title": "Higgsfield GPT Image 2 + Seedance 2.0 热带芒果汁广告",
+            "locator": MANGO_JUICE_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata",
+            "notes": (
+                "作者在主帖公开完整英文视频提示词，注明使用 Higgsfield、GPT Image 2 与 "
+                "Seedance 2.0。提示词要求以上传参考图锁定同一名女性角色，依次呈现热带厨房"
+                "芒果变瓶、凝露水花产品微距、开瓶饮用、热带水果市场、金色时刻芒果园采摘与"
+                "野餐，以及面向镜头递出产品的夕阳英雄收尾，并明确只使用自然环境声、无配乐。"
+                "原文指定 16:9 横屏、4K HDR、24 fps；公开视频实际为 14.129 秒、"
+                "1064×1244（266:311 竖版），存在明显画幅差异。"
+                f"视频入口为 {MANGO_JUICE_VIDEO_URL}；数据库逐字保留作者原始视频提示词，"
+                "参考生图提示词依据原文人物、产品和场景要求整理并明确标注为派生版。"
+            ),
+            "sha256": sha256_text(MANGO_JUICE_X_POST + MANGO_JUICE_PROMPT),
+            "raw_excerpt": (
+                MANGO_JUICE_X_POST
+                + "\n\n"
+                + MANGO_JUICE_PROMPT
+                + "\n\n#HiggsfieldCPP"
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -763,6 +824,12 @@ Scene 10 (13.5–15.0s) — Brand Signature: Dissolve to a minimal white studio 
 
 Visual direction: world-class luxury hydration skincare campaign emphasizing purity, deep moisture, luminous healthy skin, silky cream texture, crystal-clear water, botanical science and clean beauty. Palette: pure white, soft sky blue, crystal water blue, silver highlights and natural beige. Soft beauty lighting, diffused daylight, volumetric glow and clean studio reflections. ARRI Alexa 35, Cooke Anamorphic 50mm lens, macro beauty cinematography, ultra slow motion, shallow depth of field and precision focus. Seamless transitions, physically believable water and cream, ultra-photorealistic HDR, impeccable product realism and cinematic composition."""
     deep_hydration_storyboard = DEEP_HYDRATION_STORYBOARD_PROMPT
+    mango_juice_video = MANGO_JUICE_PROMPT
+    mango_juice_storyboard = """Create a premium 16:9 tropical summer advertising storyboard for a photorealistic mango juice campaign. Use the uploaded portrait as the exact identity reference for the same adult woman in every panel: preserve her face, hairstyle, eye color, makeup, skin tone, body proportions and delicate necklace; dress her consistently in a fitted white sleeveless crop top, white pleated mini skirt and white sneakers. Lock one identical chilled mango juice bottle with a vibrant orange label, fresh mango illustrations, green leaf accents and a premium fruit juice logo throughout.
+
+Arrange seven cinematic panels in chronological order: 01 sunlit tropical kitchen, the woman holds a ripe mango beside her face; 02 she tosses it and the spinning mango transforms into the chilled branded bottle, which she catches confidently; 03 glossy macro product tableau with condensation, golden mango juice splash, mango cubes, crushed ice, tropical leaves and water droplets; 04 she twists the bottle open, takes a refreshing sip and smiles naturally; 05 lively tropical fruit market, she walks through colorful stalls, greets vendors and samples a mango slice while carrying the bottle; 06 golden-hour mango orchard, she picks ripe mangoes into a woven basket and joins adult friends for a relaxed picnic; 07 sunset hero frame, she walks toward camera and extends the chilled bottle close to the lens while the orchard and celebrating friends glow behind her.
+
+Premium beverage advertising, luxury commercial cinematography, ultra-realistic fruit textures, realistic liquid physics, glossy product photography, vibrant mango orange, tropical green, clean white wardrobe and warm golden sunlight, shallow depth of field, photorealistic 4K HDR. Keep hands anatomically correct, character identity and outfit stable, bottle shape and label identical, natural expressions and physically believable fruit and liquid. No duplicate people, distorted hands, deformed bottle, blurry label, cartoon style, random text, subtitles or watermarks."""
 
     prompts = [
         {
@@ -1416,6 +1483,41 @@ Visual direction: world-class luxury hydration skincare campaign emphasizing pur
                 shot(10, 13.5, 15.092, "Brand Signature｜品牌签名", "画面溶解到极简白色棚拍背景，品牌标志优雅淡入，下方出现准确标语“Hydration That Lasts.”。", "正面居中固定构图，极轻微拉远并留出品牌停顿。", "清澈品牌和弦收束，水声与环境声干净淡出。", "只保留准确品牌标志与指定标语，无其他文字、字幕或水印。"),
             ],
         },
+        {
+            "id": 20,
+            "source_id": 17,
+            "slug": "taste-summer-tropical-mango-juice-commercial",
+            "title": "Taste Summer：热带芒果汁品牌广告",
+            "category": "写实饮料广告 / 热带生活方式",
+            "language": "en",
+            "aspect_ratio": "266:311",
+            "duration_sec": 14.129,
+            "resolution": "1064×1244",
+            "style_summary": "超写实高端芒果汁广告：以明亮热带夏日美学、金黄芒果与橙色包装为视觉核心，结合人物生活方式表演、凝露水花宏观产品摄影、自然手持与稳定器运镜、金色时刻果园和真实液体物理。",
+            "scene_summary": "同一名白衣女性在热带厨房把抛起的芒果魔法变成冰镇果汁瓶，经产品凝露水花微距和开瓶饮用，走入热闹水果市场与金色时刻芒果园，完成采摘、朋友野餐，并在夕阳下向镜头递出产品收尾。",
+            "subject_summary": "上传参考图中的同一名成年女性，固定白色无袖短款上衣、白色百褶短裙、白色运动鞋与精致项链；同一瓶带鲜橙标签、芒果插画、绿叶点缀和高端果汁标志的冰镇芒果汁，以及鲜芒果、冰块、热带叶片、市场摊位、编织篮和成年朋友。",
+            "core_mechanic": "用“抛起鲜芒果—旋转变成冰镇瓶装芒果汁”的视觉转化建立产品记忆，再通过凝露、果汁飞溅、鲜果市场和原产地果园把清凉口感、真实果味与夏日快乐连成一条品牌叙事。",
+            "camera_language": "热带厨房人物中近景、芒果抛接跟随、变形匹配剪辑、产品凝露与果汁水花极端微距、开瓶饮用表情近景、市场自然手持与稳定器跟拍、果园金色时刻侧逆光群像、瓶身贴近镜头的夸张透视英雄镜头和缓慢拉远大全景。",
+            "lighting_color": "芒果金黄、标签鲜橙、热带叶绿、冰块透明高光与纯白服装形成高饱和但不过度的夏日色盘；厨房使用明亮暖阳，市场保持多彩自然光，果园以金色时刻侧逆光和夕阳轮廓光收束。",
+            "audio_design": "严格遵循作者要求，只使用自然环境声：鸟鸣、树叶沙沙、水果市场交谈、脚步、清脆开瓶声、轻微气泡、果汁倾注、自然笑声、果园微风与柔和自然声；无背景音乐。保留两句女性英文对白：“Taste summer in every sip.”与“Pure mango. Pure happiness.”。",
+            "continuity_rules": "人物面部身份、发型、眼睛颜色、妆容、肤色、身材比例、项链与白色服装全程一致；手部解剖自然；芒果变瓶的旋转方向和轨迹连续；瓶体形状、鲜橙标签、芒果插画、绿叶和标志始终相同且可读；市场、果园与朋友数量稳定，所有角色均为成年人。",
+            "master_prompt": mango_juice_video,
+            "negative_prompt": "No distorted hands, extra fingers, duplicate people, changing face, hairstyle, eye color, makeup, skin tone, body proportions, necklace or white outfit; no deformed bottle, changing bottle shape, drifting or blurry orange label, misspelled fruit juice logo, broken mango-to-bottle transformation, implausible liquid physics, floating fruit, oversaturated colours, low resolution, cartoon style, AI artifacts, flicker, jitter, subtitles, text overlays, extra logos or watermarks.",
+            "reference_image_prompt": mango_juice_storyboard,
+            "recommended_models": "Higgsfield + GPT Image 2（参考图/分镜）+ Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_video_prompt_reference_image_prompt_derived",
+            "quality_notes": "作者在主帖逐字公开完整英文视频提示词，数据库原样保留；提示词明确要求使用上传参考图锁定同一女性角色，并给出服装、产品包装、场景、对白、风格、自然声音与负面提示词。作者没有公开参考图的生成提示词，因此数据库中的七格参考生图提示词为派生版。原文指定 4K HDR、16:9 横屏、24 fps；公开视频实际为 14.129 秒、1064×1244（266:311 竖版），数据库按实际媒体规格归档并保留画幅差异说明。",
+            "tags": ["Higgsfield", "GPT Image 2", "Seedance 2.0", "芒果汁", "饮料广告", "热带夏日", "女性角色一致性", "参考图驱动", "芒果变瓶", "产品凝露", "果汁水花", "水果市场", "芒果园", "金色时刻", "自然环境声", "无背景音乐", "英文对白", "产品英雄镜头", "266:311", "作者原始视频提示词", "派生生图提示词"],
+            "shots": [
+                shot(1, 0, 2.2, "热带厨房与芒果变瓶", "白衣女性已站在阳光充足的热带厨房，手持熟芒果贴近脸庞微笑；她把芒果抛起，旋转中的鲜果魔法变成冰镇品牌芒果汁瓶并被自信接住。", "人物中近景跟随芒果抛物线，使用旋转匹配剪辑完成芒果到瓶子的无缝转化。", "厨房自然声、鸟鸣、衣物轻响与接瓶声；她说“Taste summer in every sip.”，无音乐。", "首次锁定人物身份、白色服装、项链、芒果与瓶体包装；抛接轨迹连续，手指结构正确。"),
+                shot(2, 2.2, 4.0, "凝露与芒果水花宏观", "冰镇瓶身覆盖闪耀凝露，金黄芒果汁、鲜芒果块、碎冰、热带叶片与细小水滴在暖阳中慢动作爆开，鲜橙标签保持清晰。", "极端宏观产品摄影结合高速流体慢动作，沿瓶身标签和凝露精确移焦。", "水花、冰块碰撞、果汁流动与细微气泡声，无配乐。", "瓶形、标签和标志不变；液体、冰块与果块遵守真实物理且不遮挡产品。"),
+                shot(3, 4.0, 5.5, "开瓶畅饮", "她旋开瓶盖，清脆开瓶后自然饮用，短暂闭眼感受清凉，再露出像尝到第一口夏天般的真实微笑。", "瓶盖与手部近景切人物侧面中近景，浅景深捕捉闭眼与微笑。", "清脆开瓶声、轻微气泡、吞咽与自然呼吸，无音乐。", "人物身份、妆容和服装稳定；瓶盖、瓶口、手指和饮用动作符合真实结构。"),
+                shot(4, 5.5, 8.2, "热带水果市场", "她携带同一瓶芒果汁穿行于色彩丰富的热带水果摊，向友好摊主打招呼、品尝鲜芒果片、自然发笑，并浏览装满成熟热带水果的篮筐。", "自然手持与稳定器交替跟拍，使用肩后镜头、侧向移动和表情近景保持生活方式质感。", "市场交谈、脚步、摊位细响、自然笑声与水果触碰声，无音乐。", "同一人物和瓶子全程可追踪；摊主均为成年人，背景人物不重复、不突变。"),
+                shot(5, 8.2, 10.8, "金色果园采摘与野餐", "金色时刻的茂密芒果园中，她伸手摘下成熟芒果装入编织篮，随后与成年朋友在树荫下轻松野餐，共同饮用相同品牌芒果汁、聊天分享水果。", "果园侧逆光跟拍采摘动作，切编织篮近景和树冠下稳定群像。", "鸟鸣、树叶沙沙、摘果声、果园微风、轻声交谈和自然笑声。", "人物白衣与项链稳定；手部采摘自然；篮中芒果、朋友人数和相同品牌瓶保持连续。"),
+                shot(6, 10.8, 13.2, "夕阳递出产品", "她独自站在成排芒果树前，夕阳从身后照亮轮廓；她朝镜头走来微笑，把冰镇芒果汁瓶伸到镜头前形成产品英雄画面。", "金色时刻正面稳定器后退跟拍，瓶身接近镜头时以广角透视突出产品并保持标签可读。", "脚步、微风和树叶声；她说“Pure mango. Pure happiness.”，无音乐。", "脸部与白色服装不变；手臂伸展自然；瓶体、标签和凝露稳定无畸变。"),
+                shot(7, 13.2, 14.129, "果园拉远收尾", "镜头缓慢拉远，显露发光的果园、金色夕阳、轻摆树叶和背景中一起庆祝的成年朋友，画面自然淡出。", "从近距离产品与人物构图平滑拉远为果园大全景。", "果园微风、树叶沙沙、远处笑声与鸟鸣自然淡出，无配乐。", "夕阳方向和朋友位置与前序果园段一致；无字幕、标志叠加或水印。"),
+            ],
+        },
     ]
     return sources, prompts
 
@@ -1654,7 +1756,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 13 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 19 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 14 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 20 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1738,6 +1840,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 17 的作者在回复中公开了完整日系刻海苔儿童广告视频提示词与六句日语对白；数据库逐字保留视频原文，并依据公开视频中的九格分镜板反推生图提示词。原文要求全屏且不显示网格、数字或角标，发布演示版实际保留分镜板；媒体规格为 15.041 秒、1820×2280。
 - ID 18 的作者在主帖公开了完整 Starbucks Coffee Galaxy 十场景英文提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留主提示词，并按相同场景结构补充派生十格生图提示词。原文要求 15 秒，公开视频实际为 15.116 秒、720×1280 竖屏。
 - ID 19 的作者在主帖公开完整 Deep Hydration 十场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留分镜原文。作者未另行公开全屏视频提示词，数据库依据同一十镜头结构派生视频版并明确标注；成片规格为 15.092 秒、1280×720。
+- ID 20 的作者在主帖公开完整热带芒果汁广告视频提示词，注明 Higgsfield、GPT Image 2 与 Seedance 2.0；数据库逐字保留视频原文，并依据人物、产品和场景要求补充派生七格生图提示词。原文要求 4K HDR、16:9、24 fps，公开视频实际为 14.129 秒、1064×1244 竖版。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
