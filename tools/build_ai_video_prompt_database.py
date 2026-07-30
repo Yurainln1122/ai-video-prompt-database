@@ -276,6 +276,36 @@ Style: Premium beverage advertising, luxury commercial cinematography, ultra-rea
 Audio: Natural ambience only—birds singing, leaves rustling, fruit market chatter, footsteps, bottle opening, sparkling fizz, juice pouring, soft laughter, breeze through the orchard, and gentle nature sounds. No background music, no subtitles, no logos, no watermarks, and no on-screen text.
 
 Negative Prompt: No distorted hands, no duplicate people, no deformed bottle, no AI artifacts, no blurry label, no low resolution, no cartoon style, no flickering, no oversaturated colours, no text overlays."""
+TIRAMISU_X_URL = "https://x.com/ElsaSofia__AI/status/2082422104243495194"
+TIRAMISU_VIDEO_URL = (
+    "https://x.com/ElsaSofia__AI/status/2082422104243495194/video/1"
+)
+TIRAMISU_PROMPT_URL = (
+    "https://x.com/ElsaSofia__AI/status/2082422110354395204"
+)
+TIRAMISU_X_POST = "GPT IMAGE 2+seedance 2.0\n\nUse this Prompt⤵️"
+TIRAMISU_PROMPT = """Seedance Prompt (10s, 16:9)
+
+Ultra-realistic premium food commercial. Static camera. Pure black background. The tiramisu always remains centered. Macro food photography, cinematic studio lighting, shallow depth of field, physically accurate materials, realistic cream physics, premium dessert advertisement quality. Elegant minimalist motion graphics. No text, no logos, no neon, no bright HUD effects, no lens flares.
+0.0–1.0s
+The complete tiramisu instantly explodes vertically into perfectly aligned floating layers. Chocolate decoration, cocoa powder, mascarpone cream dollops, ladyfinger biscuits and cream layers separate upward with fast, clean motion, then immediately freeze in mid-air. Small cocoa particles naturally float around the dessert.
+1.0–2.0s
+Elegant rounded glass interface panels appear with smooth spring animation around the floating ingredients. Thin white connector lines automatically extend from every ingredient to its corresponding panel. Every panel has transparent dark glass, ultra-thin white borders, subtle shadow. No text anywhere.
+2.0–5.5s
+Inside every panel, photorealistic miniature looping videos play simultaneously:
+• chocolate melting, tempering and curling;
+• cocoa beans turning into cocoa powder;
+• mascarpone cream being whipped into silky texture;
+• ladyfingers being baked and cooled;
+• espresso brewing and soaking ladyfingers.
+Above each video, a clean 3D icon of the corresponding ingredient is displayed. Interface animations remain extremely subtle with premium spring motion. Thin connector lines stay perfectly attached to their ingredients. Ingredients remain completely motionless in the air.
+5.5–6.8s
+All miniature videos stop simultaneously. Interface panels smoothly shrink and fold inward. Connector lines retract elegantly until every window disappears completely.
+6.8–8.2s
+All floating ingredients move back simultaneously and perfectly reconstruct the tiramisu layer by layer. Cream softly compresses, cocoa naturally settles, chocolate decoration locks into its original position. Dessert becomes identical to the opening frame.
+8.2–10.0s
+A beautiful female hand enters smoothly from the right holding a premium silver dessert spoon. The spoon slowly presses into the tiramisu. The mascarpone cream visibly compresses, stretches and jiggles naturally, demonstrating extreme softness. The spoon cuts cleanly through every layer, lifting approximately half of the dessert. Cream slowly stretches before separating. Moist coffee-soaked ladyfingers, fluffy mascarpone layers and cocoa become clearly visible in cross-section. Small crumbs and cocoa particles gently fall. The lifted spoon pauses beside the dessert with the creamy bite fully visible while the remaining tiramisu retains its shape naturally.
+Style: luxury food commercial, ultra-realistic, cinematic macro photography, premium studio lighting, elegant infographic animation, minimalist UI, transparent dark glass panels, ultra-thin white connector lines, physically accurate food simulation, smooth spring animation, realistic cream deformation, high-end motion design, 8K, maximum realism."""
 
 COLLECTION_CATALOG = [
     {
@@ -328,6 +358,7 @@ PROMPT_COLLECTIONS = {
     18: "奢华品牌与产品大片",
     19: "奢华品牌与产品大片",
     20: "饮料与生活方式广告",
+    21: "美食与餐饮广告",
 }
 
 
@@ -700,6 +731,32 @@ def build_records() -> tuple[list[dict], list[dict]]:
                 + "\n\n#HiggsfieldCPP"
             ),
         },
+        {
+            "id": 18,
+            "source_type": "x_video_thread",
+            "title": "GPT Image 2 + Seedance 2.0 悬浮拆解提拉米苏广告",
+            "locator": TIRAMISU_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_storyboard_video_metadata_visual_check",
+            "notes": (
+                "作者在主帖注明使用 GPT Image 2 与 Seedance 2.0，并发布一张 1536×1024 的"
+                "十二格广告分镜板及一段实际 10.058 秒、848×478（接近 16:9）的成片；完整 "
+                f"Seedance 英文提示词发布于作者回复 {TIRAMISU_PROMPT_URL}。画面始终以纯黑"
+                "背景和居中提拉米苏为核心：甜品垂直拆成巧克力装饰、可可粉、马斯卡彭奶油、"
+                "手指饼干与奶油层，透明暗色玻璃面板展示五类食材制作微视频，随后界面回收、"
+                "食材重组，最后由女性手持银匙切开并抬起半份甜品，强调奶油形变与横截面。"
+                f"视频入口为 {TIRAMISU_VIDEO_URL}。数据库逐字保留作者视频提示词；"
+                "十二格参考生图提示词依据公开分镜板与原始时间轴整理并标注为派生版。"
+            ),
+            "sha256": sha256_text(TIRAMISU_X_POST + TIRAMISU_PROMPT),
+            "raw_excerpt": (
+                TIRAMISU_X_POST
+                + "\n\n"
+                + TIRAMISU_PROMPT
+                + "\n\nPrompt reply: "
+                + TIRAMISU_PROMPT_URL
+            ),
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -883,6 +940,12 @@ Visual direction: world-class luxury hydration skincare campaign emphasizing pur
 Arrange seven cinematic panels in chronological order: 01 sunlit tropical kitchen, the woman holds a ripe mango beside her face; 02 she tosses it and the spinning mango transforms into the chilled branded bottle, which she catches confidently; 03 glossy macro product tableau with condensation, golden mango juice splash, mango cubes, crushed ice, tropical leaves and water droplets; 04 she twists the bottle open, takes a refreshing sip and smiles naturally; 05 lively tropical fruit market, she walks through colorful stalls, greets vendors and samples a mango slice while carrying the bottle; 06 golden-hour mango orchard, she picks ripe mangoes into a woven basket and joins adult friends for a relaxed picnic; 07 sunset hero frame, she walks toward camera and extends the chilled bottle close to the lens while the orchard and celebrating friends glow behind her.
 
 Premium beverage advertising, luxury commercial cinematography, ultra-realistic fruit textures, realistic liquid physics, glossy product photography, vibrant mango orange, tropical green, clean white wardrobe and warm golden sunlight, shallow depth of field, photorealistic 4K HDR. Keep hands anatomically correct, character identity and outfit stable, bottle shape and label identical, natural expressions and physically believable fruit and liquid. No duplicate people, distorted hands, deformed bottle, blurry label, cartoon style, random text, subtitles or watermarks."""
+    tiramisu_video = TIRAMISU_PROMPT
+    tiramisu_storyboard = """Create a premium 16:9 cinematic storyboard sheet for a 10-second ultra-realistic tiramisu food commercial. Use a pure black background and keep the same square tiramisu precisely centered in every panel. Lock the dessert design throughout: cocoa-dusted top, curved dark-chocolate decoration, rounded mascarpone dollops, alternating mascarpone cream and espresso-soaked ladyfinger layers, moist realistic crumb and premium silver dessert spoon.
+
+Arrange twelve chronological panels in a clean professional advertising storyboard layout: 01 complete centered tiramisu hero frame on black; 02 the dessert deconstructs vertically into perfectly aligned floating layers; 03 chocolate decoration, cocoa powder, mascarpone dollops, ladyfingers and cream layers freeze in mid-air with sparse cocoa particles; 04 elegant rounded transparent dark-glass interface panels spring into place around the ingredients; 05 ultra-thin white connector lines attach each ingredient to its corresponding panel, with no text; 06 miniature macro video of chocolate melting, tempering and curling with a clean chocolate 3D icon; 07 cocoa beans transform into cocoa powder while mascarpone is whipped into silky cream; 08 ladyfingers bake and cool while espresso brews and soaks a biscuit; 09 all miniature videos stop as glass panels shrink, fold inward and connector lines retract; 10 every floating ingredient moves back simultaneously and reconstructs the tiramisu layer by layer; 11 a graceful adult female hand enters from the right with a premium silver spoon and presses through the soft dessert; 12 the spoon lifts approximately half of the tiramisu, revealing moist coffee-soaked ladyfingers, fluffy mascarpone and cocoa in cross-section while crumbs fall and the remaining dessert retains its shape.
+
+Ultra-realistic luxury food advertising, cinematic macro photography, premium studio lighting, shallow depth of field, physically accurate food materials, realistic cream compression, stretch and jiggle, elegant minimalist motion-design reference, transparent dark glass, ultra-thin white lines, restrained cocoa particles, black-and-cocoa palette, high-end agency presentation board, 8K detail. Static camera language and centered composition. No brand, logo, neon, bright HUD, lens flare, subtitles, random text, malformed hand, extra fingers, duplicate spoon, drifting layers, changing dessert proportions or cartoon texture."""
 
     prompts = [
         {
@@ -1571,6 +1634,40 @@ Premium beverage advertising, luxury commercial cinematography, ultra-realistic 
                 shot(7, 13.2, 14.129, "果园拉远收尾", "镜头缓慢拉远，显露发光的果园、金色夕阳、轻摆树叶和背景中一起庆祝的成年朋友，画面自然淡出。", "从近距离产品与人物构图平滑拉远为果园大全景。", "果园微风、树叶沙沙、远处笑声与鸟鸣自然淡出，无配乐。", "夕阳方向和朋友位置与前序果园段一致；无字幕、标志叠加或水印。"),
             ],
         },
+        {
+            "id": 21,
+            "source_id": 18,
+            "slug": "floating-deconstructed-tiramisu-premium-food-commercial",
+            "title": "悬浮提拉米苏：食材拆解重组广告",
+            "category": "写实甜品广告 / 悬浮拆解",
+            "language": "en",
+            "aspect_ratio": "16:9",
+            "duration_sec": 10.058,
+            "resolution": "848×478",
+            "style_summary": "纯黑背景上的超写实奢华甜品广告：静态机位与绝对居中构图结合宏观食物摄影、电影棚拍光、浅景深、透明暗色玻璃信息面板、极细白色连接线和真实奶油形变。",
+            "scene_summary": "完整提拉米苏先沿垂直轴爆开为悬浮食材层，玻璃界面同步展示巧克力、可可、马斯卡彭、手指饼干和浓缩咖啡的制作过程；界面折叠消失后食材精确重组，最后银匙切开并抬起一大口，露出湿润横截面。",
+            "subject_summary": "始终居中的同一块方形提拉米苏，包括弧形黑巧克力装饰、可可粉、马斯卡彭奶油球、咖啡浸润的手指饼干和奶油夹层；透明暗色圆角面板、白色连接线、食材 3D 图标，以及从右侧进入的成年女性手部与高端银质甜品匙。",
+            "core_mechanic": "以“成品垂直拆解—食材冻结—制作过程信息可视化—界面回收—逐层重组—切开验证质地”完成一条闭环：同时展示配方来源、制作工艺和奶油柔软度。",
+            "camera_language": "全程静态机位、黑底正面居中构图；用快速干净的垂直分层、克制弹簧动效和面板内部宏观循环视频制造变化，最后以银匙进入、压缩、切开、拉伸和停顿形成触感高潮。",
+            "lighting_color": "纯黑背景吸收环境干扰，以暖棕可可、象牙白马斯卡彭、深咖手指饼干、黑巧克力和银色餐匙构成高端色盘；电影级棚拍主光、柔和轮廓光和局部高光清晰刻画粉末、奶油、湿润饼干与玻璃界面。",
+            "audio_design": "作者原文未指定音频。建议以克制的高级食物 ASMR 为主：垂直拆解的低频轻冲击、悬浮时细小可可粉沙响、玻璃面板的柔和弹簧与收合声、食材回位的细腻层叠声、银匙压入奶油和切断湿润饼干的近距离质感声；无对白，避免喧闹配乐。",
+            "continuity_rules": "提拉米苏从开场到重组后必须完全同形、同尺寸、同装饰；所有食材只沿清晰垂直层级拆分并在悬浮阶段绝对静止；连接线始终锚定对应食材；面板无文字且不遮挡主体；女性手为成年、解剖正确，只从右侧进入；银匙切开时奶油、湿润手指饼干、碎屑和可可粉遵守真实物理。",
+            "master_prompt": tiramisu_video,
+            "negative_prompt": "No text, captions, logos, brands, watermarks, neon, bright HUD effects or lens flares; no camera shake, reframing or off-center dessert; no drifting, misaligned or duplicated layers; no changing tiramisu size, decoration or ingredient count; no opaque panels, broken connector lines or mismatched ingredient icons; no plastic cream, dry ladyfingers, implausible cocoa, floating crumbs or broken food physics; no malformed hand, extra fingers, duplicate spoon, spoon passing through food, abrupt cuts, flicker, jitter, blur, low resolution or cartoon style.",
+            "reference_image_prompt": tiramisu_storyboard,
+            "recommended_models": "GPT Image 2（作者注明，用于参考图/分镜）+ Seedance 2.0（作者注明，用于视频）",
+            "prompt_origin": "author_published_full_video_prompt_storyboard_prompt_derived",
+            "quality_notes": "作者在主帖发布 1536×1024 十二格广告分镜板及 10.058 秒、848×478 成片，并在回复中逐字公开完整 10 秒、16:9 Seedance 英文提示词；数据库原样保留视频原文。作者没有公开 GPT Image 2 分镜板的生成提示词，因此十二格参考生图提示词由公开画面和作者视频时间轴派生并明确标注。公开视频与原文时长仅相差 0.058 秒，画幅接近 16:9；原文末尾“8K”属于风格/目标质量描述，数据库分辨率按实际媒体归档。",
+            "tags": ["GPT Image 2", "Seedance 2.0", "提拉米苏", "甜品广告", "食物微距", "纯黑背景", "静态机位", "居中构图", "垂直拆解", "食材悬浮", "透明玻璃 UI", "信息图动画", "连接线", "制作过程可视化", "巧克力", "可可粉", "马斯卡彭", "手指饼干", "浓缩咖啡", "食材重组", "银匙切开", "奶油形变", "ASMR", "16:9", "作者原始视频提示词", "派生生图提示词"],
+            "shots": [
+                shot(1, 0, 1.0, "提拉米苏垂直拆解", "完整提拉米苏瞬间沿垂直方向爆开成严格对齐的悬浮层；巧克力装饰、可可粉、马斯卡彭奶油球、手指饼干与奶油夹层快速分离后立刻冻结，少量可可颗粒自然漂浮。", "固定正面宏观中近景，构图与焦点锁定主体中心，以高速干净的垂直动作完成拆解。", "低频轻冲击、食材快速掠过和细小可可粉沙响；无对白。", "食材顺序、尺度和垂直轴准确，悬浮后完全静止，黑底与机位不变。"),
+                shot(2, 1.0, 2.0, "玻璃信息面板连接食材", "透明暗色圆角玻璃面板以柔和弹簧动画出现在悬浮食材周围，极细白线从每种食材自动延伸并连接到对应面板；面板只有薄白边与轻阴影，没有文字。", "固定镜头不动，界面从主体周围有序展开，保持提拉米苏层级为视觉中心。", "克制的玻璃弹簧、细线延伸与柔和锁定声。", "每条连接线只锚定对应食材，面板不遮挡主体，不出现任何文字或亮色 HUD。"),
+                shot(3, 2.0, 5.5, "五类食材制作微视频", "所有面板同时播放写实循环微视频：巧克力融化、调温与卷曲；可可豆变成可可粉；马斯卡彭打发为丝滑奶油；手指饼干烘烤并冷却；浓缩咖啡萃取并浸润手指饼干。每个面板上方显示对应食材的干净 3D 图标。", "主镜头与悬浮食材保持绝对静止，只让面板内部以宏观产品摄影方式循环；界面动效极其克制。", "巧克力流动、研磨、打发、烘烤细响与浓缩咖啡萃取声被压缩为高级微型 ASMR。", "所有连接线持续准确附着；食材本体完全静止；面板视频与 3D 图标一一对应。"),
+                shot(4, 5.5, 6.8, "界面折叠回收", "所有微视频同时停止，玻璃面板顺滑缩小并向内折叠，白色连接线优雅回缩，直至所有窗口完全消失，只留下悬浮食材。", "固定镜头，以同步缩放、折叠和线条回收制造干净转场。", "微视频声同步截停，玻璃折叠与细线回收声整齐收束。", "面板和连接线必须全部消失，不留残影、碎片、文字或光效。"),
+                shot(5, 6.8, 8.2, "食材同步重组", "所有悬浮食材同时向原位移动，逐层精确重构提拉米苏；奶油柔软压缩，可可粉自然落定，巧克力装饰锁回开场位置，成品与首帧完全相同。", "固定正面构图，使用同步反向运动展示每层准确归位，结尾短暂停在完整英雄画面。", "层叠回位、奶油柔软挤压、粉末落定与巧克力轻触声。", "重组后尺寸、位置、层数和装饰与首帧逐像素一致，不得漏层、穿模或漂移。"),
+                shot(6, 8.2, 10.058, "银匙切开与横截面", "成年女性手从右侧平滑进入，持高端银匙缓慢压入提拉米苏；奶油明显压缩、拉伸并自然颤动，银匙切穿每一层后抬起约半份甜品。湿润咖啡手指饼干、蓬松马斯卡彭和可可横截面清晰可见，碎屑与可可粉轻落，匙中奶油甜品在剩余主体旁停顿。", "静态镜头保持甜品居中，以浅景深精准移焦银匙压入、奶油拉丝、横截面与最终停顿。", "近距离银匙压入奶油、切断湿润饼干、拉丝分离和碎屑落下的食物 ASMR。", "手部解剖正确且只从右侧进入；银匙不变形、不穿模；抬起部分约占一半，剩余甜品自然保持形状。"),
+            ],
+        },
     ]
     for prompt in prompts:
         prompt["collection"] = PROMPT_COLLECTIONS[prompt["id"]]
@@ -1832,7 +1929,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 14 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 20 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 15 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 21 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -1929,6 +2026,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 18 的作者在主帖公开了完整 Starbucks Coffee Galaxy 十场景英文提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留主提示词，并按相同场景结构补充派生十格生图提示词。原文要求 15 秒，公开视频实际为 15.116 秒、720×1280 竖屏。
 - ID 19 的作者在主帖公开完整 Deep Hydration 十场景分镜板生图提示词，并注明 GPT Image 2 + Seedance 2.0；数据库逐字保留分镜原文。作者未另行公开全屏视频提示词，数据库依据同一十镜头结构派生视频版并明确标注；成片规格为 15.092 秒、1280×720。
 - ID 20 的作者在主帖公开完整热带芒果汁广告视频提示词，注明 Higgsfield、GPT Image 2 与 Seedance 2.0；数据库逐字保留视频原文，并依据人物、产品和场景要求补充派生七格生图提示词。原文要求 4K HDR、16:9、24 fps，公开视频实际为 14.129 秒、1064×1244 竖版。
+- ID 21 的作者在回复中逐字公开完整 10 秒、16:9 悬浮拆解提拉米苏 Seedance 提示词，并在主帖发布十二格 GPT Image 2 分镜板及成片；数据库原样保留视频原文，并依据公开分镜板和时间轴补充派生十二格生图提示词。公开视频实际为 10.058 秒、848×478。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
