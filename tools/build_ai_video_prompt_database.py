@@ -349,6 +349,20 @@ A hand picks up the thermos and gently presents it toward the camera with a soft
 Visual Style
 
 Ultra-realistic • Premium Commercial • UGC Product Review • Soft Natural Morning Light • Pastel Pink Aesthetic • Cozy Lifestyle • Cinematic Camera Movements • Smooth Handheld Motion • Shallow Depth of Field • HDR • 4K • Hyper-Realistic Textures • Realistic Reflections • Soft Background Bokeh • Seamless Transitions • Luxury Advertising Style • No Watermark • No Extra Objects • Highly Detailed • Photorealistic • Modern Product Marketing."""
+MATCHA_LATTE_X_URL = "https://x.com/AIwithSynthia/status/2083043744253882689"
+MATCHA_LATTE_X_POST = """What if a premium matcha commercial could be created from a single storyboard? 🍵
+
+@HappyHorseATH
+
+This is a Matcha Latte concept ad created entirely with HappyHorse 1.1. Instead of planning an expensive commercial shoot, I started with a storyboard reference that defined the entire visual narrative from the opening hero product shot to the final golden-hour café celebration.
+
+HappyHorse accurately interpreted each storyboard frame, adhered closely to both the visual references and prompt, and transformed them into a polished commercial with 12 seamless cinematic scenes. The model maintained consistent character appearance, outfit, product design, glass shape, matcha color, and branding details throughout the video, making every shot feel like part of the same professional campaign.
+
+I also used Camera Control to create smooth push-ins, cinematic tracking shots, macro product reveals, handheld lifestyle moments, and elegant transitions, giving the final video the look of a high-end beverage advertisement without the complexity of traditional production.
+
+This workflow shows how creators and brands can rapidly produce commercial-quality advertising with dramatically lower production costs while keeping product consistency and storytelling intact.
+
+#happyhorse"""
 
 COLLECTION_CATALOG = [
     {
@@ -403,6 +417,7 @@ PROMPT_COLLECTIONS = {
     20: "饮料与生活方式广告",
     21: "美食与餐饮广告",
     22: "奢华品牌与产品大片",
+    23: "饮料与生活方式广告",
 }
 
 
@@ -819,6 +834,24 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(THERMOS_X_POST + THERMOS_PROMPT),
             "raw_excerpt": THERMOS_X_POST + "\n\n" + THERMOS_PROMPT,
         },
+        {
+            "id": 20,
+            "source_type": "x_video",
+            "title": "HappyHorse 1.1 单张分镜驱动 Matcha Latte 抹茶广告",
+            "locator": MATCHA_LATTE_X_URL,
+            "accessed_at": now,
+            "verification": "author_workflow_description_video_metadata_reverse_engineered",
+            "notes": (
+                "作者公开说明这支 Matcha Latte 概念广告完全由 HappyHorse 1.1 制作，"
+                "以单张 storyboard 参考图定义从开场产品英雄镜头到金色时刻咖啡馆庆祝的完整叙事，"
+                "并使用 Camera Control 生成平滑推镜、电影跟拍、产品宏观、手持生活方式镜头与优雅转场。"
+                "作者强调全片共有 12 个无缝电影场景，人物外貌、服装、产品设计、玻璃杯形、抹茶颜色与"
+                "品牌细节保持一致。作者未公开逐字提示词或原始 storyboard；数据库依据这些公开说明和"
+                "公开视频反推可复用版本，并明确标记为反推。媒体元数据为 15.242 秒、1080×1440（3:4）。"
+            ),
+            "sha256": sha256_text(MATCHA_LATTE_X_POST),
+            "raw_excerpt": MATCHA_LATTE_X_POST,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -1014,6 +1047,31 @@ Ultra-realistic luxury food advertising, cinematic macro photography, premium st
 Frame 01: a natural hand holds the thermos close to camera and slowly rotates it, clearly revealing the puppy artwork against a warm creamy morning bokeh. Frame 02: the bottle and matching box sit neatly on a clean wooden table in an elegant top-down composition. Frame 03: extreme macro view inside the bottle shows polished SUS304 steel, precise finishing and realistic metallic reflections. Frame 04: close-up of the one-touch lock, hinge and flip-open lid captured at the satisfying click moment. Frame 05: crystal-clear water pours into the open bottle with realistic ripples, reflections and premium slow-motion detail. Frame 06: the bottle stands on a cozy outdoor picnic table beside a few neatly arranged books and light snacks in warm morning sun. Frame 07: extreme macro of the textured anti-slip silicone base in a rotating product composition. Frame 08: a hand presents the thermos toward camera while an adult with a soft natural smile remains subtly blurred in the background; reserve clean space for the exact line “Cute • Practical • Keeps Your Drink Perfect”.
 
 Soft natural morning sunlight, warm pastel pink-and-cream color grade, premium UGC product review, cinematic handheld compositions, smooth rack-focus references, shallow depth of field, soft creamy bokeh, HDR, accurate shadows, realistic reflections, hyper-detailed matte and metallic materials, clean cozy modern lifestyle styling, luxury commercial finish. Anatomically correct hands, stable product proportions, identical puppy print and packaging, readable final text. No duplicate bottle, extra objects, malformed hand, warped lid, changing illustration, blurry print, dirty steel, impossible water, clutter, random text or watermark."""
+    matcha_latte_video = """Create a 15-second premium Matcha Latte concept commercial in a vertical 3:4 frame, generated from one locked twelve-panel storyboard reference. The visual arc begins with an elegant hero product reveal and ends with a joyful golden-hour café celebration. Use ultra-realistic high-end beverage advertising, warm Japanese-inspired café styling, vivid ceremonial matcha green, creamy milk white, natural wood, soft sunlight, cinematic depth of field, physically accurate liquids and polished lifestyle cinematography.
+
+Lock continuity across every scene: the same young adult woman, identical face, hairstyle and refined neutral outfit; the same transparent glass shape, exact matcha-green tone, foam level, product design and branding details. Follow the storyboard composition closely. Use HappyHorse Camera Control for smooth push-ins, cinematic tracking, precise macro reveals, intimate handheld lifestyle moments and elegant match transitions.
+
+Scene 01 (0.0–1.2s): Opening hero shot of the finished iced Matcha Latte centered on a warm wooden café counter, condensation sparkling as soft morning light moves across the glass. Slow premium push-in.
+Scene 02 (1.2–2.4s): Extreme macro of vivid ceremonial matcha powder in a small bowl; a bamboo scoop passes through the fine texture, releasing delicate green particles.
+Scene 03 (2.4–3.6s): Warm water pours over the matcha. The liquid blooms into a saturated emerald suspension with realistic ripples and steam.
+Scene 04 (3.6–4.8s): A bamboo whisk moves rapidly in a ceramic bowl, creating smooth glossy matcha foam. Use controlled overhead macro tracking.
+Scene 05 (4.8–6.0s): Cold milk pours into the same transparent glass over clear ice cubes; white liquid, reflections and condensation follow accurate physics.
+Scene 06 (6.0–7.2s): The prepared matcha flows into the milk in slow motion, forming elegant green-and-white ribbons before settling into the exact final drink color.
+Scene 07 (7.2–8.4s): Macro product reveal circles the finished glass, highlighting foam, ice, condensation, branding and the stable glass silhouette.
+Scene 08 (8.4–9.6s): The same woman receives the Matcha Latte from a barista across the café counter. Use a smooth lateral tracking shot and natural restrained smiles.
+Scene 09 (9.6–10.8s): Handheld lifestyle close-up as she lifts the glass and takes a natural first sip beside a sunlit café window.
+Scene 10 (10.8–12.0s): Track with her walking through the stylish café carrying the drink; customers and warm interior details create depth without distracting from the product.
+Scene 11 (12.0–13.4s): She joins adult friends at an outdoor café table during golden hour and places the same drink at the center as everyone shares a relaxed, authentic moment.
+Scene 12 (13.4–15.242s): Final golden-hour café celebration. Friends raise matching Matcha Lattes while the hero glass remains closest to camera; warm sun flare, gentle laughter and an elegant pull-back end the campaign.
+
+Audio: refined modern café music, bamboo scoop and whisk ASMR, water and milk pouring, ice clinks, glass placement, soft café ambience and natural laughter. No narration.
+
+No character drift, outfit change, duplicate protagonist, changing glass geometry, inconsistent branding, changing matcha hue, unstable foam or ice, warped hands, extra fingers, broken whisk, plastic liquid, impossible pouring, random text, subtitles, watermarks, flicker, jitter, abrupt cuts or distracting background action."""
+    matcha_latte_storyboard = """Create one professional 3:4 vertical advertising storyboard sheet containing twelve clearly ordered cinematic frames for a premium Matcha Latte campaign. Lock the exact same young adult woman, face, hairstyle and refined neutral outfit; the exact same transparent branded glass, silhouette, foam level, vivid matcha-green color and product details across every applicable frame.
+
+01 finished iced Matcha Latte hero shot on a warm wooden café counter with sparkling condensation; 02 extreme macro of ceremonial matcha powder and bamboo scoop; 03 warm water blooming through matcha with green ripples and steam; 04 overhead bamboo-whisk macro creating glossy foam; 05 cold milk pouring over clear ice in the hero glass; 06 slow-motion matcha pouring into milk and forming green-white ribbons; 07 circular macro product reveal of foam, ice, condensation and branding; 08 the same woman receives the drink from a barista across the counter; 09 intimate handheld window-side first sip; 10 cinematic tracking shot through the café while she carries the drink; 11 she joins adult friends at an outdoor table in golden hour and places the drink centrally; 12 warm café celebration with matching Matcha Lattes raised while the hero glass stays closest to camera.
+
+Premium beverage advertising, Japanese-inspired contemporary café, ceremonial matcha green, creamy milk white, warm natural wood, soft morning light evolving into golden hour, cinematic depth of field, realistic glass and liquid materials, polished but authentic lifestyle photography. Include visual cues for smooth push-ins, tracking, macro reveals and handheld moments. No captions, panel text, random logos, changing character, wardrobe drift, inconsistent glass shape, changing branding, muddy matcha, malformed hands, duplicate limbs, impossible liquid, clutter or watermarks."""
 
     prompts = [
         {
@@ -1772,6 +1830,46 @@ Soft natural morning sunlight, warm pastel pink-and-cream color grade, premium U
                 shot(8, 8.4, 10.147, "Hero Ending｜人物推荐收尾", "一只手拿起保温杯并轻柔递向镜头，背景中的成年人物自然微笑但面部保持轻微虚化；画面以产品英雄构图显示“Cute • Practical • Keeps Your Drink Perfect”。", "产品近景稳定推向镜头，人物后景保持奶油散景，最后短暂停顿。", "拿起杯子的细响、轻盈品牌提示音与音乐收束。", "产品与手部清晰、人物不抢焦；指定标语拼写、圆点和大小写准确，无额外文字。"),
             ],
         },
+        {
+            "id": 23,
+            "source_id": 20,
+            "slug": "happyhorse-single-storyboard-matcha-latte-commercial",
+            "title": "HappyHorse 单分镜抹茶拿铁：十二镜头生活方式广告",
+            "category": "高级饮料广告 / 抹茶生活方式",
+            "language": "en",
+            "aspect_ratio": "3:4",
+            "duration_sec": 15.242,
+            "resolution": "1080×1440",
+            "style_summary": "高级写实抹茶饮料广告：日系现代咖啡馆、鲜明仪式级抹茶绿、奶白、暖木与柔和日光，从精致产品宏观和流体制作过渡到自然手持生活方式与金色时刻群像。",
+            "scene_summary": "从成品抹茶拿铁英雄镜头出发，经抹茶粉、注水、竹筅击拂、牛奶与抹茶混合、凝露产品环绕，再进入吧台递杯、人物试饮、咖啡馆跟拍、朋友会合和金色时刻举杯庆祝。",
+            "subject_summary": "同一名年轻成年女性及固定中性色精致服装；同一只透明品牌玻璃杯、相同杯形、抹茶绿色、泡沫高度、冰块和品牌细节；竹制茶勺、竹筅、陶瓷茶碗、牛奶、现代咖啡馆、成年朋友和金色时刻户外座位。",
+            "core_mechanic": "用一张锁定的十二格 storyboard 同时约束“制作工艺—产品质感—人物使用—社交庆祝”四层叙事，再通过 Camera Control 为每格指定推镜、跟拍、宏观、手持和拉远，使短片在快速换景中仍像同一专业广告项目。",
+            "camera_language": "慢速产品推镜、茶粉与流体极端宏观、顶视竹筅跟踪、杯体环绕、吧台横向跟拍、窗边手持近景、咖啡馆稳定器行进、户外群像与金色时刻优雅拉远；转场以形状、色彩和动作匹配为主。",
+            "lighting_color": "鲜明但自然的抹茶绿、奶白、暖木、陶瓷米色和金色日光；开场使用柔和晨光与洁净产品高光，后段逐渐转为温暖金色时刻、柔和轮廓光与克制阳光耀斑。",
+            "audio_design": "反推音频设计：现代精致咖啡馆音乐下叠加竹勺刮过茶粉、注水、竹筅击拂、牛奶与抹茶倾注、冰块碰杯、玻璃落桌、咖啡馆空间声和自然笑声；无旁白，结尾以暖和弦与环境笑声收束。",
+            "continuity_rules": "女性脸型、发型、妆容和服装全片固定；透明杯的轮廓、容量、标志、泡沫高度、冰块数量与抹茶色保持一致；同一杯饮品在制作、递交、饮用和庆祝段可追踪；成人朋友数量稳定；液体、蒸汽、泡沫和手部动作符合真实物理。",
+            "master_prompt": matcha_latte_video,
+            "negative_prompt": "No character identity drift, changing face, hairstyle or outfit, duplicate protagonist, child characters, warped hands, extra fingers, changing glass geometry, duplicate hero glass, drifting or misspelled branding, muddy brown matcha, changing green hue, unstable foam level, disappearing ice, broken bamboo whisk, plastic liquid, impossible pouring, floating props, cluttered café, aggressive sun flare, abrupt scene changes, flicker, jitter, random captions, subtitles, extra logos or watermarks.",
+            "reference_image_prompt": matcha_latte_storyboard,
+            "recommended_models": "HappyHorse 1.1 + Camera Control（作者注明）",
+            "prompt_origin": "reverse_engineered_from_author_workflow_description_and_public_video",
+            "quality_notes": "作者公开了工作流、模型、镜头数量和连续性要求，但未公开逐字视频提示词或原始 storyboard。数据库中的视频提示词、十二格生图提示词、具体制作镜头和音频均为依据作者说明与公开视频结构整理的可复用反推版，不标记为作者原文。可核实信息包括：HappyHorse 1.1、单张 storyboard、Camera Control、12 个无缝场景、开场产品英雄镜头、结尾金色时刻咖啡馆庆祝，以及人物、服装、产品、杯形、抹茶颜色和品牌细节的一致性。公开视频实际为 15.242 秒、1080×1440（3:4）。",
+            "tags": ["HappyHorse 1.1", "Camera Control", "单张分镜", "十二镜头", "Matcha Latte", "抹茶拿铁", "饮料广告", "生活方式广告", "咖啡馆", "抹茶制作", "竹筅", "流体微距", "产品英雄镜头", "角色一致性", "产品一致性", "品牌一致性", "手持摄影", "电影跟拍", "金色时刻", "朋友庆祝", "3:4", "反推提示词"],
+            "shots": [
+                shot(1, 0, 1.2, "Opening Hero｜开场产品英雄镜头", "完成的冰抹茶拿铁居中立于暖木咖啡馆吧台，杯壁凝露在柔和晨光下闪烁。", "电影级慢速推近，浅景深锁定杯形、抹茶色和品牌细节。", "柔和咖啡馆音乐起奏，远处空间声与冰块轻响。", "首次锁定透明杯轮廓、标志、泡沫、冰块和鲜明抹茶绿。"),
+                shot(2, 1.2, 2.4, "Ceremonial Matcha｜仪式级茶粉", "竹制茶勺划过细腻鲜绿抹茶粉，少量粉末在光束中自然扬起。", "极端宏观侧移，焦点沿茶勺边缘和茶粉纹理移动。", "竹勺刮粉的干燥细响。", "茶粉保持鲜绿、细腻、无结块，不出现多余工具。"),
+                shot(3, 2.4, 3.6, "Water Bloom｜注水绽放", "温水注入陶瓷茶碗，抹茶扩散为饱和翡翠色液体，产生真实涟漪和轻柔蒸汽。", "斜俯宏观跟随水流落点，平滑推近色彩扩散。", "清澈注水、陶瓷回响与轻微蒸汽声。", "水流和蒸汽真实，抹茶颜色与成品保持同一色系。"),
+                shot(4, 3.6, 4.8, "Bamboo Whisk｜竹筅击拂", "竹筅快速而稳定地搅打抹茶，表面形成细密光泽泡沫。", "顶视宏观跟踪竹筅圆周运动，镜头轻微旋转。", "有节奏的竹筅击拂 ASMR。", "竹筅结构完整，泡沫逐步形成，无液体飞散穿模。"),
+                shot(5, 4.8, 6.0, "Milk & Ice｜牛奶与冰", "冷牛奶倒入装有透明冰块的同一品牌玻璃杯，奶液环绕冰块并形成洁净反射。", "杯口斜俯高速流体微距，沿杯壁缓慢下移。", "牛奶倾注、冰块碰杯与凝露细响。", "杯形、标志和冰块数量锁定；牛奶遵守真实重力和折射。"),
+                shot(6, 6.0, 7.2, "Matcha Ribbon｜抹茶丝带混合", "准备好的抹茶以慢动作注入牛奶，绿色与白色形成优雅丝带，最终稳定为准确的成品色。", "侧逆光宏观慢动作，使用颜色匹配转场进入成品。", "浓稠液流、冰块轻碰和音乐小幅上扬。", "混合过程连续，不突变、不浑浊成棕色，最终泡沫高度一致。"),
+                shot(7, 7.2, 8.4, "Macro Product Reveal｜产品环绕", "成品杯的泡沫、冰块、凝露、玻璃边缘和品牌细节被逐一揭示。", "精确环绕产品并顺滑移焦，结尾回到正面品牌构图。", "细微玻璃高频、凝露滑落和克制品牌提示音。", "产品尺寸、标志、饮料颜色和液面绝对稳定。"),
+                shot(8, 8.4, 9.6, "Counter Handoff｜吧台递杯", "同一名女性在吧台接过抹茶拿铁，与成年咖啡师自然微笑致意。", "横向电影跟拍递杯动作，保持手部和杯体同框。", "玻璃落托、轻声致意与咖啡馆环境。", "女性身份、发型和中性色服装首次锁定；双手结构正确。"),
+                shot(9, 9.6, 10.8, "First Sip｜窗边第一口", "女性坐在阳光窗边自然举杯试饮，露出真实克制的满足反应。", "亲密手持中近景，焦点从杯子移到表情后再回到产品。", "冰块轻响、自然吞咽与柔和呼吸。", "同一人物与产品；饮用后液面只产生合理小幅下降。"),
+                shot(10, 10.8, 12.0, "Café Tracking｜咖啡馆跟拍", "女性拿着饮品穿过现代日系咖啡馆，背景顾客与暖木细节形成自然纵深。", "稳定器侧后方跟拍，穿越前景制造电影视差。", "脚步、低声交谈、杯碟声与音乐推进。", "产品始终可追踪；背景人物不复制、不抢主体焦点。"),
+                shot(11, 12.0, 13.4, "Friends Gather｜朋友会合", "金色时刻的户外桌边，女性加入成年朋友并把同一杯抹茶拿铁放在画面中心。", "自然手持群像结合产品落桌近景，柔和绕桌半步。", "玻璃落桌、朋友问候和自然笑声。", "朋友均为成年人且数量稳定；杯形、标志和抹茶色连续。"),
+                shot(12, 13.4, 15.242, "Golden-Hour Celebration｜金色庆祝", "朋友举起相同抹茶饮品庆祝，主角的英雄杯最靠近镜头，金色阳光包围温暖咖啡馆场景。", "先轻推英雄杯，再优雅拉远显露完整庆祝群像和夕阳环境。", "轻柔碰杯、自然笑声与温暖品牌和弦收束。", "英雄杯无遮挡且品牌稳定；阳光耀斑克制，人物和杯子不重复。"),
+            ],
+        },
     ]
     for prompt in prompts:
         prompt["collection"] = PROMPT_COLLECTIONS[prompt["id"]]
@@ -2033,7 +2131,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 16 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 22 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 17 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 23 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -2132,6 +2230,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 20 的作者在主帖公开完整热带芒果汁广告视频提示词，注明 Higgsfield、GPT Image 2 与 Seedance 2.0；数据库逐字保留视频原文，并依据人物、产品和场景要求补充派生七格生图提示词。原文要求 4K HDR、16:9、24 fps，公开视频实际为 14.129 秒、1064×1244 竖版。
 - ID 21 的作者在回复中逐字公开完整 10 秒、16:9 悬浮拆解提拉米苏 Seedance 提示词，并在主帖发布十二格 GPT Image 2 分镜板及成片；数据库原样保留视频原文，并依据公开分镜板和时间轴补充派生十二格生图提示词。公开视频实际为 10.058 秒、848×478。
 - ID 22 的作者在主帖逐字公开完整 10 秒、9:16 粉色幼犬图案 SUS304 保温杯 UGC 广告提示词，并注明通过 ChatGPT 使用 GPT Image 2；数据库原样保留作者提示词，补充派生八格生图提示词与音频设计。公开视频实际为 10.147 秒、720×1280，归入“奢华品牌与产品大片”合集。
+- ID 23 的作者公开说明使用 HappyHorse 1.1、单张 storyboard 和 Camera Control 制作十二镜头 Matcha Latte 广告，但未公开逐字 prompt 或原始分镜。数据库依据作者可核实的镜头范围、相机语言和一致性要求整理反推版视频与十二格生图提示词；公开视频实际为 15.242 秒、1080×1440，归入“饮料与生活方式广告”合集。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
