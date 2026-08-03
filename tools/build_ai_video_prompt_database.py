@@ -363,6 +363,39 @@ I also used Camera Control to create smooth push-ins, cinematic tracking shots, 
 This workflow shows how creators and brands can rapidly produce commercial-quality advertising with dramatically lower production costs while keeping product consistency and storytelling intact.
 
 #happyhorse"""
+TINY_FRIES_X_URL = "https://x.com/ImaStudio_ai/status/2083804993598198055"
+TINY_FRIES_X_POST = """Seedance 2.0｜Tiny Crew, Big Fries 🍟
+One storyboard became a complete 15s fan-made fast-food commercial.
+🎬 Restaurant intro → fresh fries → seasoning → packing → full meal reveal → team hero shot
+Prompt below 👇"""
+TINY_FRIES_PROMPT = """Create a 15-second cute 3D chibi animated fast-food commercial, strictly following the uploaded storyboard image sequence.
+
+Theme: a magical McDonald’s-style French fries factory operated by tiny chibi workers. Use a bright red-and-yellow fast-food color palette, warm golden sunlight, clean stainless-steel kitchen equipment, cheerful factory atmosphere, and premium Pixar-quality 3D animation.
+
+Important: keep the same chibi worker design throughout the video. Tiny cute workers with oversized sparkling eyes, rosy cheeks, red caps, black aprons, yellow details, adorable waddling movements, and expressive happy faces. Keep the environment consistent. Do not introduce KFC branding, chicken branding, or unrelated fast-food logos. Focus only on golden French fries, burgers, drinks, and fast-food packaging.
+
+Video structure:
+
+0–3s — Factory exterior hero shot
+Wide cinematic shot outside a bright red-and-yellow fast-food factory. Many tiny chibi workers carry oversized cartons of golden French fries and trays of fast-food orders. A small forklift moves boxes. Warm sunlight, clean pavement, cheerful teamwork, magical commercial feeling.
+
+3–6s — Kitchen production line
+Cut inside the spotless factory kitchen. Chibi workers move along stainless-steel counters and conveyor belts. Some prepare burgers, some carry drinks, some fry and salt golden French fries. Everything is perfectly organized, playful, and synchronized.
+
+6–9s — Fries beauty shots
+Close-up macro shots of crispy golden French fries being lifted from the fryer, salted with sparkling salt, and placed into red fries cartons. Steam rises gently. Fries look realistic, crunchy, hot, and appetizing. Tiny workers smile proudly and give high-fives.
+
+9–12s — Packaging and teamwork
+Rows of chibi workers pack fries, burgers, and drinks onto trays. They move quickly but cutely, with tiny victory dances and happy teamwork. Conveyor belts carry finished orders through the bright factory.
+
+12–15s — Final hero moment
+All tiny workers gather around one perfectly filled red fries carton in the center of the factory. They proudly point at it, clap, and smile toward the camera. Camera slowly pulls back to reveal the full cheerful factory running smoothly.
+
+Style requirements:
+Pixar-quality 3D animation, ultra-cute chibi characters, premium fast-food commercial lighting, realistic crispy fries texture, warm golden atmosphere, smooth cinematic camera movement, clean factory environment, expressive facial animation, playful teamwork, family-friendly humor, polished feature-film quality, 16:9 widescreen.
+
+Negative prompt:
+No KFC text, no wrong brand logos, no mixed restaurant branding, no messy factory, no subtitles, no watermark, no on-screen text, no deformed characters, no extra fingers, no horror mood, no dark lighting, no blurry food, no low-quality animation."""
 
 COLLECTION_CATALOG = [
     {
@@ -418,6 +451,7 @@ PROMPT_COLLECTIONS = {
     21: "美食与餐饮广告",
     22: "奢华品牌与产品大片",
     23: "饮料与生活方式广告",
+    24: "美食与餐饮广告",
 }
 
 
@@ -852,6 +886,24 @@ def build_records() -> tuple[list[dict], list[dict]]:
             "sha256": sha256_text(MATCHA_LATTE_X_POST),
             "raw_excerpt": MATCHA_LATTE_X_POST,
         },
+        {
+            "id": 21,
+            "source_type": "x_video",
+            "title": "Seedance 2.0 Tiny Crew, Big Fries 萌系薯条工厂广告",
+            "locator": TINY_FRIES_X_URL,
+            "accessed_at": now,
+            "verification": "author_full_prompt_video_metadata",
+            "notes": (
+                "作者在主帖逐字公开完整 15 秒英文提示词，注明使用 Seedance 2.0，并说明由一张"
+                "storyboard 生成整支粉丝创作快餐广告。内容以红黄配色的魔法薯条工厂为舞台，"
+                "固定大眼、红帽、黑围裙和黄色细节的迷你 Q 版工人，依次呈现工厂外景、厨房生产线、"
+                "薯条起锅与撒盐、餐食打包和团队产品英雄镜头。原文要求 16:9 横屏，公开视频实际为"
+                "14.766 秒、1080×1216（135:152 竖向近方形），存在明显画幅差异。数据库逐字保留"
+                "作者原始视频提示词，参考分镜提示词依据作者公开结构整理并明确标记为派生版。"
+            ),
+            "sha256": sha256_text(TINY_FRIES_X_POST + TINY_FRIES_PROMPT),
+            "raw_excerpt": TINY_FRIES_X_POST + "\n\n" + TINY_FRIES_PROMPT,
+        },
     ]
 
     x_master = """生成一段约 43 秒、16:9 横屏、1920×1080 的超写实城市街头短片。场景是正午强日照下的欧洲城市广场：浅色石板地面，前景有一群正在啄食、走动和振翅的鸽子，背景游客持续穿行，有人推婴儿车、交谈、坐在纪念性喷泉或台阶旁，历史建筑立面清晰可见。使用自然手持或稳定器跟拍，真实手机/纪录片摄影质感，硬朗日光与清晰长阴影，连续空间关系。
@@ -1072,6 +1124,12 @@ No character drift, outfit change, duplicate protagonist, changing glass geometr
 01 finished iced Matcha Latte hero shot on a warm wooden café counter with sparkling condensation; 02 extreme macro of ceremonial matcha powder and bamboo scoop; 03 warm water blooming through matcha with green ripples and steam; 04 overhead bamboo-whisk macro creating glossy foam; 05 cold milk pouring over clear ice in the hero glass; 06 slow-motion matcha pouring into milk and forming green-white ribbons; 07 circular macro product reveal of foam, ice, condensation and branding; 08 the same woman receives the drink from a barista across the counter; 09 intimate handheld window-side first sip; 10 cinematic tracking shot through the café while she carries the drink; 11 she joins adult friends at an outdoor table in golden hour and places the drink centrally; 12 warm café celebration with matching Matcha Lattes raised while the hero glass stays closest to camera.
 
 Premium beverage advertising, Japanese-inspired contemporary café, ceremonial matcha green, creamy milk white, warm natural wood, soft morning light evolving into golden hour, cinematic depth of field, realistic glass and liquid materials, polished but authentic lifestyle photography. Include visual cues for smooth push-ins, tracking, macro reveals and handheld moments. No captions, panel text, random logos, changing character, wardrobe drift, inconsistent glass shape, changing branding, muddy matcha, malformed hands, duplicate limbs, impossible liquid, clutter or watermarks."""
+    tiny_fries_video = TINY_FRIES_PROMPT
+    tiny_fries_storyboard = """Create a professional six-panel cinematic storyboard sheet for a 15-second cute 3D chibi fast-food commercial titled “Tiny Crew, Big Fries”. Follow one consistent magical French-fries factory world. Lock the same tiny worker design in every panel: oversized sparkling eyes, rosy cheeks, red caps, black aprons, yellow details, adorable proportions, waddling movement cues and expressive happy faces. Use one coherent bright red-and-yellow fast-food palette, warm golden sunlight, spotless stainless-steel equipment and premium feature-film-quality 3D rendering.
+
+Panel 01: wide exterior hero view of the bright red-and-yellow factory; many tiny workers carry oversized golden-fries cartons and meal trays while a miniature forklift moves boxes across clean pavement. Panel 02: spotless interior production line with synchronized workers at stainless-steel counters and conveyor belts preparing burgers, drinks and fries. Panel 03: macro fryer beauty shot as realistic crispy golden fries rise from hot oil with gentle steam and appetizing highlights. Panel 04: sparkling salt falls over the fries before workers fill a clean red fries carton, exchange proud smiles and high-five. Panel 05: organized rows of workers pack fries, burgers and drinks onto full meal trays while conveyor belts advance finished orders and a few workers perform tiny victory dances. Panel 06: final hero composition with one perfectly filled red fries carton centered in the factory, surrounded by the full team pointing, clapping and smiling as the active production line recedes into the background.
+
+Premium cute 3D chibi animation, playful miniature world, family-friendly humor, Pixar-quality character appeal, realistic crunchy fries texture, soft steam, clean metal reflections, warm commercial lighting, cinematic wides and food macro detail, smooth camera-movement reference, polished feature-film finish. McDonald’s-style color language only; do not reproduce a real logo. No KFC text, chicken branding, mixed restaurant identity, messy factory, subtitles, on-screen text, watermark, malformed characters, extra fingers, duplicate workers, blurry food, dark mood or low-quality animation."""
 
     prompts = [
         {
@@ -1870,6 +1928,40 @@ Premium beverage advertising, Japanese-inspired contemporary café, ceremonial m
                 shot(12, 13.4, 15.242, "Golden-Hour Celebration｜金色庆祝", "朋友举起相同抹茶饮品庆祝，主角的英雄杯最靠近镜头，金色阳光包围温暖咖啡馆场景。", "先轻推英雄杯，再优雅拉远显露完整庆祝群像和夕阳环境。", "轻柔碰杯、自然笑声与温暖品牌和弦收束。", "英雄杯无遮挡且品牌稳定；阳光耀斑克制，人物和杯子不重复。"),
             ],
         },
+        {
+            "id": 24,
+            "source_id": 21,
+            "slug": "seedance-tiny-crew-big-fries-chibi-factory-commercial",
+            "title": "Tiny Crew, Big Fries：萌系迷你工人薯条工厂广告",
+            "category": "萌系三维快餐广告 / 微缩工厂",
+            "language": "en",
+            "aspect_ratio": "135:152",
+            "duration_sec": 14.766,
+            "resolution": "1080×1216",
+            "style_summary": "高品质萌系三维快餐广告：Q 版迷你工人、红黄快餐色盘、金色暖阳、洁净不锈钢工厂、写实酥脆薯条和家庭友好喜剧节奏，结合电影大全景与食物宏观特写。",
+            "scene_summary": "从红黄薯条工厂外景与迷你叉车开场，进入同步运转的厨房生产线；薯条起锅、闪亮撒盐并装入红盒，再完成汉堡、饮料和薯条的团队打包，最后全体工人围绕一盒完美薯条形成英雄镜头。",
+            "subject_summary": "同一批大眼、红润脸颊、红帽、黑围裙与黄色细节的迷你 Q 版工人；金黄酥脆薯条、红色薯条盒、汉堡、饮料、餐盘、迷你叉车、传送带、不锈钢炸锅和红黄快餐工厂。",
+            "core_mechanic": "把标准快餐生产流程缩小成“可爱工人协作秀”：外景建立规模，生产线展示组织力，食物微距兑现食欲，打包蒙太奇提升节奏，最终全员庆祝把薯条盒塑造成团队成果与产品记忆点。",
+            "camera_language": "工厂外景电影广角、生产线横向跟拍与传送带纵深、炸锅和薯条纹理宏观、撒盐慢动作、装盒与击掌中近景、打包蒙太奇、中央产品英雄构图和最终缓慢拉远。",
+            "lighting_color": "明亮红黄主色、薯条金色、洁净银色金属与暖金阳光；外景使用通透暖阳，厨房使用高级商业柔光和清晰金属反射，食物镜头强化酥脆高光与轻柔蒸汽。",
+            "audio_design": "派生音频设计：欢快家庭向配乐结合迷你脚步、叉车提示音、传送带运转、油炸滋滋、薯条起锅、撒盐颗粒、纸盒折叠、饮料落托、工人击掌和结尾掌声；无对白、无品牌口播。",
+            "continuity_rules": "所有工人的头身比例、眼睛、脸颊、红帽、黑围裙和黄色细节保持一致；工厂红黄配色、厨房布局与设备方向稳定；薯条始终金黄酥脆；红盒、汉堡、饮料和餐盘设计统一；叉车与传送带遵守空间和运动逻辑；不得出现 KFC、鸡肉品牌或混杂标志。",
+            "master_prompt": tiny_fries_video,
+            "negative_prompt": "No KFC text, chicken branding, wrong brand logos, mixed restaurant identity, exact real-world trademark reproduction, messy or unsafe factory, dirty oil, raw or burnt fries, blurry food, changing worker design, duplicate hero workers, deformed chibi characters, extra fingers, missing limbs, frightening expressions, horror mood, dark lighting, broken forklift, chaotic conveyor motion, floating trays, subtitles, watermark, on-screen text, flicker, jitter or low-quality animation.",
+            "reference_image_prompt": tiny_fries_storyboard,
+            "recommended_models": "Seedance 2.0（作者注明）",
+            "prompt_origin": "author_published_full_prompt_storyboard_prompt_derived",
+            "quality_notes": "作者在主帖逐字公开完整 15 秒 Seedance 2.0 英文视频提示词，数据库原样保留；作者提到上传 storyboard，但未公开该参考图的生成提示词，因此数据库中的六格生图提示词按正文列出的“餐厅开场—新鲜薯条—撒盐—打包—套餐揭示—团队英雄镜头”派生，并明确标注。原文指定 16:9 横屏，公开视频实际为 14.766 秒、1080×1216（135:152 竖向近方形），数据库按实际媒体规格归档并保留差异。该作品为粉丝概念广告，提示词中的 McDonald’s-style 只作为红黄快餐视觉语言，不代表品牌官方内容。",
+            "tags": ["Seedance 2.0", "Tiny Crew Big Fries", "薯条", "快餐广告", "三维动画", "Q版角色", "迷你工人", "微缩世界", "魔法工厂", "生产线", "食物微距", "撒盐慢动作", "传送带", "团队协作", "家庭友好", "产品英雄镜头", "红黄配色", "135:152", "作者原始视频提示词", "派生生图提示词"],
+            "shots": [
+                shot(1, 0, 3.0, "Factory Exterior｜工厂外景英雄镜头", "明亮红黄快餐工厂沐浴在暖阳中，大批迷你工人搬运超大薯条盒和套餐托盘，一辆小叉车沿干净路面运送纸箱。", "电影级广角建立后缓慢推向工厂入口，以前景叉车制造尺度和视差。", "欢快配乐、迷你脚步、叉车轻响和远处团队忙碌声。", "首次锁定工人造型、工厂红黄配色、叉车比例与干净环境。"),
+                shot(2, 3.0, 6.0, "Kitchen Production Line｜厨房生产线", "洁净厨房内，工人沿不锈钢台面和传送带同步协作：部分制作汉堡、部分搬饮料、部分炸制和撒盐薯条。", "横向跟拍生产线，穿插传送带纵深和整齐工位中景。", "传送带、金属器具、饮料落托与有节奏的厨房作业声。", "工人服装和比例一致；设备位置、工序方向与传送带运动连续。"),
+                shot(3, 6.0, 7.5, "Fries Lift｜薯条起锅美食镜头", "金黄薯条从炸锅中升起，油滴自然回落，酥脆表面和温热蒸汽在商业灯光下清晰可见。", "高速食物宏观转轻微慢动作，沿薯条边缘精确移焦。", "油炸滋滋、金属炸篮和油滴回落声。", "薯条熟度均匀、金黄不焦黑；油和蒸汽遵守真实物理。"),
+                shot(4, 7.5, 9.0, "Salt & Carton｜撒盐装盒与击掌", "闪亮盐粒落在热薯条上，迷你工人把薯条整齐装入红盒，随后自豪微笑并开心击掌。", "撒盐极近景切装盒中近景，再以短推捕捉击掌表情。", "盐粒沙响、纸盒摩擦与清脆击掌。", "红盒设计稳定；盐量克制；手部结构正确，击掌不穿模。"),
+                shot(5, 9.0, 12.0, "Packaging Teamwork｜套餐打包协作", "成排工人把薯条、汉堡和饮料装上餐盘，完成的套餐沿传送带前进；工人快速但可爱地移动并做小型胜利舞。", "节奏化打包蒙太奇结合传送带跟随和整齐群像。", "纸盒折叠、杯子与餐盘轻碰、传送带和欢快庆祝音。", "套餐组件和数量稳定；工人动作同步且不互相穿透，传送带方向不变。"),
+                shot(6, 12.0, 14.766, "Team Hero Shot｜团队产品英雄镜头", "一盒完美装满的金黄薯条位于工厂中央，全体迷你工人围绕它指向产品、鼓掌并面向镜头微笑，背景生产线持续顺畅运转。", "先以低角度产品英雄构图突出红盒，再缓慢拉远揭示完整团队和工厂。", "工人掌声、轻快欢呼与配乐进入明亮收束。", "主薯条盒始终居中无遮挡；团队造型一致，背景设备继续有序运行。"),
+            ],
+        },
     ]
     for prompt in prompts:
         prompt["collection"] = PROMPT_COLLECTIONS[prompt["id"]]
@@ -2131,7 +2223,7 @@ def export_index(prompts: list[dict]) -> None:
     x_prompt = prompts[3]["master_prompt"]
     text = f"""# AI 视频提示词数据库
 
-本库把当前文件夹中的 3 份有效提示词与 17 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 23 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
+本库把当前文件夹中的 3 份有效提示词与 18 个 X 视频来源统一整理为可检索结构；动画风格合辑按四个独立微短片拆分，因此共形成 24 条主提示词。主库是 SQLite，同时提供 UTF-8 BOM CSV、JSON 和本索引。
 
 ## 数据概览
 
@@ -2231,6 +2323,7 @@ WHERE prompt_fts MATCH '时间冻结 OR 物理一致性';
 - ID 21 的作者在回复中逐字公开完整 10 秒、16:9 悬浮拆解提拉米苏 Seedance 提示词，并在主帖发布十二格 GPT Image 2 分镜板及成片；数据库原样保留视频原文，并依据公开分镜板和时间轴补充派生十二格生图提示词。公开视频实际为 10.058 秒、848×478。
 - ID 22 的作者在主帖逐字公开完整 10 秒、9:16 粉色幼犬图案 SUS304 保温杯 UGC 广告提示词，并注明通过 ChatGPT 使用 GPT Image 2；数据库原样保留作者提示词，补充派生八格生图提示词与音频设计。公开视频实际为 10.147 秒、720×1280，归入“奢华品牌与产品大片”合集。
 - ID 23 的作者公开说明使用 HappyHorse 1.1、单张 storyboard 和 Camera Control 制作十二镜头 Matcha Latte 广告，但未公开逐字 prompt 或原始分镜。数据库依据作者可核实的镜头范围、相机语言和一致性要求整理反推版视频与十二格生图提示词；公开视频实际为 15.242 秒、1080×1440，归入“饮料与生活方式广告”合集。
+- ID 24 的作者在主帖逐字公开完整 15 秒 Seedance 2.0 萌系薯条工厂广告提示词；数据库原样保留视频原文，并按正文六个叙事节点补充派生生图提示词。原文要求 16:9 横屏，公开视频实际为 14.766 秒、1080×1216，归入“美食与餐饮广告”合集。
 """
     INDEX_PATH.write_text(text, encoding="utf-8")
 
